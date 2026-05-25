@@ -2,12 +2,14 @@ import './Navbar.css'
 
 import polishFlag from './img/poland.svg'
 import englishFlag from './img/english.svg'
+import homeicon from './img/home.svg'
 
 function Navbar({
     theme,
     setTheme,
     language,
-    setLanguage
+    setLanguage,
+    setView
 }) {
 
     function toggleTheme() {
@@ -15,16 +17,23 @@ function Navbar({
     }
 
     function toggleLanguage() {
-        setLanguage(
-            language === "polish"
-                ? "english"
-                : "polish"
-        )
+        setLanguage(language === "polish" ? "english" : "polish")
     }
 
     return (
         <nav className="navbar">
 
+            {/* HOME LEFT */}
+            <div className="navbar-left">
+                <img
+                    src={homeicon}
+                    className={`home-icon ${theme}`}
+                    alt="home"
+                    onClick={() => setView("home")}
+                />
+            </div>
+
+            {/* RIGHT SIDE */}
             <div className="navbar-right">
 
                 <img
@@ -39,15 +48,12 @@ function Navbar({
                 />
 
                 <label className="switch">
-
                     <input
                         type="checkbox"
                         checked={theme === "dark"}
                         onChange={toggleTheme}
                     />
-
                     <span className="slider"></span>
-
                 </label>
 
             </div>

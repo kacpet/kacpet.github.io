@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
+import Home from './components/Home/Home'
 
 function App() {
-
   const [theme, setTheme] = useState(() => {
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
@@ -12,23 +11,33 @@ function App() {
   })
 
   const [language, setLanguage] = useState("polish")
+  const [currentView, setCurrentView] = useState("home")
+
+  const renderView = () => {
+    switch (currentView) {
+      case "home":
+        return <Home theme={theme} language={language} setView={setCurrentView} />
+      case "about":
+        return <div style={{ padding: "100px" }}>Sekcja: O mnie / About me</div>
+      case "projects":
+        return <div style={{ padding: "100px" }}>Sekcja: Projekty / Projects</div>
+      case "skills":
+        return <div style={{ padding: "100px" }}>Sekcja: Umiejętności / Skills</div>
+      default:
+        return <Home theme={theme} language={language} setView={setCurrentView} />
+    }
+  }
 
   return (
     <div className={`App ${theme}`}>
-
       <Navbar
         theme={theme}
         setTheme={setTheme}
         language={language}
         setLanguage={setLanguage}
+        setView={setCurrentView}
       />
-
-      <h1>
-        {language === "polish"
-          ? "Kacper Makulus (kacpet)//polski"
-          : "Kacper Makulus (kacpet)//english"}
-      </h1>
-
+      {renderView()}
     </div>
   )
 }

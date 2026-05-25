@@ -1,0 +1,183 @@
+.home {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== TŁO ===== */
+.home-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: scale(1.1);
+    animation: bgZoom 8s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+.home-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+@keyframes bgZoom {
+    0% {
+        transform: scale(1.08) translateY(0px);
+    }
+    100% {
+        transform: scale(1.18) translateY(-20px);
+    }
+}
+
+/* ===== HERO ===== */
+.hero {
+    width: 100%;
+    height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 120px;
+    padding-left: 32px;
+    padding-right: 32px;
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== HEADER ===== */
+.header-home-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 36px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    transition: 0.3s ease;
+    margin-bottom: 50px;
+}
+
+.header-home-page.dark h1 {
+    color: rgb(220, 220, 220);
+    font-size: clamp(1.8rem, 4vw, 4rem);
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -1px;
+    line-height: 1.1;
+}
+
+.header-home-page.light h1 {
+    color: #3f6a8a;
+    font-size: clamp(1.8rem, 4vw, 4rem);
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -1px;
+    line-height: 1.1;
+}
+
+/* ===== KONTAINER PRZYCISKÓW ===== */
+.buttons-container {
+    width: 100%;
+    max-width: 1100px;
+    position: relative;
+    min-height: 260px;
+}
+
+/* ===== WSPÓLNE PRZYCISKI ===== */
+.nav-btn {
+    width: clamp(220px, 18vw, 360px);
+    padding: clamp(14px, 1.2vw, 22px) clamp(18px, 1.8vw, 32px);
+    font-size: clamp(1rem, 1.2vw, 1.4rem);
+    font-weight: 600;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* ===== LEWA STRONA ===== */
+.nav-btn.left {
+    position: absolute;
+    left: 6%;
+    top: 0;
+}
+
+/* ===== PRAWA STRONA ===== */
+.nav-btn.right {
+    position: absolute;
+    right: 6%;
+    top: 0;
+}
+
+.nav-btn.bottom {
+    position: absolute;
+    top: 170px;
+
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+
+    display: block;
+}
+
+
+/* ===== MOTYW DARK ===== */
+.nav-btn.dark {
+    color: rgb(200, 200, 200);
+}
+
+/* ===== MOTYW LIGHT ===== */
+.nav-btn.light {
+    color: #475569;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+
+.nav-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.12);
+    transform:  translateY(-3px) scale(1.03);
+}
+
+.nav-btn.light:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 768px) {
+    .header-home-page {
+        margin-bottom: 50px;
+    }
+
+    .buttons-container {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        min-height: auto;
+    }
+
+    .nav-btn.left,
+    .nav-btn.right,
+    .nav-btn.bottom {
+        position: static;
+        transform: none;
+    }
+
+    .nav-btn {
+        width: 90%;
+        max-width: 320px;
+    }
+}
