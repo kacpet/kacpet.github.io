@@ -3,20 +3,43 @@
 
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
 
     padding: 0 32px;
 
-    background-color: rgba(128, 128, 128, 0.3);
+    background-color: rgba(128, 128, 190, 0.3);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    z-index: 1000;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-.navbar-right {
+/* LEWA STRONA */
+.navbar-left {
     display: flex;
     align-items: center;
 
+    margin-left: 20px;
+}
+
+/* PRAWA STRONA */
+.navbar-right {
+    display: flex;
+    align-items: center;
     gap: 16px;
 }
 
+/* FLAGA */
 .flag {
     width: 32px;
     height: 32px;
@@ -32,6 +55,7 @@
     transform: scale(1.1);
 }
 
+/* SWITCH */
 .switch {
     position: relative;
 
@@ -45,7 +69,6 @@
 
 .switch input {
     opacity: 0;
-
     width: 0;
     height: 0;
 }
@@ -69,7 +92,6 @@
 
 .slider::before {
     position: absolute;
-
     content: "";
 
     width: 26px;
@@ -91,4 +113,30 @@ input:checked + .slider {
 
 input:checked + .slider::before {
     transform: translateX(26px);
+}
+
+/* HOME ICON */
+.home-icon {
+    width: 32px;
+    height: 32px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+/* LIGHT THEME */
+.home-icon.light {
+    filter: brightness(0) saturate(100%) invert(42%) sepia(10%) saturate(1500%) hue-rotate(170deg);
+    /* ~ #3f6a8a */
+}
+
+/* DARK THEME */
+.home-icon.dark {
+    filter: brightness(0) saturate(100%) invert(90%);
+    /* ~ rgb(220,220,220) */
+}
+
+.home-icon:hover {
+    transform: scale(1.1);
 }

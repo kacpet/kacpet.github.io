@@ -1,22 +1,21 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    font-family: Inter;
 }
-
-
 
 .App {
     min-height: 100vh;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
     transition: 0.3s;
-}
 
-.App.dark {
-    background-color: black;
-    color: white;
-}
+    overflow: hidden;
 
-.App.light {
-    background-color: white;
-    color: black;
+    position: relative;
 }
