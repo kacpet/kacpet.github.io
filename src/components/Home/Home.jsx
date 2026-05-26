@@ -5,6 +5,7 @@ import './Home.css'
 function Home({ theme, language, setView }) {
     return (
         <div className="home">
+
             <div
                 className="home-bg"
                 style={{
@@ -13,6 +14,7 @@ function Home({ theme, language, setView }) {
             />
 
             <div className="hero">
+
                 <div className={`header-home-page ${theme}`}>
                     <h1>
                         {language === "polish"
@@ -24,27 +26,34 @@ function Home({ theme, language, setView }) {
                 <div className="buttons-container">
 
                     <button
-                        className={`nav-btn left big ${theme}`}
+                        className={`nav-btn left ${theme}`}
                         onClick={() => setView("about")}
                     >
-                        {language === "polish" ? "O mnie" : "About me"}
+                        {language === "polish"
+                            ? "O mnie"
+                            : "About me"}
                     </button>
 
                     <button
-                        className={`nav-btn right big ${theme}`}
+                        className={`nav-btn right ${theme}`}
                         onClick={() => setView("skills")}
                     >
-                        {language === "polish" ? "Umiejętności/CV" : "Skills/CV"}
+                        {language === "polish"
+                            ? "Umiejętności / CV"
+                            : "Skills / CV"}
                     </button>
 
                     <button
-                        className={`nav-btn big bottom ${theme}`}
+                        className={`nav-btn bottom ${theme}`}
                         onClick={() => setView("projects")}
                     >
-                        {language === "polish" ? "Projekty" : "Projects"}
+                        {language === "polish"
+                            ? "Projekty"
+                            : "Projects"}
                     </button>
 
                 </div>
+
             </div>
         </div>
     )
