@@ -6,8 +6,12 @@ function Home({ theme, language, setView }) {
     return (
         <div className="home">
 
+            {/* BAZOWE TŁO (natychmiastowe) */}
+            <div className={`home-bg-base ${theme}`} />
+
+            {/* OBRAZ TŁA (animowany) */}
             <div
-                className="home-bg"
+                className={`home-bg ${theme}`}
                 style={{
                     backgroundImage: `url(${theme === "dark" ? d_bg : l_bg})`
                 }}
