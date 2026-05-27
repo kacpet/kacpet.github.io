@@ -2,9 +2,9 @@ import { useState } from 'react'
 import './App.css'
 
 import Navbar from './components/Navbar/Navbar'
-import Home from './components/Home/Home'
 import Footer from './components/Footer/Footer'
-import About from './components/About/About'
+
+import { renderView } from './router/renderView'
 
 function App() {
 
@@ -16,57 +16,10 @@ function App() {
 
   const [language, setLanguage] = useState(() => {
     const systemLang = navigator.language || navigator.userLanguage
-
-    if (systemLang.startsWith("pl")) return "polish"
-    return "english"
+    return systemLang.startsWith("pl") ? "polish" : "english"
   })
 
   const [currentView, setCurrentView] = useState("home")
-
-  const renderView = () => {
-    switch (currentView) {
-
-      case "home":
-        return (
-          <Home
-            theme={theme}
-            language={language}
-            setView={setCurrentView}
-          />
-        )
-
-      case "about":
-        return (
-          <About
-            theme={theme}
-            language={language}
-          />
-        )
-
-      case "projects":
-        return (
-          <div style={{ padding: "100px" }}>
-            Sekcja: Projekty / Projects
-          </div>
-        )
-
-      case "skills":
-        return (
-          <div style={{ padding: "100px" }}>
-            Sekcja: Umiejętności / Skills
-          </div>
-        )
-
-      default:
-        return (
-          <Home
-            theme={theme}
-            language={language}
-            setView={setCurrentView}
-          />
-        )
-    }
-  }
 
   return (
     <div className={`App ${theme}`}>
@@ -79,7 +32,12 @@ function App() {
         setView={setCurrentView}
       />
 
-      {renderView()}
+      {renderView({
+        currentView,
+        theme,
+        language,
+        setCurrentView
+      })}
 
       <Footer
         theme={theme}
