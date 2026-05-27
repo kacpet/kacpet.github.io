@@ -4,6 +4,7 @@ import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import Home from './components/Home/Home'
 import Footer from './components/Footer/Footer'
+import About from './components/About/About'
 
 function App() {
 
@@ -13,7 +14,13 @@ function App() {
       : "light"
   })
 
-  const [language, setLanguage] = useState("polish")
+  const [language, setLanguage] = useState(() => {
+    const systemLang = navigator.language || navigator.userLanguage
+
+    if (systemLang.startsWith("pl")) return "polish"
+    return "english"
+  })
+
   const [currentView, setCurrentView] = useState("home")
 
   const renderView = () => {
@@ -30,9 +37,10 @@ function App() {
 
       case "about":
         return (
-          <div style={{ padding: "100px" }}>
-            Sekcja: O mnie / About me
-          </div>
+          <About
+            theme={theme}
+            language={language}
+          />
         )
 
       case "projects":
