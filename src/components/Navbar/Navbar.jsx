@@ -1,23 +1,29 @@
-import './Navbar.css'
+import { useNavigate } from "react-router-dom"
 
-import polishFlag from './img/poland.svg'
-import englishFlag from './img/english.svg'
-import homeicon from './img/home.svg'
+import "./Navbar.css"
+
+import polishFlag from "./img/poland.svg"
+import englishFlag from "./img/english.svg"
+import homeicon from "./img/home.svg"
 
 function Navbar({
     theme,
     setTheme,
     language,
-    setLanguage,
-    setView
+    setLanguage
 }) {
+
+    const navigate = useNavigate()
 
     function toggleTheme() {
         setTheme(theme === "dark" ? "light" : "dark")
     }
 
     function toggleLanguage() {
-        setLanguage(language === "polish" ? "english" : "polish")
+        setLanguage(language === "polish"
+            ? "english"
+            : "polish"
+        )
     }
 
     return (
@@ -25,12 +31,14 @@ function Navbar({
 
             {/* HOME LEFT */}
             <div className="navbar-left">
+
                 <img
                     src={homeicon}
                     className={`home-icon ${theme}`}
                     alt="home"
-                    onClick={() => setView("home")}
+                    onClick={() => navigate("/")}
                 />
+
             </div>
 
             {/* RIGHT SIDE */}
@@ -48,12 +56,15 @@ function Navbar({
                 />
 
                 <label className="switch">
+
                     <input
                         type="checkbox"
                         checked={theme === "dark"}
                         onChange={toggleTheme}
                     />
+
                     <span className="slider"></span>
+
                 </label>
 
             </div>

@@ -1,15 +1,21 @@
-import l_bg from './img/light-bg.png'
-import d_bg from './img/dark-bg.png'
-import './Home.css'
+import { useNavigate } from "react-router-dom"
 
-function Home({ theme, language, setView }) {
+import l_bg from "./img/light-bg.png"
+import d_bg from "./img/dark-bg.png"
+
+import "./Home.css"
+
+function Home({ theme, language }) {
+
+    const navigate = useNavigate()
+
     return (
         <div className="home">
 
-            {/* BAZOWE TŁO (natychmiastowe) */}
+            {/* BAZOWE TŁO */}
             <div className={`home-bg-base ${theme}`} />
 
-            {/* OBRAZ TŁA (animowany) */}
+            {/* OBRAZ TŁA */}
             <div
                 className={`home-bg ${theme}`}
                 style={{
@@ -31,7 +37,7 @@ function Home({ theme, language, setView }) {
 
                     <button
                         className={`nav-btn left ${theme}`}
-                        onClick={() => setView("about")}
+                        onClick={() => navigate("/about")}
                     >
                         {language === "polish"
                             ? "O mnie"
@@ -40,7 +46,7 @@ function Home({ theme, language, setView }) {
 
                     <button
                         className={`nav-btn right ${theme}`}
-                        onClick={() => setView("skills")}
+                        onClick={() => navigate("/skills")}
                     >
                         {language === "polish"
                             ? "Umiejętności / CV"
@@ -49,7 +55,7 @@ function Home({ theme, language, setView }) {
 
                     <button
                         className={`nav-btn bottom ${theme}`}
-                        onClick={() => setView("projects")}
+                        onClick={() => navigate("/projects")}
                     >
                         {language === "polish"
                             ? "Projekty"

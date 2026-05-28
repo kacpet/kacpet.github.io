@@ -1,5 +1,5 @@
 import "./About.css"
-import face from "./img/face.png"
+import face from "./img/face.jpg"
 
 function About({ theme, language }) {
 
