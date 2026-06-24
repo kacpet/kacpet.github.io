@@ -1,49 +1,36 @@
-// function JavaScriptPage({ theme, language, setView }) {
-//     return (
-//         <div
-//             style={{
-//                 width: "100%",
-//                 minHeight: "100vh",
+import Icons from "../icons/Icons"
 
-//                 display: "flex",
-//                 justifyContent: "center",
-//                 alignItems: "center"
-//             }}
-//         >
-//             <h1
-//                 style={{
-//                     fontSize: "50px",
-//                     margin: 0
-//                 }}
-//             >
-//                 JavaScript Page
-//             </h1>
-//         </div>
-//     )
-// }
+const VueData = {
 
-// export default JavaScriptPage
+  title: "Vue",
 
-function VuePage({ theme, language, setView }) {
-    return (
-        <div
-            style={{
-                width: "100%",
-                minHeight: "100vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-            }}
-        >
-            <h1
-                style={{
-                    fontSize: "50px",
-                    margin: 0
-                }}
-            >
-                Vue Page
-            </h1>
-        </div>
-    )
+  category: "Frontend Framework",
+
+  logo: <Icons name="vue" />,
+
+  description: {
+    polish:
+      "Vue wykorzystuję do budowy lekkich i elastycznych interfejsów użytkownika, stawiając na prostotę, reaktywność i szybki rozwój aplikacji.",
+
+    english:
+      "I use Vue to build lightweight and flexible user interfaces, focusing on simplicity, reactivity and fast application development."
+  },
+
+  skills: [
+
+    "Vue Components",
+    "Reactivity",
+    "Vue Router",
+    "State Management",
+    "Directives",
+    "Composition API"
+
+  ],
+
+  projectsPath: "/vue-projects",
+
+  projects: []
+
 }
-export default VuePage
+
+export default VueData

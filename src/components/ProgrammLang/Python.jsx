@@ -1,23 +1,36 @@
-function PythonPage({ theme, language, setView }) {
-    return (
-        <div
-            style={{
-                width: "100%",
-                minHeight: "100vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-            }}
-        >
-            <h1
-                style={{
-                    fontSize: "50px",
-                    margin: 0
-                }}
-            >
-                Python Page
-            </h1>
-        </div>
-    )
+import Icons from "../icons/Icons"
+
+const PythonData = {
+
+  title: "Python",
+
+  category: "Backend Language / Scripting",
+
+  logo: <Icons name="python" />,
+
+  description: {
+    polish:
+      "Pythona wykorzystuję do tworzenia skryptów, automatyzacji, backendu oraz analizy danych dzięki jego prostocie i ogromnemu ekosystemowi bibliotek.",
+
+    english:
+      "I use Python to build scripts, automation tools, backend services and data analysis solutions thanks to its simplicity and large ecosystem of libraries."
+  },
+
+  skills: [
+
+    "Syntax Basics",
+    "OOP",
+    "Automation Scripts",
+    "API Integration",
+    "File Handling",
+    "Data Processing"
+
+  ],
+
+  projectsPath: "/python-projects",
+
+  projects: []
+
 }
-export default PythonPage
+
+export default PythonData
