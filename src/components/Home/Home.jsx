@@ -12,10 +12,10 @@ function Home({ theme, language }) {
     return (
         <div className="home">
 
-            {/* BAZOWE TŁO */}
+            {/* Bazowe tło */}
             <div className={`home-bg-base ${theme}`} />
 
-            {/* OBRAZ TŁA */}
+            {/* Obraz tła */}
             <div
                 className={`home-bg ${theme}`}
                 style={{
@@ -62,9 +62,19 @@ function Home({ theme, language }) {
                             : "Projects"}
                     </button>
 
+                    <button
+                        className={`nav-btn game ${theme}`}
+                        onClick={() => navigate("/mini-games")}
+                    >
+                        {language === "polish"
+                            ? "Mini Gry"
+                            : "Mini Games"}
+                    </button>
+
                 </div>
 
             </div>
+
         </div>
     )
 }

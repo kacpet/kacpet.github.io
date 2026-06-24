@@ -1,25 +1,36 @@
-function Java({ theme, language, setView }) {
-    return (
-        <div
-            style={{
-                width: "100%",
-                minHeight: "100vh",
+import Icons from "../icons/Icons"
 
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-            }}
-        >
-            <h1
-                style={{
-                    fontSize: "50px",
-                    margin: 0
-                }}
-            >
-                Java Page
-            </h1>
-        </div>
-    )
+const JavaData = {
+
+  title: "Java",
+
+  category: "Backend Language",
+
+  logo: <Icons name="java" />,
+
+  description: {
+    polish:
+      "Javę wykorzystuję do tworzenia aplikacji backendowych, systemów serwerowych oraz projektów opartych o programowanie obiektowe i stabilną architekturę.",
+
+    english:
+      "I use Java to build backend applications, server systems and projects based on object-oriented programming and stable architecture."
+  },
+
+  skills: [
+
+    "Object-Oriented Programming",
+    "Spring Basics",
+    "Collections",
+    "Multithreading",
+    "JVM",
+    "File Handling"
+
+  ],
+
+  projectsPath: "/java-projects",
+
+  projects: []
+
 }
 
-export default Java
+export default JavaData

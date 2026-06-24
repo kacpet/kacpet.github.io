@@ -1,25 +1,36 @@
-function ReactPage({ theme, language, setView }) {
-    return (
-        <div
-            style={{
-                width: "100%",
-                minHeight: "100vh",
+import Icons from "../icons/Icons"
 
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-            }}
-        >
-            <h1
-                style={{
-                    fontSize: "50px",
-                    margin: 0
-                }}
-            >
-                React Page
-            </h1>
-        </div>
-    )
+const ReactData = {
+
+  title: "React",
+
+  category: "Frontend Library",
+
+  logo: <Icons name="react" />,
+
+  description: {
+    polish:
+      "React wykorzystuję do budowy interfejsów użytkownika opartych o komponenty, skupiając się na wydajności i reużywalności kodu.",
+
+    english:
+      "I use React to build component-based user interfaces, focusing on performance and code reusability."
+  },
+
+  skills: [
+
+    "JSX",
+    "Components",
+    "Hooks",
+    "State Management",
+    "React Router",
+    "API Integration"
+
+  ],
+
+  projectsPath: "/react-projects",
+
+  projects: []
+
 }
 
-export default ReactPage
+export default ReactData

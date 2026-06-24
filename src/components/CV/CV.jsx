@@ -2,7 +2,7 @@ import "./CV.css"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-import Icon from "./icons/Icons"
+import Icon from "../icons/Icons"
 
 function Cv({ theme, language }) {
 

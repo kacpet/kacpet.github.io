@@ -1,49 +1,36 @@
-// function Java({ theme, language, setView }) {
-//     return (
-//         <div
-//             style={{
-//                 width: "100%",
-//                 minHeight: "100vh",
+import Icons from "../icons/Icons"
 
-//                 display: "flex",
-//                 justifyContent: "center",
-//                 alignItems: "center"
-//             }}
-//         >
-//             <h1
-//                 style={{
-//                     fontSize: "50px",
-//                     margin: 0
-//                 }}
-//             >
-//                 Java Page
-//             </h1>
-//         </div>
-//     )
-// }
+const SQLData = {
 
-// export default Java
+  title: "SQL",
 
-function Sql({ theme, language, setView }) {
-    return (
-        <div
-            style={{
-                width: "100%",
-                minHeight: "100vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-            }}
-        >
-            <h1
-                style={{
-                    fontSize: "50px",
-                    margin: 0
-                }}
-            >
-                SQL Page
-            </h1>
-        </div>
-    )
+  category: "Database Language",
+
+  logo: <Icons name="sql" />,
+
+  description: {
+    polish:
+      "SQL wykorzystuję do zarządzania bazami danych, tworzenia zapytań oraz analizowania i przetwarzania danych w relacyjnych systemach bazodanowych.",
+
+    english:
+      "I use SQL to manage databases, write queries and analyze and process data in relational database systems."
+  },
+
+  skills: [
+
+    "SELECT Queries",
+    "JOINs",
+    "Filtering Data",
+    "Aggregations",
+    "Database Design",
+    "CRUD Operations"
+
+  ],
+
+  projectsPath: "/sql-projects",
+
+  projects: []
+
 }
-export default Sql
+
+export default SQLData
