@@ -1,0 +1,279 @@
+.join-page {
+min-height: 100vh;
+width: 100%;
+
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+padding: 140px 24px 100px;
+
+transition:
+    background 0.4s ease,
+    color 0.4s ease;
+
+
+}
+
+/* =========================
+BACKGROUND
+========================= */
+
+.join-page.dark {
+background: radial-gradient(
+circle at top left,
+#0b2a55 0%,
+#071a36 40%,
+#050e1f 100%
+);
+}
+
+.join-page.light {
+background: radial-gradient(
+circle at top left,
+#eaf6ff 0%,
+#cfeaff 35%,
+#a8d8ff 70%,
+#7bbfff 100%
+);
+}
+
+/* =========================
+ENTER ANIMATION
+========================= */
+
+.join-enter .join-container {
+animation: pageEnter 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes pageEnter {
+from {
+opacity: 0;
+transform: translate3d(0, 18px, 0);
+}
+
+
+to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+
+}
+
+/* =========================
+CONTAINER
+========================= */
+
+.join-container {
+width: 100%;
+max-width: 520px;
+
+
+display: flex;
+flex-direction: column;
+gap: 32px;
+
+padding: 42px;
+
+border-radius: 28px;
+
+backdrop-filter: blur(18px);
+-webkit-backdrop-filter: blur(18px);
+
+transition:
+    background 0.4s ease,
+    border-color 0.4s ease,
+    transform 0.35s ease;
+
+}
+
+.join-container:hover {
+transform: translate3d(0, -5px, 0) scale(1.015);
+}
+
+.join-page.dark .join-container {
+background: rgba(10, 25, 55, 0.45);
+border: 1px solid rgba(120, 190, 255, 0.14);
+color: rgba(235, 245, 255, 0.9);
+}
+
+.join-page.light .join-container {
+background: rgba(255, 255, 255, 0.65);
+border: 1px solid rgba(120, 180, 255, 0.25);
+color: #1f4f7a;
+}
+
+/* =========================
+HEADER
+========================= */
+
+.join-header {
+text-align: center;
+}
+
+.join-header h2 {
+font-size: clamp(2.4rem, 5vw, 3.2rem);
+font-weight: 800;
+letter-spacing: -0.5px;
+}
+
+.join-page.dark .join-header h2 {
+color: #e3f1ff;
+}
+
+.join-page.light .join-header h2 {
+color: #1f4f7a;
+}
+
+/* =========================
+INPUTS
+========================= */
+
+.join-input-wrapper {
+display: flex;
+flex-direction: column;
+gap: 18px;
+}
+
+.join-input {
+width: 100%;
+
+padding: 16px 18px;
+
+border-radius: 14px;
+
+font-size: 1rem;
+
+outline: none;
+
+transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+
+}
+
+.join-input:focus {
+transform: translate3d(0, -2px, 0);
+}
+
+.join-page.dark .join-input {
+background: rgba(80, 170, 255, 0.08);
+border: 1px solid rgba(120, 190, 255, 0.12);
+color: #e3f1ff;
+}
+
+.join-page.dark .join-input::placeholder {
+color: rgba(220, 235, 255, 0.45);
+}
+
+.join-page.dark .join-input:focus {
+border-color: rgba(120, 190, 255, 0.4);
+background: rgba(80, 170, 255, 0.12);
+}
+
+.join-page.light .join-input {
+background: rgba(255, 255, 255, 0.65);
+border: 1px solid rgba(120, 180, 255, 0.25);
+color: #1f4f7a;
+}
+
+.join-page.light .join-input::placeholder {
+color: rgba(31, 79, 122, 0.55);
+}
+
+.join-page.light .join-input:focus {
+border-color: rgba(120, 180, 255, 0.4);
+background: rgba(255, 255, 255, 0.95);
+}
+
+/* =========================
+BUTTON
+========================= */
+
+.join-button {
+height: 58px;
+
+
+border: none;
+border-radius: 18px;
+
+font-size: 1rem;
+font-weight: 700;
+
+cursor: pointer;
+
+transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+
+
+}
+
+.join-page.dark .join-button {
+color: white;
+
+
+background: linear-gradient(
+    135deg,
+    #3e8cff,
+    #62b7ff
+);
+
+
+}
+
+.join-page.light .join-button {
+color: white;
+
+background: linear-gradient(
+    135deg,
+    #4a9dff,
+    #7bc3ff
+);
+
+
+}
+
+.join-button:hover:not(:disabled) {
+transform: translate3d(0, -3px, 0);
+
+
+box-shadow:
+    0 12px 30px rgba(62, 140, 255, 0.35);
+
+}
+
+.join-button:active:not(:disabled) {
+transform: translate3d(0, 0, 0);
+}
+
+.join-button:disabled {
+opacity: 0.7;
+cursor: not-allowed;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+
+.join-page {
+    padding-top: 110px;
+}
+
+.join-container {
+    padding: 28px 24px;
+}
+
+.join-header h2 {
+    font-size: 2rem;
+}
+
+
+}
