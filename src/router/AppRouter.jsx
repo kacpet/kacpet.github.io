@@ -32,8 +32,17 @@ import CppProjectsData from "../components/Projects/langProjects/langs/CppProjec
 import PythonProjectsData from "../components/Projects/langProjects/langs/PythonProjectsData"
 import JavaProjectsData from "../components/Projects/langProjects/langs/JavaProjectsData"
 import SQLProjectsData from "../components/Projects/langProjects/langs/SqlProjectsData"
+
+
 import MiniGames from "../components/MiniGames/MiniGames"
 
+import RockPaperScizzors from "../components/Minigames/games/RockPaperScizzors/RockPaperScizzors"
+import Room1 from "../components/Minigames/games/RockPaperScizzors/Room"
+import Game1 from "../components/Minigames/games/RockPaperScizzors/Game"
+
+import ConnectFour from "../components/Minigames/games/ConnectFour/ConnectFour"
+import Room2 from "../components/MiniGames/games/ConnectFour/Room"
+import Game2 from "../components/Minigames/games/RockPaperScizzors/Game"
 function AppRouter({ theme, language }) {
 
   const langPages = [
@@ -73,6 +82,14 @@ const langProjects = [
       <Route path="/skills" element={<CV theme={theme} language={language} />} />
       <Route path="/projects" element={<Projects theme={theme} language={language} />} />
       <Route path="/mini-games" element={<MiniGames theme={theme} language={language} />} />
+
+      <Route path="/rock-paper-scizzors" element={<RockPaperScizzors theme={theme} />} />
+      <Route path="/room1/:id" element={<Room1 theme={theme} />} />
+      <Route path="/game1/:id" element={<Game1 theme={theme} />} />
+
+      <Route path="/connect-four" element={<ConnectFour theme={theme} />} />
+      <Route path="/room2/:id" element={<Room2 theme={theme} />} />
+      <Route path="/game2/:id" element={<Game2 theme={theme} />} />
       {langPages.map((page) => (
         <Route
           key={page.path}

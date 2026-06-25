@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 function MiniGames({ theme, language }) {
-
     const navigate = useNavigate()
     const [enter, setEnter] = useState(false)
 
@@ -20,18 +19,26 @@ function MiniGames({ theme, language }) {
             title: "Mini gry",
             button: "Zagraj teraz",
 
-            gameTitle: "Papier – Kamień – Nożyce",
-            gameDesc:
-                "Klasyczna gra logiczna, w której wybierasz jedną z trzech opcji i walczysz z komputerem lub innym graczem."
+            rpsTitle: "📄 ✊ ✂️ Papier – Kamień – Nożyce",
+            rpsDesc:
+                "Klasyczna gra logiczna, w której wybierasz jedną z trzech opcji i walczysz z innym graczem.",
+
+            connect4Title: "🔴 🟡 4 w Rzędzie",
+            connect4Desc:
+                "Połącz cztery pionki w jednej linii szybciej niż przeciwnik i wygraj pojedynek."
         },
 
         english: {
             title: "Mini Games",
             button: "Play now",
 
-            gameTitle: "Rock – Paper – Scissors",
-            gameDesc:
-                "A classic logic game where you choose one of three options and compete against the computer or another player."
+            rpsTitle: "✊ 📄 ✂️ Rock – Paper – Scissors",
+            rpsDesc:
+                "A classic logic game where you choose one of three options and compete against another player.",
+
+            connect4Title: "🔴 🟡 Connect Four",
+            connect4Desc:
+                "Connect four pieces in a row before your opponent and claim victory."
         }
     }
 
@@ -39,7 +46,6 @@ function MiniGames({ theme, language }) {
 
     return (
         <section className={`minigames ${theme} ${enter ? "enter" : ""}`}>
-
             <div className="minigames-container">
 
                 <div className="minigames-header">
@@ -47,24 +53,32 @@ function MiniGames({ theme, language }) {
                 </div>
 
                 <div className="minigames-card">
+                    <h2>{t.rpsTitle}</h2>
 
-                    <h2>✊ 📄 ✂️ {t.gameTitle}</h2>
-
-                    <p>
-                        {t.gameDesc}
-                    </p>
+                    <p>{t.rpsDesc}</p>
 
                     <button
                         className="minigames-button"
-                        onClick={() => navigate("/game")}
+                        onClick={() => navigate("/rock-paper-scizzors")}
                     >
                         {t.button} →
                     </button>
+                </div>
 
+                <div className="minigames-card">
+                    <h2>{t.connect4Title}</h2>
+
+                    <p>{t.connect4Desc}</p>
+
+                    <button
+                        className="minigames-button"
+                        onClick={() => navigate("/connect-four")}
+                    >
+                        {t.button} →
+                    </button>
                 </div>
 
             </div>
-
         </section>
     )
 }
