@@ -1,35 +1,27 @@
-import { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../../base/firebase";
-import { useNavigate } from "react-router-dom";
 import "./Room.css";
 
-export default function Room() {
+export default function Room({ theme, language }) {
   const { id } = useParams();
   const location = useLocation();
-
   const navigate = useNavigate();
+
   const playerId = location.state?.playerId;
 
   const [room, setRoom] = useState(null);
   const [role, setRole] = useState(null);
-  const [dropping, setDropping] = useState(null);
+
+  // 🔥 TERAZ animacja jest w Firestore (nie lokalnie)
   const [animating, setAnimating] = useState(false);
+
+  const boardRef = useRef(null);
 
   const ROWS = 6;
   const COLS = 7;
 
-  const getCenter = (r, c) => {
-  const CELL = 90;
-  const GAP = 12;
-  const PADDING = 30;
-
-  const x = PADDING + c * (CELL + GAP) + CELL / 2;
-  const y = PADDING + r * (CELL + GAP) + CELL / 2;
-
-  return { x, y };
-};
   useEffect(() => {
     const roomRef = doc(db, "connect4_rooms", id);
 
@@ -41,6 +33,9 @@ export default function Room() {
 
       if (data.player1?.id === playerId) setRole("player1");
       if (data.player2?.id === playerId) setRole("player2");
+
+      // 🔥 animating zależne od globalnego stanu
+      setAnimating(false);
     });
 
     return () => unsub();
@@ -51,7 +46,9 @@ export default function Room() {
       ? board[r * COLS + c]
       : null;
 
-  // ✅ FIRESTORE SAFE: tylko stringi, żadnych array-of-array
+  // =========================
+  // WIN DETECTION
+  // =========================
   const getWinningLines = (board) => {
     const lines = [];
     const seen = new Set();
@@ -87,39 +84,20 @@ export default function Room() {
 
             if (!seen.has(key)) {
               seen.add(key);
-              lines.push(key); // 🔥 STRING, nie tablica
+              lines.push(key);
             }
           }
         }
       }
     }
 
-    return lines; // string[]
+    return lines;
   };
-  const buildLines = () => {
-  if (!room?.winningLines) return [];
-
-  return room.winningLines.map((line) => {
-    const points = line.split("|").map((p) => {
-      const [r, c] = p.split("-").map(Number);
-      return getCenter(r, c);
-    });
-
-    const first = points[0];
-    const last = points[points.length - 1];
-
-    return {
-      x1: first.x,
-      y1: first.y,
-      x2: last.x,
-      y2: last.y,
-    };
-  });
-};
-  const dropPiece = async (col) => {
+    const dropPiece = async (col) => {
     if (!room || !role) return;
     if (room.currentTurn !== role) return;
     if (animating) return;
+    if (room.winner) return;
 
     const board = Array.isArray(room.board)
       ? [...room.board]
@@ -138,27 +116,42 @@ export default function Room() {
 
     setAnimating(true);
 
-    for (let r = 0; r <= targetRow; r++) {
-      setDropping({ row: r, col, role });
-      await new Promise((res) => setTimeout(res, 35));
-    }
+    const roomRef = doc(db, "connect4_rooms", id);
+
+    // 🔥 START ANIMACJI (GLOBALNA)
+    await updateDoc(roomRef, {
+      dropping: { row: 0, col, role }
+    });
+
+    // lokalna „symulacja” animacji
+    await updateDoc(roomRef, {
+        dropping: { row: targetRow, col, role }
+    });
+
+        // krótka pauza żeby CSS mógł „zagrać”
+    await new Promise((res) => setTimeout(res, 450));
 
     board[targetRow * COLS + col] = role;
 
     const winLines = getWinningLines(board);
     const winner = winLines.length > 0 ? role : null;
 
-    setTimeout(() => setDropping(null), 120);
-
-    await updateDoc(doc(db, "connect4_rooms", id), {
+    // 🔥 KONIEC ANIMACJI
+    await updateDoc(roomRef, {
       board,
       winner,
       winningLines: winLines,
+      dropping: null,
+
       currentTurn: winner
         ? null
         : role === "player1"
         ? "player2"
         : "player1",
+
+      ...(winner && {
+        winnerAt: Date.now(),
+      }),
     });
 
     setAnimating(false);
@@ -176,57 +169,107 @@ export default function Room() {
     );
   };
 
-  if (!room) return <div>Ładowanie...</div>;
+  if (!room) {
+    return (
+      <div className={`room-page-cf ${theme}`}>
+        {language === "polish" ? "Ładowanie..." : "Loading..."}
+      </div>
+    );
+  }
+const buildLines = () => {
+  if (!room?.winningLines || !boardRef.current) return [];
 
+  const cells = boardRef.current.querySelectorAll(".cell-cf");
+
+  return room.winningLines.map((line) => {
+    const points = line.split("|").map((p) => {
+      const [r, c] = p.split("-").map(Number);
+      const index = r * COLS + c;
+      const el = cells[index];
+
+      if (!el) return { x: 0, y: 0 };
+
+      const rect = el.getBoundingClientRect();
+      const parentRect = boardRef.current.getBoundingClientRect();
+
+      return {
+        x: rect.left + rect.width / 2 - parentRect.left,
+        y: rect.top + rect.height / 2 - parentRect.top,
+      };
+    });
+
+    const first = points[0];
+    const last = points[points.length - 1];
+
+    return {
+      x1: first.x,
+      y1: first.y,
+      x2: last.x,
+      y2: last.y,
+    };
+  });
+};
   return (
-    <div className="room-page">
-      <div className="board-wrapper">
-            {buildLines().map((l, i) => (
-                <div
-                key={i}
-                className="win-line"
-                style={{
-                    left: l.x1,
-                    top: l.y1,
-                    width: Math.hypot(l.x2 - l.x1, l.y2 - l.y1),
-                    transform: `rotate(${Math.atan2(
-                    l.y2 - l.y1,
-                    l.x2 - l.x1
-                    )}rad)`,
-                }}
-                />
-            ))}
-        <div className="board">
+    <div className={`room-page-cf ${theme}`}>
+      <div className="board-wrapper-cf" ref={boardRef}>
+        {/* =========================
+            WIN LINES OVERLAY
+        ========================= */}
+        {buildLines().map((l, i) => {
+          const dx = l.x2 - l.x1;
+          const dy = l.y2 - l.y1;
+
+          return (
+            <div
+              key={i}
+              className="win-line-cf"
+              style={{
+                left: l.x1,
+                top: l.y1,
+                width: Math.hypot(dx, dy),
+                transform: `rotate(${Math.atan2(dy, dx)}rad)`,
+              }}
+            />
+          );
+        })}
+
+        {/* =========================
+            BOARD
+        ========================= */}
+        <div className="board-cf">
           {Array.from({ length: ROWS }).map((_, row) =>
             Array.from({ length: COLS }).map((_, col) => {
               const index = row * COLS + col;
               const cell = room.board?.[index];
 
+              // 🔥 GLOBALNA ANIMACJA (DLA OBU GRACZY)
               const isDrop =
-                dropping &&
-                dropping.row === row &&
-                dropping.col === col;
+                room.dropping &&
+                room.dropping.row === row &&
+                room.dropping.col === col;
 
               return (
                 <div
                   key={`${row}-${col}`}
-                  className={`cell ${
-                    isWinningCell(index) ? "win-cell" : ""
+                  className={`cell-cf ${
+                    isWinningCell(index) ? "win-cell-cf" : ""
                   }`}
                   onClick={() => dropPiece(col)}
                 >
                   {cell && (
                     <div
-                      className={`piece ${
-                        cell === "player1" ? "red" : "yellow"
+                      className={`piece-cf ${
+                        cell === "player1" ? "red-cf" : "yellow-cf"
                       }`}
                     />
                   )}
 
                   {isDrop && (
                     <div
-                      className={`piece drop ${
-                        role === "player1" ? "red" : "yellow"
+                      className={`piece-cf drop-cf ${
+                        room.dropping?.role === "player1"
+                          ? "red-cf"
+                          : "yellow-cf"
                       }`}
                     />
                   )}
@@ -236,29 +279,40 @@ export default function Room() {
           )}
         </div>
       </div>
-      <div className="room-info">
-        <p>🔴 {room.player1?.name}</p>
-        <p>🟡 {room.player2?.name}</p>
+
+      {/* =========================
+          INFO PANEL
+      ========================= */}
+      <div className="room-info-cf">
+        <p>
+          🔴 {language === "polish" ? "Gracz 1" : "Player 1"}:{" "}
+          {room.player1?.name}
+        </p>
+
+        <p>
+          🟡 {language === "polish" ? "Gracz 2" : "Player 2"}:{" "}
+          {room.player2?.name}
+        </p>
 
         {room.winner ? (
-          <div className="winner-box">
+          <div className="winner-box-cf">
             <p className="winner-text">
-              🏆 Wygrywa:{" "}
+              🏆 {language === "polish" ? "Wygrywa" : "Winner"}:{" "}
               {room.winner === "player1"
                 ? room.player1?.name
                 : room.player2?.name}
             </p>
 
             <button
-              className="back-button"
+              className="back-button-cf"
               onClick={() => navigate("/connect-four")}
             >
-              Powrót
+              {language === "polish" ? "Powrót" : "Back"}
             </button>
           </div>
         ) : (
           <p>
-            Tura:{" "}
+            {language === "polish" ? "Tura" : "Turn"}:{" "}
             {room.currentTurn === "player1"
               ? room.player1?.name
               : room.player2?.name}

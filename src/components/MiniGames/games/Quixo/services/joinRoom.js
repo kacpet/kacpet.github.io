@@ -11,10 +11,10 @@ import {
 import { db } from "../../../base/firebase";
 
 // =========================
-// 🧹 CLEANUP MARTWYCH POKOI
+// 🧹 CLEANUP QUIXO ROOMS
 // =========================
 const cleanupRooms = async () => {
-  const snapshot = await getDocs(collection(db, "connect4_rooms"));
+  const snapshot = await getDocs(collection(db, "quixo_rooms"));
 
   const now = Date.now();
   const deletes = [];
@@ -26,21 +26,17 @@ const cleanupRooms = async () => {
     const winnerAt = data.winnerAt ? Number(data.winnerAt) : null;
     const hasWinner = !!data.winner;
 
-    // =========================
-    // ⏳ STARE POKOJE (1h)
-    // =========================
+    // ⏳ stare pokoje (10 min)
     const expiredByTime = now - createdAt >= 10 * 60 * 1000;
 
+    // 🏁 po wygranej (10s)
     const expiredByWin =
       hasWinner &&
       winnerAt &&
       now - winnerAt >= 10 * 1000;
 
-    // =========================
-    // 🧨 USUWANIE
-    // =========================
     if (expiredByTime || expiredByWin) {
-      deletes.push(deleteDoc(doc(db, "connect4_rooms", d.id)));
+      deletes.push(deleteDoc(doc(db, "quixo_rooms", d.id)));
     }
   });
 
@@ -48,19 +44,19 @@ const cleanupRooms = async () => {
 };
 
 // =========================
-// 🚀 JOIN ROOM
+// 🚀 JOIN ROOM (QUIXO)
 // =========================
 export const joinRoom = async (roomCode, playerId, playerName) => {
-  // 🧹 zawsze najpierw sprzątanie
+  // 🧹 cleanup przed join
   await cleanupRooms();
 
-  const roomRef = doc(db, "connect4_rooms", roomCode);
+  const roomRef = doc(db, "quixo_rooms", roomCode);
   const roomSnap = await getDoc(roomRef);
 
   const now = Date.now();
 
   // =========================
-  // 1. POKÓJ NIE ISTNIEJE
+  // 1. CREATE ROOM
   // =========================
   if (!roomSnap.exists()) {
     await setDoc(roomRef, {
@@ -75,7 +71,9 @@ export const joinRoom = async (roomCode, playerId, playerName) => {
       winnerAt: null,
 
       gameStarted: false,
-      board: Array(42).fill(null),
+
+      // 5x5 = 25 pól
+      board: Array(25).fill(null),
 
       createdAt: now,
       lastActivity: now,
@@ -90,7 +88,7 @@ export const joinRoom = async (roomCode, playerId, playerName) => {
   const data = roomSnap.data();
 
   // =========================
-  // 2. PLAYER 1 REJOIN
+  // 2. REJOIN PLAYER 1
   // =========================
   if (data.player1?.id === playerId) {
     await updateDoc(roomRef, {
@@ -104,7 +102,7 @@ export const joinRoom = async (roomCode, playerId, playerName) => {
   }
 
   // =========================
-  // 3. PLAYER 2 REJOIN
+  // 3. REJOIN PLAYER 2
   // =========================
   if (data.player2?.id === playerId) {
     await updateDoc(roomRef, {
@@ -118,7 +116,7 @@ export const joinRoom = async (roomCode, playerId, playerName) => {
   }
 
   // =========================
-  // 4. JOIN AS PLAYER 2
+  // 4. JOIN PLAYER 2
   // =========================
   if (!data.player2) {
     await updateDoc(roomRef, {

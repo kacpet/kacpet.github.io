@@ -37,12 +37,14 @@ import SQLProjectsData from "../components/Projects/langProjects/langs/SqlProjec
 import MiniGames from "../components/MiniGames/MiniGames"
 
 import RockPaperScizzors from "../components/Minigames/games/RockPaperScizzors/RockPaperScizzors"
-import Room1 from "../components/Minigames/games/RockPaperScizzors/Room"
-import Game1 from "../components/Minigames/games/RockPaperScizzors/Game"
+import RockPaperScizzorsRoom from "../components/Minigames/games/RockPaperScizzors/Room"
+import RockPaperScizzorsGame from "../components/Minigames/games/RockPaperScizzors/Game"
 
 import ConnectFour from "../components/Minigames/games/ConnectFour/ConnectFour"
-import Room2 from "../components/MiniGames/games/ConnectFour/Room"
-import Game2 from "../components/Minigames/games/RockPaperScizzors/Game"
+import ConnectFourRoom from "../components/MiniGames/games/ConnectFour/Room"
+
+import Quixo from "../components/MiniGames/games/Quixo/quixo"
+import QuixoRoom from "../components/MiniGames/games/Quixo/Room"
 function AppRouter({ theme, language }) {
 
   const langPages = [
@@ -83,13 +85,16 @@ const langProjects = [
       <Route path="/projects" element={<Projects theme={theme} language={language} />} />
       <Route path="/mini-games" element={<MiniGames theme={theme} language={language} />} />
 
-      <Route path="/rock-paper-scizzors" element={<RockPaperScizzors theme={theme} />} />
-      <Route path="/room1/:id" element={<Room1 theme={theme} />} />
-      <Route path="/game1/:id" element={<Game1 theme={theme} />} />
+      <Route path="/rock-paper-scizzors" element={<RockPaperScizzors theme={theme} language={language} />} />
+      <Route path="/rock-paper-scissors-game/:id" element={<RockPaperScizzorsRoom theme={theme} language={language}  />} />
+      <Route path="/rock-paper-scissors-result/:id" element={<RockPaperScizzorsGame theme={theme} language={language}  />} />
 
-      <Route path="/connect-four" element={<ConnectFour theme={theme} />} />
-      <Route path="/room2/:id" element={<Room2 theme={theme} />} />
-      <Route path="/game2/:id" element={<Game2 theme={theme} />} />
+      <Route path="/connect-four" element={<ConnectFour theme={theme} language={language}  />} />
+      <Route path="/connect-four-game/:id" element={<ConnectFourRoom theme={theme} language={language}  />} />
+
+      <Route path="/quixo" element={<Quixo theme={theme} language={language}  />} />
+      <Route path="/quixo-game/:id" element={<QuixoRoom theme={theme} language={language}  />} />
+  
       {langPages.map((page) => (
         <Route
           key={page.path}

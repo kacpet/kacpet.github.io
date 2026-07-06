@@ -13,6 +13,7 @@ function LangPage({
   const navigate = useNavigate()
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     const t = setTimeout(() => {
       setEnter(true)
     }, 40)

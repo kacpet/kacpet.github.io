@@ -27,7 +27,7 @@ const JavaScriptData = {
 
   ],
 
-  projectsPath: "/javascript-projects",
+   projectsPath: "/projects/javascript",
 
   projects: []
 

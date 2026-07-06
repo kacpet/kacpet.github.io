@@ -4,13 +4,6 @@ import { getFirestore } from "firebase/firestore";
 import { enableNetwork } from "firebase/firestore";
 
 
-// const app = initializeApp(firebaseConfig);
-
-console.log("🔥 Firebase config:");
-console.log("API KEY:", import.meta.env.VITE_FIREBASE_API_KEY);
-console.log("PROJECT ID:", import.meta.env.VITE_FIREBASE_PROJECT_ID);
-
-// export const db = getFirestore(app);
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,

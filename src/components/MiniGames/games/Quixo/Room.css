@@ -1,0 +1,1307 @@
+/* =========================
+   ROOM LAYOUT
+========================= */
+
+.room-page {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 28px;
+
+  font-family: system-ui, sans-serif;
+
+  padding: 20px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+
+/* =========================
+   THEMES
+========================= */
+
+.room-page.dark {
+  background:
+    radial-gradient(
+      circle at top,
+      #0f172a,
+      #050814
+    );
+
+  color: white;
+}
+
+
+.room-page.light {
+  background:
+    radial-gradient(
+      circle at top,
+      #f8fafc,
+      #e2e8f0
+    );
+
+  color: #0f172a;
+}
+
+
+
+/* =========================
+   INFO PANEL
+========================= */
+
+.room-info {
+
+  display: flex;
+
+  gap: 20px;
+
+  align-items: center;
+
+  font-size: 18px;
+
+
+  padding: 12px 18px;
+
+  border-radius: 12px;
+
+
+  backdrop-filter: blur(8px);
+
+
+  transition:
+    background .3s ease,
+    border .3s ease;
+
+}
+
+
+
+.room-page.dark .room-info {
+
+  background:
+    rgba(17,24,39,.85);
+
+  border:
+    1px solid #374151;
+
+}
+
+
+
+.room-page.light .room-info {
+
+  background:
+    rgba(255,255,255,.85);
+
+  border:
+    1px solid #cbd5e1;
+
+}
+
+
+
+.room-info p {
+
+  opacity: .9;
+
+}
+
+
+
+/* =========================
+   BOARD WRAPPER
+========================= */
+
+
+.board-wrapper {
+
+  position: relative;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  z-index:10;
+
+}
+
+
+
+
+/* =========================
+   QUIXO BOARD
+========================= */
+
+
+.board.quixo-board {
+
+
+  display:grid;
+
+
+  grid-template-columns:
+    repeat(5,1fr);
+
+
+  gap:10px;
+
+
+  padding:18px;
+
+
+  border-radius:18px;
+
+
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.6);
+
+
+
+  transition:
+    transform .25s ease,
+    filter .25s ease;
+
+
+  will-change:
+    transform;
+
+}
+
+
+
+.room-page.dark
+.board.quixo-board {
+
+  background:#111827;
+
+}
+
+
+
+.room-page.light
+.board.quixo-board {
+
+  background:white;
+
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.15);
+
+}
+
+
+
+/* =========================
+   BOARD PUSH ANIMATION
+========================= */
+
+
+.board.quixo-board.pushing {
+
+
+  animation:
+    boardPush
+    .25s ease;
+
+
+}
+
+
+
+@keyframes boardPush {
+
+
+  0% {
+
+    transform:
+      scale(1);
+
+    filter:
+      brightness(1);
+
+  }
+
+
+
+  40% {
+
+    transform:
+      scale(1.03);
+
+    filter:
+      brightness(1.12);
+
+  }
+
+
+
+  100% {
+
+    transform:
+      scale(1);
+
+    filter:
+      brightness(1);
+
+  }
+
+
+}
+
+
+
+/* =========================
+   CELLS
+========================= */
+
+
+.cell {
+
+
+  width:70px;
+
+  height:70px;
+
+
+  border-radius:12px;
+
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+
+
+  position:relative;
+
+
+  cursor:pointer;
+
+
+
+  transition:
+
+    transform .15s ease,
+
+    background .15s ease,
+
+    box-shadow .15s ease;
+
+
+}
+
+
+
+
+.room-page.dark
+.cell {
+
+  background:#1f2937;
+
+}
+
+
+
+
+.room-page.light
+.cell {
+
+  background:#e5e7eb;
+
+}
+
+
+
+
+.cell:hover {
+
+
+  transform:
+    scale(1.05);
+
+}
+
+
+
+.cell:active {
+
+
+  transform:
+    scale(.95);
+
+}
+
+
+
+
+/* =========================
+   EDGE CELLS
+========================= */
+
+
+.cell.edge {
+
+
+  outline:
+    2px solid #38bdf8;
+
+
+
+  box-shadow:
+
+    0 0 14px
+
+    rgba(56,189,248,.45);
+
+}
+
+
+
+/* =========================
+   SELECTED BLOCK
+========================= */
+
+
+.cell.selected {
+
+
+  outline:
+    2px solid #f59e0b;
+
+
+
+  box-shadow:
+
+    0 0 18px
+
+    rgba(245,158,11,.6);
+
+
+
+  transform:
+    scale(1.08);
+
+
+
+  z-index:20;
+
+}
+
+
+
+
+/* =========================
+   TAKEN / LIFT ANIMATION
+========================= */
+
+
+.cell.lifting {
+
+
+  animation:
+
+    liftPiece
+    .25s ease;
+
+
+}
+
+
+
+@keyframes liftPiece {
+
+
+  0% {
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+
+
+  50% {
+
+    transform:
+      translateY(-18px)
+      scale(1.12);
+
+  }
+
+
+
+  100% {
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+
+}
+/* =========================
+   PIECES
+========================= */
+
+
+.piece {
+
+
+  width:55px;
+
+  height:55px;
+
+
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+
+
+  font-size:38px;
+
+  font-weight:800;
+
+
+
+  border-radius:10px;
+
+
+
+  user-select:none;
+
+
+
+  animation:
+
+    pieceAppear
+
+    .18s ease;
+
+
+
+  box-shadow:
+
+    inset 0 0 10px rgba(0,0,0,.55),
+
+    0 6px 12px rgba(0,0,0,.35);
+
+
+}
+
+
+
+
+
+.piece.x {
+
+
+  color:#ef4444;
+
+
+}
+
+
+
+.piece.o {
+
+
+  color:#facc15;
+
+
+}
+
+
+
+
+
+@keyframes pieceAppear {
+
+
+  from {
+
+
+    transform:
+      scale(.3);
+
+
+    opacity:
+      0;
+
+
+  }
+
+
+
+  to {
+
+
+    transform:
+      scale(1);
+
+
+    opacity:
+      1;
+
+
+  }
+
+
+}
+
+
+
+
+/* =========================
+   MOVING PIECE EFFECT
+   (wyjmowany klocek)
+========================= */
+
+
+.piece.moving {
+
+
+  animation:
+
+
+    pieceMove
+
+    .35s ease;
+
+
+  z-index:100;
+
+
+}
+
+
+
+
+@keyframes pieceMove {
+
+
+  0% {
+
+
+    transform:
+      scale(1);
+
+
+  }
+
+
+
+  40% {
+
+
+    transform:
+
+      scale(1.15)
+
+      translateY(-25px);
+
+
+  }
+
+
+
+  100% {
+
+
+    transform:
+
+      scale(1);
+
+
+  }
+
+
+}
+
+
+
+
+
+/* =========================
+   OUTSIDE PUSH PIECE
+   (klocek poza planszą)
+========================= */
+
+
+.outside-piece {
+
+
+  position:absolute;
+
+
+
+  pointer-events:none;
+
+
+
+  z-index:200;
+
+
+
+  animation:
+
+
+    pushOutside
+
+    .35s ease;
+
+
+}
+
+
+
+
+
+@keyframes pushOutside {
+
+
+
+  0% {
+
+
+    transform:
+
+      scale(1)
+
+      translate(0,0);
+
+
+    opacity:1;
+
+
+  }
+
+
+
+  70% {
+
+
+    transform:
+
+      scale(1.15);
+
+
+  }
+
+
+
+  100% {
+
+
+    transform:
+
+      scale(.9);
+
+
+    opacity:0;
+
+
+  }
+
+
+}
+
+
+
+
+
+/* =========================
+   SLIDE CELLS
+   PRZESUWANIE LINII QUIXO
+========================= */
+
+
+.cell.slide-left {
+
+
+  animation:
+
+
+    slideLeft
+
+    .25s ease;
+
+
+}
+
+
+
+.cell.slide-right {
+
+
+  animation:
+
+
+    slideRight
+
+    .25s ease;
+
+
+}
+
+
+
+.cell.slide-up {
+
+
+  animation:
+
+
+    slideUp
+
+    .25s ease;
+
+
+}
+
+
+
+.cell.slide-down {
+
+
+  animation:
+
+
+    slideDown
+
+    .25s ease;
+
+
+}
+
+
+
+
+
+@keyframes slideLeft {
+
+
+  from {
+
+
+    transform:
+
+      translateX(40px);
+
+
+  }
+
+
+
+  to {
+
+
+    transform:
+
+      translateX(0);
+
+
+  }
+
+
+}
+
+
+
+@keyframes slideRight {
+
+
+  from {
+
+
+    transform:
+
+      translateX(-40px);
+
+
+  }
+
+
+
+  to {
+
+
+    transform:
+
+      translateX(0);
+
+
+  }
+
+
+}
+
+
+
+@keyframes slideUp {
+
+
+  from {
+
+
+    transform:
+
+      translateY(40px);
+
+
+  }
+
+
+
+  to {
+
+
+    transform:
+
+      translateY(0);
+
+
+  }
+
+
+}
+
+
+
+@keyframes slideDown {
+
+
+  from {
+
+
+    transform:
+
+      translateY(-40px);
+
+
+  }
+
+
+
+  to {
+
+
+    transform:
+
+      translateY(0);
+
+
+  }
+
+
+}
+
+
+
+
+
+/* =========================
+   DIRECTION BAR
+========================= */
+
+
+.direction-bar {
+
+
+  position:absolute;
+
+
+
+  bottom:-55px;
+
+
+
+  left:50%;
+
+
+
+  transform:
+
+    translateX(-50%);
+
+
+
+  display:flex;
+
+
+
+  gap:6px;
+
+
+
+  padding:7px;
+
+
+
+  border-radius:10px;
+
+
+
+  z-index:999;
+
+
+
+  backdrop-filter:
+
+    blur(10px);
+
+
+
+  background:
+
+    rgba(17,24,39,.95);
+
+
+
+  border:
+
+    1px solid #374151;
+
+
+}
+
+
+
+
+/* =========================
+   DIRECTION BUTTONS
+========================= */
+
+
+.dir-btn {
+
+
+  position:relative;
+
+
+
+  border:none;
+
+
+
+  cursor:pointer;
+
+
+
+  padding:
+
+    7px 12px;
+
+
+
+  border-radius:8px;
+
+
+
+  font-size:12px;
+
+
+
+  text-transform:uppercase;
+
+
+
+  background:#1f2937;
+
+
+
+  color:#cbd5e1;
+
+
+
+  transition:
+
+    .15s ease;
+
+
+}
+
+
+
+
+.dir-btn:hover {
+
+
+  transform:
+
+    scale(1.05);
+
+
+
+  background:#273244;
+
+
+}
+
+
+
+
+
+.dir-btn.active {
+
+
+  background:#38bdf8;
+
+
+
+  color:#0f172a;
+
+
+
+  font-weight:700;
+
+
+
+  transform:
+
+    scale(1.1);
+
+
+
+  box-shadow:
+
+
+    0 0 14px
+
+    rgba(56,189,248,.6);
+
+
+}
+
+
+
+
+
+.dir-btn.active::after {
+
+
+  content:"";
+
+
+
+  position:absolute;
+
+
+
+  inset:-3px;
+
+
+
+  border-radius:10px;
+
+
+
+  border:
+
+    1px solid
+
+    rgba(56,189,248,.6);
+
+
+
+  animation:
+
+
+    dirPulse
+
+    .8s infinite;
+
+
+}
+
+
+
+
+@keyframes dirPulse {
+
+
+  0% {
+
+
+    opacity:.3;
+
+
+    transform:
+
+      scale(1);
+
+
+  }
+
+
+
+  50% {
+
+
+    opacity:.8;
+
+
+    transform:
+
+      scale(1.05);
+
+
+  }
+
+
+
+  100% {
+
+
+    opacity:.3;
+
+
+    transform:
+
+      scale(1);
+
+
+  }
+
+
+}
+
+
+
+
+
+/* =========================
+   WINNER
+========================= */
+
+
+.winner-box {
+
+
+  display:flex;
+
+
+
+  align-items:center;
+
+
+
+  gap:15px;
+
+
+}
+
+
+
+.winner-text {
+
+
+  font-weight:700;
+
+
+}
+
+
+
+.back-button {
+
+
+  border:none;
+
+
+
+  padding:
+
+    8px 16px;
+
+
+
+  border-radius:10px;
+
+
+
+  cursor:pointer;
+
+
+
+  background:#38bdf8;
+
+
+
+  color:#0f172a;
+
+
+
+  font-weight:700;
+
+
+
+  transition:.2s ease;
+}
+
+
+
+
+.back-button:hover {
+  transform:
+  scale(1.05);
+}
+
+
+
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+
+@media(max-width:600px){
+
+
+
+  .cell {
+    width:52px;
+    height:52px;
+  }
+
+
+
+  .piece {
+    width:42px;
+    height:42px;
+    font-size:28px;
+  }
+
+
+
+  .direction-bar {
+    bottom:-65px;
+    flex-wrap:wrap;
+  }
+
+  .room-info {
+    flex-direction:column;
+    gap:8px;
+    font-size:15px;
+  }
+
+}

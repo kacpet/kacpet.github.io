@@ -27,7 +27,7 @@ const AngularData = {
 
   ],
 
-  projectsPath: "/angular-projects",
+  projectsPath: "/projects/angular",
 
   projects: []
 

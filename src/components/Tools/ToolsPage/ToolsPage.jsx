@@ -10,6 +10,7 @@ function ToolsPage({
   const [enter, setEnter] = useState(false)
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     const t = setTimeout(() => {
       setEnter(true)
     }, 40)

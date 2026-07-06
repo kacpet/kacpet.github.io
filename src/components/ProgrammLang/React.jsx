@@ -27,7 +27,7 @@ const ReactData = {
 
   ],
 
-  projectsPath: "/react-projects",
+  projectsPath: "/projects/react",
 
   projects: []
 

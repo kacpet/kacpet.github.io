@@ -1,16 +1,69 @@
-# React + Vite
+# Portfolio & Mini Games Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern React application combining personal portfolio, technology showcase, and multiplayer browser games.
 
-Currently, two official plugins are available:
+## Link
+[Portfolio](https://kacpet.github.io)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
+## 📌 Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project includes:
 
-## Expanding the ESLint configuration
+- Personal portfolio with about and CV sections
+- Projects grouped by programming languages
+- Dedicated pages for each technology
+- Multiplayer mini games using Firebase
+- Developer tools showcase
+- Dark / light theme support
+- English / Polish language support
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 💻 Technologies
+
+- React
+- Vite
+- React Router
+- Firebase (Firestore + Functions)
+- JavaScript 
+- CSS3
+
+---
+
+## 🎯 Features
+
+### Portfolio
+- Personal homepage
+- Technology-based project organization
+- Animated UI with modern design
+
+
+### Mini Games
+- Rock Paper Scissors
+- Connect Four
+- Quixo
+
+
+
+### UI / UX
+- Dark & Light mode
+- Glassmorphism design
+- Responsive layout
+
+
+---
+
+## 🌍 Localization
+
+- Polish language support
+- English language support
+
+---
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/kacpet/kacpet.github.io.git
+npm install
+npm run dev

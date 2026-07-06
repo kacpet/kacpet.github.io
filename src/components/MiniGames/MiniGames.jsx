@@ -7,6 +7,7 @@ function MiniGames({ theme, language }) {
     const [enter, setEnter] = useState(false)
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         const t = setTimeout(() => {
             setEnter(true)
         }, 30)
@@ -25,7 +26,11 @@ function MiniGames({ theme, language }) {
 
             connect4Title: "🔴 🟡 4 w Rzędzie",
             connect4Desc:
-                "Połącz cztery pionki w jednej linii szybciej niż przeciwnik i wygraj pojedynek."
+                "Połącz cztery pionki w jednej linii szybciej niż przeciwnik i wygraj pojedynek.",
+
+            quixoTitle: "❌ ⭕ Quixo",
+            quixoDesc:
+                "Taktyczna gra planszowa, w której przesuwasz kostki i próbujesz ułożyć linię swojego znaku."
         },
 
         english: {
@@ -38,7 +43,11 @@ function MiniGames({ theme, language }) {
 
             connect4Title: "🔴 🟡 Connect Four",
             connect4Desc:
-                "Connect four pieces in a row before your opponent and claim victory."
+                "Connect four pieces in a row before your opponent and claim victory.",
+
+            quixoTitle: "❌ ⭕ Quixo",
+            quixoDesc:
+                "A tactical board game where you push cubes and try to form a line of your symbol."
         }
     }
 
@@ -52,11 +61,10 @@ function MiniGames({ theme, language }) {
                     <h1>{t.title}</h1>
                 </div>
 
+                {/* RPS */}
                 <div className="minigames-card">
                     <h2>{t.rpsTitle}</h2>
-
                     <p>{t.rpsDesc}</p>
-
                     <button
                         className="minigames-button"
                         onClick={() => navigate("/rock-paper-scizzors")}
@@ -65,14 +73,25 @@ function MiniGames({ theme, language }) {
                     </button>
                 </div>
 
+                {/* CONNECT 4 */}
                 <div className="minigames-card">
                     <h2>{t.connect4Title}</h2>
-
                     <p>{t.connect4Desc}</p>
-
                     <button
                         className="minigames-button"
                         onClick={() => navigate("/connect-four")}
+                    >
+                        {t.button} →
+                    </button>
+                </div>
+
+                {/* QUIXO */}
+                <div className="minigames-card">
+                    <h2>{t.quixoTitle}</h2>
+                    <p>{t.quixoDesc}</p>
+                    <button
+                        className="minigames-button"
+                        onClick={() => navigate("/quixo")}
                     >
                         {t.button} →
                     </button>

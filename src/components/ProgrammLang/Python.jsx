@@ -27,7 +27,7 @@ const PythonData = {
 
   ],
 
-  projectsPath: "/python-projects",
+  projectsPath: "/projects/python",
 
   projects: []
 

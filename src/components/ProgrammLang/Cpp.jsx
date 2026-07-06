@@ -27,7 +27,7 @@ const CppData = {
 
   ],
 
-  projectsPath: "/cpp-projects",
+  projectsPath: "/projects/cpp",
 
   projects: []
 

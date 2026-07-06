@@ -27,7 +27,7 @@ const SQLData = {
 
   ],
 
-  projectsPath: "/sql-projects",
+   projectsPath: "/projects/sql",
 
   projects: []
 
