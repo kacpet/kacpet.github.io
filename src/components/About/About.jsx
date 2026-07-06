@@ -1,5 +1,6 @@
 import "./About.css"
 import face from "./img/face.jpg"
+import {useEffect, useState} from "react"
 
 function About({ theme, language }) {
 

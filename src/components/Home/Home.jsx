@@ -7,6 +7,7 @@ import "./Home.css"
 
 function Home({ theme, language }) {
 
+
     const navigate = useNavigate()
 
     return (

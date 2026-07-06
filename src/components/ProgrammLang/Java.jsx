@@ -27,7 +27,7 @@ const JavaData = {
 
   ],
 
-  projectsPath: "/java-projects",
+  projectsPath: "/projects/java",
 
   projects: []
 

@@ -27,7 +27,7 @@ const VueData = {
 
   ],
 
-  projectsPath: "/vue-projects",
+  projectsPath: "/projects/vue",
 
   projects: []
 

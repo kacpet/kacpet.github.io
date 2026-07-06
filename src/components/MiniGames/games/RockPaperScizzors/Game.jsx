@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   doc,
   getDoc,
-  deleteDoc
+  updateDoc
 } from "firebase/firestore";
 import { db } from "../../base/firebase";
 import "./Game.css";
@@ -53,8 +53,13 @@ export default function Game() {
         )
       );
 
+      // =========================
+      // zamiast usuwać → zapis winnerAt
+      // =========================
       timeoutId = setTimeout(async () => {
-        await deleteDoc(roomRef);
+        await updateDoc(roomRef, {
+          winnerAt: Date.now()
+        });
       }, 10000);
     };
 

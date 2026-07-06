@@ -7,6 +7,12 @@ function Projects({ theme, language }) {
   const [enter, setEnter] = useState(false);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant"
+    });
+
     const t = setTimeout(() => {
       setEnter(true);
     }, 30);
@@ -29,17 +35,37 @@ function Projects({ theme, language }) {
     },
   };
 
-  const t = text[language] || text.en;
+  const t = text[language] || text.english;
+
+  // ✅ poprawna odmiana PL + EN
+  const formatProjects = (count, lang) => {
+    if (lang !== "polish") return `${count} Projects`;
+
+    if (count === 1) return `${count} Projekt`;
+
+    const lastDigit = count % 10;
+    const lastTwoDigits = count % 100;
+
+    if (
+      lastDigit >= 2 &&
+      lastDigit <= 4 &&
+      !(lastTwoDigits >= 12 && lastTwoDigits <= 14)
+    ) {
+      return `${count} Projekty`;
+    }
+
+    return `${count} Projektów`;
+  };
 
   const technologies = [
-    { name: "JavaScript", logo: <Icons name="javascript" />, path: "/projects/javascript", projects: 6 },
-    { name: "React", logo: <Icons name="react" />, path: "/projects/react", projects: 4 },
-    { name: "Angular", logo: <Icons name="angular" />, path: "/projects/angular", projects: 2 },
-    { name: "Vue", logo: <Icons name="vue" />, path: "/projects/vue", projects: 2 },
-    { name: "C++", logo: <Icons name="cpp" />, path: "/projects/cpp", projects: 10 },
-    { name: "Python", logo: <Icons name="python" />, path: "/projects/python", projects: 2 },
-    { name: "SQL", logo: <Icons name="sql" />, path: "/projects/sql", projects: 2 },
-    { name: "Java", logo: <Icons name="java" />, path: "/projects/java", projects: 5 },
+    { name: "JavaScript", logo: <Icons name="javascript" />, path: "/projects/javascript", projects: 0 },
+    { name: "React", logo: <Icons name="react" />, path: "/projects/react", projects: 1 },
+    { name: "Angular", logo: <Icons name="angular" />, path: "/projects/angular", projects: 0 },
+    { name: "Vue", logo: <Icons name="vue" />, path: "/projects/vue", projects: 0 },
+    { name: "C++", logo: <Icons name="cpp" />, path: "/projects/cpp", projects: 0 },
+    { name: "Python", logo: <Icons name="python" />, path: "/projects/python", projects: 0 },
+    { name: "SQL", logo: <Icons name="sql" />, path: "/projects/sql", projects: 0 },
+    { name: "Java", logo: <Icons name="java" />, path: "/projects/java", projects: 0 },
   ];
 
   return (
@@ -74,7 +100,7 @@ function Projects({ theme, language }) {
               <div className="project-divider" />
 
               <span className="project-count">
-                {tech.projects} Projects
+                {formatProjects(tech.projects, language)}
               </span>
 
               <span className="project-more">

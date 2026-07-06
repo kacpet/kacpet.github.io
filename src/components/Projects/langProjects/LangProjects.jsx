@@ -12,6 +12,7 @@ function LangProjects({
   const navigate = useNavigate()
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     const t = setTimeout(() => {
       setEnter(true)
     }, 40)
@@ -32,7 +33,7 @@ function LangProjects({
               : `${data.title} Projects`}
           </h1>
 
-          <p>
+          <p className="lang-projects-subtitle">
             {language === "polish"
               ? "Wybrane projekty oparte na tej technologii"
               : "Selected projects built with this technology"}
@@ -51,7 +52,13 @@ function LangProjects({
               >
 
                 <div className="project-image">
-                  <img src={project.image} alt={project.title} />
+                  <img
+                    src={theme === "dark"
+                      ? project.imageDark
+                      : project.imageLight}
+                  
+                    alt={project.title}
+                  />
                 </div>
 
                 <div className="project-content">
@@ -65,12 +72,8 @@ function LangProjects({
                   </div>
 
                   <div className="project-actions">
-                    <a href={project.github} target="_blank">
+                    <a href={project.github} target="_blank" className="project-github">
                       GitHub
-                    </a>
-
-                    <a href={project.demo} target="_blank">
-                      Demo
                     </a>
                   </div>
                 </div>

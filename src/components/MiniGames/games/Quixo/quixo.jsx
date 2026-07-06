@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { joinRoom } from "./services/joinRoom";
-import "./ConnectFour.css";
+import { joinRoom } from "./services/joinRoom"; // zakładam quixo joinRoom
+import "./quixo.css";
 
 export default function JoinPage({ theme }) {
   const [roomCode, setRoomCode] = useState("");
@@ -30,7 +30,7 @@ export default function JoinPage({ theme }) {
         return;
       }
 
-      navigate(`/connect-four-game/${roomCode.trim()}`, {
+      navigate(`/quixo-game/${roomCode.trim()}`, {
         state: {
           playerId,
           playerName: playerName.trim(),

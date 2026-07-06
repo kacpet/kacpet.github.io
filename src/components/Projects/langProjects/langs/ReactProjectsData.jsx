@@ -1,33 +1,28 @@
-// import Icons from "../icons/Icons"
+import CVLight from "./imgs/React/CV/light.png";
+import CVDark from "./imgs/React/CV/dark.png";
 
 const ReactProjectsData = {
-  title: "Angular",
+  title: "React",
 
   projects: [
     {
-      title: "Admin Dashboard",
-      description: {
-        polish: "Panel administracyjny do zarządzania użytkownikami i danymi.",
-        english: "Admin dashboard for managing users and data."
-      },
-      image: "https://via.placeholder.com/600x300",
-      tags: ["Angular", "TypeScript", "RxJS"],
-      github: "https://github.com/example/admin-dashboard",
-      demo: "https://example.com/demo"
-    },
+      title: "CV - kacpet.github.io",
 
-    {
-      title: "E-commerce App",
       description: {
-        polish: "Aplikacja sklepu internetowego z koszykiem i płatnościami.",
-        english: "E-commerce app with cart and payments."
+        polish:
+          "Nowoczesne portfolio/CV zbudowane w React. Zawiera sekcje projektów, umiejętności oraz interaktywny interfejs użytkownika.",
+        english:
+          "Modern portfolio/CV built with React. Includes projects, skills sections and interactive UI."
       },
-      image: "https://via.placeholder.com/600x300",
-      tags: ["Angular", "API", "NgRx"],
-      github: "https://github.com/example/ecommerce",
-      demo: "https://example.com/demo2"
+
+      imageLight: CVLight,
+      imageDark: CVDark,
+
+      tags: ["React", "JavaScript", "Firebase"],
+
+      github: "https://github.com/kacpet/kacpet.github.io",
     }
   ]
-}
+};
 
-export default ReactProjectsData
+export default ReactProjectsData;
