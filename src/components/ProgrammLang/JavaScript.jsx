@@ -1,36 +1,24 @@
-import Icons from "../icons/Icons"
+import Icons from "../icons/Icons";
 
 const JavaScriptData = {
+    title: "JavaScript",
 
-  title: "JavaScript",
+    category: "Frontend / Backend Language",
 
-  category: "Frontend / Backend Language",
+    logo: <Icons name="javascript" />,
 
-  logo: <Icons name="javascript" />,
+    description: {
+        polish: "JavaScript wykorzystuję do tworzenia dynamicznych interfejsów użytkownika oraz logiki aplikacji zarówno po stronie frontendowej, jak i backendowej (Node.js).",
 
-  description: {
-    polish:
-      "JavaScript wykorzystuję do tworzenia dynamicznych interfejsów użytkownika oraz logiki aplikacji zarówno po stronie frontendowej, jak i backendowej (Node.js).",
+        english:
+            "I use JavaScript to build dynamic user interfaces and application logic both on the frontend and backend (Node.js).",
+    },
 
-    english:
-      "I use JavaScript to build dynamic user interfaces and application logic both on the frontend and backend (Node.js)."
-  },
+    skills: ["ES6+", "DOM Manipulation", "Async/Await", "Fetch API", "Node.js", "Modules"],
 
-  skills: [
+    projectsPath: "/projects/javascript",
 
-    "ES6+",
-    "DOM Manipulation",
-    "Async/Await",
-    "Fetch API",
-    "Node.js",
-    "Modules"
+    projects: [],
+};
 
-  ],
-
-   projectsPath: "/projects/javascript",
-
-  projects: []
-
-}
-
-export default JavaScriptData
+export default JavaScriptData;

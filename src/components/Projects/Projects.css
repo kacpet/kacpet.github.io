@@ -15,22 +15,11 @@
 ========================= */
 
 .projects.dark {
-    background: radial-gradient(
-        circle at top left,
-        #0b2a55 0%,
-        #071a36 40%,
-        #050e1f 100%
-    );
+    background: radial-gradient(circle at top left, #0b2a55 0%, #071a36 40%, #050e1f 100%);
 }
 
 .projects.light {
-    background: radial-gradient(
-        circle at top left,
-        #eaf6ff 0%,
-        #cfeaff 35%,
-        #a8d8ff 70%,
-        #7bbfff 100%
-    );
+    background: radial-gradient(circle at top left, #eaf6ff 0%, #cfeaff 35%, #a8d8ff 70%, #7bbfff 100%);
 }
 
 /* =========================
@@ -127,7 +116,7 @@
     gap: 16px;
 
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
 
     transition:
         transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -147,6 +136,7 @@
         opacity: 0;
         transform: translateY(25px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -154,14 +144,14 @@
 }
 
 .projects.dark .project-card {
-    background: rgba(10, 25, 55, 0.45);
-    border: 1px solid rgba(120, 190, 255, 0.15);
+    background: rgb(10 25 55 / 45%);
+    border: 1px solid rgb(120 190 255 / 15%);
     color: #e7f4ff;
 }
 
 .projects.light .project-card {
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(120, 180, 255, 0.25);
+    background: rgb(255 255 255 / 70%);
+    border: 1px solid rgb(120 180 255 / 25%);
     color: #1f4f7a;
 }
 
@@ -188,11 +178,7 @@
 
     transition: 0.5s ease;
 
-    background: radial-gradient(
-        circle,
-        rgba(120, 190, 255, 0.35),
-        transparent 70%
-    );
+    background: radial-gradient(circle, rgb(120 190 255 / 35%), transparent 70%);
 }
 
 .project-card:hover .project-glow {
@@ -223,6 +209,7 @@
 }
 
 /* 🔥 KLUCZ: SVG = pełne wypełnienie */
+
 .project-logo svg,
 .project-logo > * {
     width: 100%;
@@ -233,10 +220,11 @@
 }
 
 /* hover jak tools */
+
 .project-card:hover .project-logo {
     transform: translateY(-6px) scale(1.08) rotate(6deg);
 
-    filter: drop-shadow(0 0 22px rgba(120, 190, 255, 0.7));
+    filter: drop-shadow(0 0 22px rgb(120 190 255 / 70%));
 }
 
 /* =========================
@@ -255,11 +243,11 @@
 }
 
 .projects.dark .project-divider {
-    background: rgba(120, 190, 255, 0.5);
+    background: rgb(120 190 255 / 50%);
 }
 
 .projects.light .project-divider {
-    background: rgba(31, 79, 122, 0.4);
+    background: rgb(31 79 122 / 40%);
 }
 
 .project-count {
@@ -282,7 +270,7 @@
    RESPONSIVE
 ========================= */
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .projects {
         padding-top: 110px;
     }

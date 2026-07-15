@@ -15,22 +15,11 @@
 ========================= */
 
 .cv.dark {
-    background: radial-gradient(
-        circle at top left,
-        #0b2a55 0%,
-        #071a36 40%,
-        #050e1f 100%
-    );
+    background: radial-gradient(circle at top left, #0b2a55 0%, #071a36 40%, #050e1f 100%);
 }
 
 .cv.light {
-    background: radial-gradient(
-        circle at top left,
-        #eaf6ff 0%,
-        #cfeaff 35%,
-        #a8d8ff 70%,
-        #7bbfff 100%
-    );
+    background: radial-gradient(circle at top left, #eaf6ff 0%, #cfeaff 35%, #a8d8ff 70%, #7bbfff 100%);
 }
 
 /* =========================
@@ -119,20 +108,20 @@
     border-radius: 28px;
 
     backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
 
     transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .cv.dark .cv-card {
-    background: rgba(10, 25, 55, 0.45);
-    border: 1px solid rgba(120, 190, 255, 0.14);
-    color: rgba(235, 245, 255, 0.9);
+    background: rgb(10 25 55 / 45%);
+    border: 1px solid rgb(120 190 255 / 14%);
+    color: rgb(235 245 255 / 90%);
 }
 
 .cv.light .cv-card {
-    background: rgba(255, 255, 255, 0.65);
-    border: 1px solid rgba(120, 180, 255, 0.25);
+    background: rgb(255 255 255 / 65%);
+    border: 1px solid rgb(120 180 255 / 25%);
     color: #1f4f7a;
 }
 
@@ -229,22 +218,22 @@
 }
 
 .cv.dark .skill-item {
-    background: rgba(80, 170, 255, 0.08);
-    border: 1px solid rgba(120, 190, 255, 0.12);
+    background: rgb(80 170 255 / 8%);
+    border: 1px solid rgb(120 190 255 / 12%);
 }
 
 .cv.dark .skill-more {
-    background: rgba(120, 190, 255, 0.14);
+    background: rgb(120 190 255 / 14%);
     color: #d6eaff;
 }
 
 .cv.light .skill-item {
-    background: rgba(255,255,255,0.65);
-    border: 1px solid rgba(120, 180, 255, 0.25);
+    background: rgb(255 255 255 / 65%);
+    border: 1px solid rgb(120 180 255 / 25%);
 }
 
 .cv.light .skill-more {
-    background: rgba(120, 180, 255, 0.18);
+    background: rgb(120 180 255 / 18%);
     color: #1f4f7a;
 }
 
@@ -252,8 +241,7 @@
    RESPONSIVE
 ========================= */
 
-@media (max-width: 768px) {
-
+@media (width <= 768px) {
     .cv {
         padding-top: 110px;
     }
@@ -267,12 +255,14 @@
         padding: 24px;
     }
 }
+
 .motto-card {
     position: relative;
     overflow: hidden;
 }
 
 /* label */
+
 .motto-label {
     font-size: 0.75rem;
     letter-spacing: 0.2em;
@@ -281,6 +271,7 @@
 }
 
 /* ⭐ GŁÓWNE MOTTO */
+
 .motto-text {
     font-family: "Playfair Display", serif;
     font-size: 1.6rem;
@@ -291,14 +282,15 @@
     margin-top: 10px;
 
     /* delikatny “premium look” */
-    background: linear-gradient(90deg, #ffffff, #b3b3b3);
-    -webkit-background-clip: text;
+    background: linear-gradient(90deg, #fff, #b3b3b3);
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 
     position: relative;
 }
 
 /* dekoracyjna linia pod motto */
+
 .motto-text::after {
     content: "";
     position: absolute;
@@ -308,14 +300,13 @@
     width: 60px;
     height: 2px;
 
-    background: linear-gradient(90deg, #ffffff, transparent);
+    background: linear-gradient(90deg, #fff, transparent);
     opacity: 0.6;
 }
 
-
 .cv.light .motto-text {
     background: none;
-    -webkit-background-clip: unset;
+    background-clip: unset;
     -webkit-text-fill-color: unset;
 
     color: #1f3f5f; /* ciemniejszy, elegancki granat */
@@ -323,6 +314,7 @@
 }
 
 /* delikatnie dopasuj też linię pod spodem */
+
 .cv.light .motto-text::after {
     background: linear-gradient(90deg, #1f3f5f, transparent);
 }

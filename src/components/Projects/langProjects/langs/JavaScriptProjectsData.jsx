@@ -1,11 +1,9 @@
 // import Icons from "../icons/Icons"
 
 const JavaScriptProjectsData = {
-  title: "JavaScript",
+    title: "JavaScript",
 
-  projects: [
+    projects: [],
+};
 
-  ]
-}
-
-export default JavaScriptProjectsData
+export default JavaScriptProjectsData;

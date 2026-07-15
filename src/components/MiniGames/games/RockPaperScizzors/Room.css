@@ -1,66 +1,87 @@
+.room-page-rps {
+    position: relative;
 
-/* =========================
-   ROOM PAGE BASE
-========================= */
-
-.room-page {
     min-height: 100vh;
     width: 100%;
 
     display: flex;
     justify-content: center;
 
-    padding: 140px 24px 100px;
+    overflow: hidden;
+
+    padding: 120px 24px 80px;
 
     transition: background 0.4s ease;
 }
 
 /* =========================
-   BACKGROUND (SPÓJNY Z JOIN)
+   BACKGROUND
 ========================= */
 
-.room-page.dark {
-    background: radial-gradient(
-        circle at top left,
-        #0b2a55 0%,
-        #071a36 40%,
-        #050e1f 100%
-    );
+.room-page-rps.dark {
+    background: radial-gradient(circle at top left, #3ea6ff 0%, #1d4f9c 35%, #081f4d 70%, #020b1d 100%);
 }
 
-.room-page.light {
-    background: radial-gradient(
-        circle at top left,
-        #eaf6ff 0%,
-        #cfeaff 35%,
-        #a8d8ff 70%,
-        #7bbfff 100%
-    );
+.room-page-rps.light {
+    background: radial-gradient(circle at top left, #eef8ff 0%, #d6efff 30%, #a8dbff 65%, #7bc4ff 100%);
+}
+
+/* =========================
+   OVERLAY
+========================= */
+
+.room-page-rps::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 0;
+}
+
+.room-page-rps.dark::before {
+    background: linear-gradient(to bottom, rgb(255 255 255 / 3%), rgb(0 0 0 / 18%));
+}
+
+.room-page-rps.light::before {
+    background: linear-gradient(to bottom, rgb(255 255 255 / 45%), rgb(255 255 255 / 8%));
 }
 
 /* =========================
    CONTAINER
 ========================= */
 
-.room-container {
+.room-container-rps {
+    position: relative;
+
+    z-index: 2;
+
     width: 100%;
+
     max-width: 800px;
 
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
 
-    animation: roomEnter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 35px;
+
+    animation: roomFadeUpRps 1s ease;
 }
 
-@keyframes roomEnter {
+@keyframes roomFadeUpRps {
     from {
         opacity: 0;
-        transform: translateY(12px);
+
+        transform: translateY(40px);
     }
+
     to {
         opacity: 1;
+
         transform: translateY(0);
     }
 }
@@ -69,205 +90,234 @@
    TITLE
 ========================= */
 
-.room-title {
-    font-size: clamp(2rem, 4vw, 3rem);
+.room-title-rps {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+
     font-weight: 800;
-    letter-spacing: -0.5px;
+
+    letter-spacing: -2px;
 }
 
-.room-page.dark .room-title {
-    color: #e3f1ff;
+.room-page-rps.dark .room-title-rps {
+    color: rgb(220 220 220);
+
+    text-shadow: 0 10px 30px rgb(0 0 0 / 35%);
 }
 
-.room-page.light .room-title {
-    color: #1f4f7a;
+.room-page-rps.light .room-title-rps {
+    color: #3f6a8a;
+
+    text-shadow: 0 10px 25px rgb(255 255 255 / 40%);
 }
 
 /* =========================
-   CARDS (INFO BOXY)
+   CARD
 ========================= */
 
-.room-card {
+.room-card-rps {
     width: 100%;
 
-    padding: 18px 20px;
+    padding: 32px;
 
-    border-radius: 16px;
+    border-radius: 32px;
 
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(18px);
 
     display: flex;
+
     flex-direction: column;
-    gap: 8px;
 
-    transition: 0.3s ease;
+    gap: 12px;
+
+    transition: transform 0.3s ease;
 }
 
-.room-page.dark .room-card {
-    background: rgba(10, 25, 55, 0.45);
-    border: 1px solid rgba(120, 190, 255, 0.14);
-    color: rgba(235, 245, 255, 0.9);
+.room-card-rps:hover {
+    transform: translateY(-4px);
 }
 
-.room-page.light .room-card {
-    background: rgba(255, 255, 255, 0.65);
-    border: 1px solid rgba(120, 180, 255, 0.25);
-    color: #1f4f7a;
+.room-page-rps.dark .room-card-rps {
+    background: rgb(8 20 45 / 45%);
+
+    border: 1px solid rgb(255 255 255 / 8%);
+
+    color: rgb(255 255 255 / 85%);
+
+    box-shadow: 0 20px 60px rgb(0 0 0 / 35%);
+}
+
+.room-page-rps.light .room-card-rps {
+    background: rgb(255 255 255 / 45%);
+
+    border: 1px solid rgb(255 255 255 / 40%);
+
+    color: #3f6a8a;
+
+    box-shadow: 0 20px 60px rgb(15 23 42 / 12%);
 }
 
 /* =========================
-   STATUS TEXT
+   STATUS
 ========================= */
 
-.room-status {
+.room-status-rps {
     font-size: 0.95rem;
+
     opacity: 0.8;
 }
 
 /* =========================
-   RPS BUTTONS WRAPPER
+   RPS BUTTONS
 ========================= */
 
-.rps-buttons {
+.rps-buttons-rps {
     display: flex;
+
     justify-content: center;
-    gap: 16px;
+
+    gap: 18px;
+
     width: 100%;
-    margin-top: 10px;
+
+    margin-top: 15px;
 }
 
-/* =========================
-   KWADRATOWE PRZYCISKI
-========================= */
-
-.rps-btn {
+.rps-btn-rps {
     width: 90px;
+
     height: 90px;
 
-    border-radius: 14px;
-
-    border: 1px solid rgba(120, 180, 255, 0.25);
+    border-radius: 22px;
 
     cursor: pointer;
 
     font-size: 2rem;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
 
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-/* DARK */
-.room-page.dark .rps-btn {
-    background: rgba(10, 25, 55, 0.45);
-    color: #e3f1ff;
+.room-page-rps.dark .rps-btn-rps {
+    background: rgb(0 0 0 / 25%);
+
+    color: rgb(220 220 220);
+
+    border: 1px solid rgb(255 255 255 / 12%);
 }
 
-/* LIGHT */
-.room-page.light .rps-btn {
-    background: rgba(255, 255, 255, 0.65);
-    color: #1f4f7a;
+.room-page-rps.light .rps-btn-rps {
+    background: rgb(255 255 255 / 45%);
+
+    color: #3f6a8a;
+
+    border: 1px solid rgb(255 255 255 / 50%);
 }
 
-/* HOVER */
-.rps-btn:hover {
-    transform: translateY(-3px);
+.rps-btn-rps:hover {
+    transform: translateY(-5px);
 }
 
-/* SELECTED (NAJWAŻNIEJSZE UX) */
-.rps-btn.selected {
-    border: 1px solid rgba(120, 190, 255, 0.85);
-    box-shadow: 0 0 18px rgba(120, 190, 255, 0.35);
-    transform: translateY(-2px) scale(1.08);
+.rps-btn-rps.selected-rps {
+    border: 1px solid rgb(62 166 255 / 80%);
+
+    box-shadow: 0 0 25px rgb(62 166 255 / 40%);
+
+    transform: translateY(-4px) scale(1.08);
 }
 
-/* DISABLED (po READY) */
-.rps-btn:disabled {
+.rps-btn-rps:disabled {
     opacity: 0.5;
+
     cursor: not-allowed;
-    transform: none;
 }
 
 /* =========================
-   READY BUTTON (z JoinPage)
+   READY BUTTON
 ========================= */
 
-.room-button {
+.room-button-rps {
     width: 100%;
+
     max-width: 420px;
 
     padding: 16px 18px;
 
-    border-radius: 16px;
-    border: none;
+    border-radius: 18px;
 
     cursor: pointer;
 
     font-weight: 700;
+
     font-size: 1rem;
 
-    transition: transform 0.25s ease, opacity 0.25s ease;
+    transition: transform 0.25s ease;
 }
 
-/* DARK */
-.room-page.dark .room-button {
-    background: rgba(80, 170, 255, 0.18);
+.room-page-rps.dark .room-button-rps {
+    background: rgb(255 255 255 / 8%);
+
     color: #d6eaff;
-    border: 1px solid rgba(120, 190, 255, 0.2);
+
+    border: 1px solid rgb(255 255 255 / 15%);
 }
 
-/* LIGHT */
-.room-page.light .room-button {
-    background: rgba(120, 180, 255, 0.25);
-    color: #1f4f7a;
-    border: 1px solid rgba(120, 180, 255, 0.3);
+.room-page-rps.light .room-button-rps {
+    background: rgb(255 255 255 / 45%);
+
+    color: #3f6a8a;
+
+    border: 1px solid rgb(255 255 255 / 40%);
 }
 
-/* HOVER */
-.room-button:hover {
-    transform: translateY(-3px);
-}
-
-/* DISABLED READY */
-.room-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
+.room-button-rps:hover {
+    transform: translateY(-4px);
 }
 
 /* =========================
-   START TEXT
+   START
 ========================= */
 
-.room-start {
-    font-size: 1.6rem;
+.room-start-rps {
+    font-size: 1.8rem;
+
     font-weight: 800;
-    color: #5de38b;
-    text-shadow: 0 0 12px rgba(93, 227, 139, 0.35);
+
+    color: #22c55e;
+
+    text-shadow: 0 0 15px rgb(34 197 94 / 60%);
 }
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media (max-width: 768px) {
-    .room-page {
+@media (width <= 768px) {
+    .room-page-rps {
         padding-top: 110px;
     }
 
-    .room-container {
-        gap: 18px;
+    .room-container-rps {
+        gap: 25px;
     }
 
-    .rps-btn {
-        width: 80px;
-        height: 80px;
+    .room-card-rps {
+        padding: 24px;
+    }
+
+    .rps-btn-rps {
+        width: 75px;
+
+        height: 75px;
+
         font-size: 1.8rem;
     }
 }

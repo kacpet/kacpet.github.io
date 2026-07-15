@@ -1,106 +1,80 @@
-import "./LangProjects.css"
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import "./LangProjects.css";
+import ImageSlider from "../ImageSlider/ImageSlider";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+function LangProjects({ theme, language, data }) {
+    const [enter, setEnter] = useState(false);
+    const navigate = useNavigate();
 
-function LangProjects({
-  theme,
-  language,
-  data
-}) {
-  const [enter, setEnter] = useState(false)
-  const navigate = useNavigate()
+    useEffect(() => {
+        window.scrollTo(0, 0);
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-    const t = setTimeout(() => {
-      setEnter(true)
-    }, 40)
+        const t = setTimeout(() => {
+            setEnter(true);
+        }, 40);
 
-    return () => clearTimeout(t)
-  }, [])
+        return () => clearTimeout(t);
+    }, []);
 
-  return (
-    <section className={`lang-projects ${theme} ${enter ? "lang-enter" : ""}`}>
+    return (
+        <section className={`lang-projects ${theme} ${enter ? "lang-enter" : ""}`}>
+            <div className="lang-projects-container">
+                <header className="lang-projects-header">
+                    <h1>{language === "polish" ? `Projekty - ${data.title}` : `${data.title} Projects`}</h1>
 
-      <div className="lang-projects-container">
+                    <p className="lang-projects-subtitle">
+                        {language === "polish"
+                            ? "Wybrane projekty oparte na tej technologii"
+                            : "Selected projects built with this technology"}
+                    </p>
+                </header>
 
-        {/* ================= HEADER ================= */}
-        <header className="lang-projects-header">
-          <h1>
-            {language === "polish"
-              ? `Projekty - ${data.title}`
-              : `${data.title} Projects`}
-          </h1>
+                <div className="lang-projects-grid">
+                    {data.projects.length > 0 ? (
+                        data.projects.map((project, index) => (
+                            <article key={index} className="project-card" style={{ "--d": `${0.15 + index * 0.08}s` }}>
+                                <div className="project-image">
+                                    <ImageSlider project={project} theme={theme} language={language} />
+                                </div>
 
-          <p className="lang-projects-subtitle">
-            {language === "polish"
-              ? "Wybrane projekty oparte na tej technologii"
-              : "Selected projects built with this technology"}
-          </p>
-        </header>
+                                <div className="project-content">
+                                    <h3>{project.title}</h3>
 
-        {/* ================= GRID ================= */}
-        <div className="lang-projects-grid">
+                                    <p>{project.description[language]}</p>
 
-          {data.projects.length > 0 ? (
-            data.projects.map((project, index) => (
-              <div
-                key={index}
-                className="project-card"
-                style={{ "--d": `${0.15 + index * 0.08}s` }}
-              >
+                                    <div className="project-tags">
+                                        {project.tags.map((tag, i) => (
+                                            <span key={i}>{tag}</span>
+                                        ))}
+                                    </div>
 
-                <div className="project-image">
-                  <img
-                    src={theme === "dark"
-                      ? project.imageDark
-                      : project.imageLight}
-                  
-                    alt={project.title}
-                  />
+                                    <div className="project-actions">
+                                        <a
+                                            href={project.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="project-github"
+                                        >
+                                            GitHub
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        ))
+                    ) : (
+                        <div className="empty-state">
+                            {language === "polish" ? "Brak projektów" : "No projects available"}
+                        </div>
+                    )}
                 </div>
 
-                <div className="project-content">
-                  <h3>{project.title}</h3>
-                  <p>{project.description[language]}</p>
-
-                  <div className="project-tags">
-                    {project.tags.map((tag, i) => (
-                      <span key={i}>{tag}</span>
-                    ))}
-                  </div>
-
-                  <div className="project-actions">
-                    <a href={project.github} target="_blank" className="project-github">
-                      GitHub
-                    </a>
-                  </div>
+                <div className="back-wrapper">
+                    <button onClick={() => navigate(-1)}>{language === "polish" ? "Powrót" : "Back"}</button>
                 </div>
-
-              </div>
-            ))
-          ) : (
-            <div className="empty-state">
-              {language === "polish"
-                ? "Brak projektów"
-                : "No projects available"}
             </div>
-          )}
-
-        </div>
-
-        {/* ================= BACK BUTTON ================= */}
-        <div className="back-wrapper">
-          <button onClick={() => navigate(-1)}>
-            {language === "polish" ? "Powrót" : "Back"}
-          </button>
-        </div>
-
-      </div>
-
-    </section>
-  )
+        </section>
+    );
 }
 
-export default LangProjects
+export default LangProjects;

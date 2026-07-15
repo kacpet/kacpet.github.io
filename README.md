@@ -3,8 +3,8 @@
 Modern React application combining personal portfolio, technology showcase, and multiplayer browser games.
 
 ## Link
-[Portfolio](https://kacpet.github.io)
 
+[Portfolio](https://kacpet.github.io)
 
 ## 📌 Overview
 
@@ -26,7 +26,7 @@ This project includes:
 - Vite
 - React Router
 - Firebase (Firestore + Functions)
-- JavaScript 
+- JavaScript
 - CSS3
 
 ---
@@ -34,23 +34,22 @@ This project includes:
 ## 🎯 Features
 
 ### Portfolio
+
 - Personal homepage
 - Technology-based project organization
 - Animated UI with modern design
 
-
 ### Mini Games
+
 - Rock Paper Scissors
 - Connect Four
 - Quixo
 
-
-
 ### UI / UX
+
 - Dark & Light mode
 - Glassmorphism design
 - Responsive layout
-
 
 ---
 
@@ -67,3 +66,4 @@ This project includes:
 git clone https://github.com/kacpet/kacpet.github.io.git
 npm install
 npm run dev
+```

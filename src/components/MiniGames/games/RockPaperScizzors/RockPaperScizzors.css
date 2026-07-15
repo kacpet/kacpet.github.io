@@ -1,279 +1,344 @@
-.join-page {
-min-height: 100vh;
-width: 100%;
+.room-page {
+    min-height: 100vh;
+    width: 100%;
 
+    display: flex;
+    justify-content: center;
 
-display: flex;
-justify-content: center;
-align-items: center;
+    padding: 140px 24px 100px;
 
-padding: 140px 24px 100px;
+    box-sizing: border-box;
 
-transition:
-    background 0.4s ease,
-    color 0.4s ease;
-
-
+    transition: background 0.4s ease;
 }
 
 /* =========================
-BACKGROUND
+   BACKGROUND
 ========================= */
 
-.join-page.dark {
-background: radial-gradient(
-circle at top left,
-#0b2a55 0%,
-#071a36 40%,
-#050e1f 100%
-);
+.room-page.dark {
+    background: radial-gradient(circle at top left, #0b2a55 0%, #071a36 40%, #050e1f 100%);
 }
 
-.join-page.light {
-background: radial-gradient(
-circle at top left,
-#eaf6ff 0%,
-#cfeaff 35%,
-#a8d8ff 70%,
-#7bbfff 100%
-);
+.room-page.light {
+    background: radial-gradient(circle at top left, #eaf6ff 0%, #cfeaff 35%, #a8d8ff 70%, #7bbfff 100%);
 }
 
 /* =========================
-ENTER ANIMATION
+   CONTAINER
 ========================= */
 
-.join-enter .join-container {
-animation: pageEnter 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.room-container {
+    width: 100%;
+
+    max-width: 800px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 35px;
+
+    animation: roomEnter 1.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@keyframes pageEnter {
-from {
-opacity: 0;
-transform: translate3d(0, 18px, 0);
-}
+@keyframes roomEnter {
+    from {
+        opacity: 0;
 
+        transform: translate3d(0, 12px, 0);
+    }
 
-to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-}
+    to {
+        opacity: 1;
 
-
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 /* =========================
-CONTAINER
+   TITLE
 ========================= */
 
-.join-container {
-width: 100%;
-max-width: 520px;
+.room-title {
+    margin: 0;
 
+    font-size: clamp(2.4rem, 5vw, 4rem);
 
-display: flex;
-flex-direction: column;
-gap: 32px;
+    font-weight: 800;
 
-padding: 42px;
-
-border-radius: 28px;
-
-backdrop-filter: blur(18px);
--webkit-backdrop-filter: blur(18px);
-
-transition:
-    background 0.4s ease,
-    border-color 0.4s ease,
-    transform 0.35s ease;
-
+    letter-spacing: -0.5px;
 }
 
-.join-container:hover {
-transform: translate3d(0, -5px, 0) scale(1.015);
+.room-page.dark .room-title {
+    color: #e3f1ff;
 }
 
-.join-page.dark .join-container {
-background: rgba(10, 25, 55, 0.45);
-border: 1px solid rgba(120, 190, 255, 0.14);
-color: rgba(235, 245, 255, 0.9);
-}
-
-.join-page.light .join-container {
-background: rgba(255, 255, 255, 0.65);
-border: 1px solid rgba(120, 180, 255, 0.25);
-color: #1f4f7a;
+.room-page.light .room-title {
+    color: #1f4f7a;
 }
 
 /* =========================
-HEADER
+   CARD
 ========================= */
 
-.join-header {
-text-align: center;
+.room-card {
+    width: 100%;
+
+    padding: 32px;
+
+    border-radius: 28px;
+
+    backdrop-filter: blur(18px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    box-sizing: border-box;
+
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.join-header h2 {
-font-size: clamp(2.4rem, 5vw, 3.2rem);
-font-weight: 800;
-letter-spacing: -0.5px;
+.room-page.dark .room-card {
+    background: rgb(10 25 55 / 45%);
+
+    border: 1px solid rgb(120 190 255 / 14%);
+
+    color: rgb(235 245 255 / 90%);
 }
 
-.join-page.dark .join-header h2 {
-color: #e3f1ff;
+.room-page.light .room-card {
+    background: rgb(255 255 255 / 65%);
+
+    border: 1px solid rgb(120 180 255 / 25%);
+
+    color: #1f4f7a;
 }
 
-.join-page.light .join-header h2 {
-color: #1f4f7a;
+.room-card:hover {
+    transform: translate3d(0, -5px, 0) scale(1.015);
 }
 
 /* =========================
-INPUTS
+   STATUS
 ========================= */
 
-.join-input-wrapper {
-display: flex;
-flex-direction: column;
-gap: 18px;
-}
+.room-status {
+    font-size: 0.95rem;
 
-.join-input {
-width: 100%;
-
-padding: 16px 18px;
-
-border-radius: 14px;
-
-font-size: 1rem;
-
-outline: none;
-
-transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    background 0.25s ease;
-
-}
-
-.join-input:focus {
-transform: translate3d(0, -2px, 0);
-}
-
-.join-page.dark .join-input {
-background: rgba(80, 170, 255, 0.08);
-border: 1px solid rgba(120, 190, 255, 0.12);
-color: #e3f1ff;
-}
-
-.join-page.dark .join-input::placeholder {
-color: rgba(220, 235, 255, 0.45);
-}
-
-.join-page.dark .join-input:focus {
-border-color: rgba(120, 190, 255, 0.4);
-background: rgba(80, 170, 255, 0.12);
-}
-
-.join-page.light .join-input {
-background: rgba(255, 255, 255, 0.65);
-border: 1px solid rgba(120, 180, 255, 0.25);
-color: #1f4f7a;
-}
-
-.join-page.light .join-input::placeholder {
-color: rgba(31, 79, 122, 0.55);
-}
-
-.join-page.light .join-input:focus {
-border-color: rgba(120, 180, 255, 0.4);
-background: rgba(255, 255, 255, 0.95);
+    opacity: 0.8;
 }
 
 /* =========================
-BUTTON
+   RPS BUTTONS
 ========================= */
 
-.join-button {
-height: 58px;
+.rps-buttons {
+    display: flex;
 
+    justify-content: center;
 
-border: none;
-border-radius: 18px;
+    align-items: center;
 
-font-size: 1rem;
-font-weight: 700;
+    gap: 18px;
 
-cursor: pointer;
+    width: 100%;
 
-transition:
-    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.3s ease,
-    opacity 0.3s ease;
-
-
+    margin-top: 15px;
 }
 
-.join-page.dark .join-button {
-color: white;
+.rps-btn {
+    width: 90px;
 
+    height: 90px;
 
-background: linear-gradient(
-    135deg,
-    #3e8cff,
-    #62b7ff
-);
+    border-radius: 18px;
 
+    cursor: pointer;
 
+    font-size: 2rem;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    backdrop-filter: blur(16px);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border 0.25s ease;
 }
 
-.join-page.light .join-button {
-color: white;
+.room-page.dark .rps-btn {
+    background: rgb(80 170 255 / 8%);
 
-background: linear-gradient(
-    135deg,
-    #4a9dff,
-    #7bc3ff
-);
+    border: 1px solid rgb(120 190 255 / 18%);
 
-
+    color: #e3f1ff;
 }
 
-.join-button:hover:not(:disabled) {
-transform: translate3d(0, -3px, 0);
+.room-page.light .rps-btn {
+    background: rgb(255 255 255 / 65%);
 
+    border: 1px solid rgb(120 180 255 / 25%);
 
-box-shadow:
-    0 12px 30px rgba(62, 140, 255, 0.35);
-
+    color: #1f4f7a;
 }
 
-.join-button:active:not(:disabled) {
-transform: translate3d(0, 0, 0);
+.rps-btn:hover {
+    transform: translate3d(0, -3px, 0);
 }
 
-.join-button:disabled {
-opacity: 0.7;
-cursor: not-allowed;
+.rps-btn.selected {
+    border: 1px solid rgb(120 190 255 / 85%);
+
+    box-shadow: 0 0 18px rgb(120 190 255 / 35%);
+
+    transform: translate3d(0, -2px, 0) scale(1.08);
+}
+
+.rps-btn:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none;
 }
 
 /* =========================
-RESPONSIVE
+   MAIN BUTTON
 ========================= */
+
+.room-button {
+    width: 100%;
+
+    max-width: 420px;
+
+    padding: 16px 18px;
+
+    border-radius: 16px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    font-size: 1rem;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.room-page.dark .room-button {
+    background: rgb(80 170 255 / 18%);
+
+    color: #d6eaff;
+
+    border: 1px solid rgb(120 190 255 / 20%);
+}
+
+.room-page.light .room-button {
+    background: rgb(120 180 255 / 25%);
+
+    color: #1f4f7a;
+
+    border: 1px solid rgb(120 180 255 / 30%);
+}
+
+.room-button:hover {
+    transform: translate3d(0, -3px, 0);
+}
+
+.room-button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+/* =========================
+   START MESSAGE
+========================= */
+
+.room-start {
+    font-size: 1.6rem;
+
+    font-weight: 800;
+
+    color: #5de38b;
+
+    text-shadow: 0 0 12px rgb(93 227 139 / 35%);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+    .room-page {
+        padding: 120px 20px 80px;
+    }
+
+    .room-card {
+        padding: 28px;
+    }
+}
 
 @media (max-width: 768px) {
+    .room-page {
+        padding-top: 110px;
+    }
 
+    .room-container {
+        gap: 25px;
+    }
 
-.join-page {
-    padding-top: 110px;
+    .room-card {
+        padding: 24px;
+    }
+
+    .rps-btn {
+        width: 80px;
+
+        height: 80px;
+
+        font-size: 1.8rem;
+    }
 }
 
-.join-container {
-    padding: 28px 24px;
-}
+@media (max-width: 500px) {
+    .room-page {
+        padding-left: 16px;
 
-.join-header h2 {
-    font-size: 2rem;
-}
+        padding-right: 16px;
+    }
 
+    .room-title {
+        font-size: 2rem;
+    }
 
+    .rps-buttons {
+        gap: 12px;
+    }
+
+    .rps-btn {
+        width: 70px;
+
+        height: 70px;
+
+        font-size: 1.5rem;
+    }
+
+    .room-card {
+        padding: 18px;
+
+        border-radius: 22px;
+    }
 }

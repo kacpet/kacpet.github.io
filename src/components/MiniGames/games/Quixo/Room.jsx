@@ -1,912 +1,571 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useCallback } from "react";
 
-import { useParams, useLocation, useNavigate } from "react-router-dom"
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 
-import { doc, onSnapshot, updateDoc } from "firebase/firestore"
+import { doc, onSnapshot, updateDoc, serverTimestamp } from "firebase/firestore";
 
-import { db } from "../../base/firebase"
-import "./Room.css"
+import { db } from "../../base/firebase";
+
+import "./Room.css";
 
 export default function QuixoRoom({ theme, language }) {
-  const { id } = useParams()
+    const { id } = useParams();
 
-  const location = useLocation()
+    const location = useLocation();
 
-  const navigate = useNavigate()
+    const navigate = useNavigate();
 
-  const playerId = location.state?.playerId
+    const playerId = location.state?.playerId;
 
-  const SIZE = 5
+    const SIZE = 5;
 
-  const [room, setRoom] = useState(null)
+    const [room, setRoom] = useState(null);
 
-  const [role, setRole] = useState(null)
+    const [role, setRole] = useState(null);
 
-  // aktualnie wybrany klocek
+    const [selectedEdge, setSelectedEdge] = useState(null);
 
-  const [selectedEdge, setSelectedEdge] = useState(null)
+    const [selectedDirection, setSelectedDirection] = useState(null);
 
-  // kierunek wsunięcia
+    const [pushing, setPushing] = useState(false);
 
-  const [selectedDirection, setSelectedDirection] = useState(null)
+    const [movingPiece, setMovingPiece] = useState(null);
 
-  // animacja ruchu
+    const [moveAnimation, setMoveAnimation] = useState(null);
 
-  const [pushing, setPushing] = useState(false)
+    const boardRef = useRef(null);
 
-  const [movingPiece, setMovingPiece] = useState(null)
+    const directionLabels = {
+        polish: {
+            up: "Góra",
 
-  const [moveAnimation, setMoveAnimation] = useState(null)
+            down: "Dół",
 
-  const boardRef = useRef(null)
+            left: "Lewo",
 
-  // =========================
-  // LANGUAGE
-  // =========================
+            right: "Prawo",
+        },
 
-  const directionLabels = {
-    polish: {
-      up: "Góra",
+        english: {
+            up: "Up",
 
-      down: "Dół",
+            down: "Down",
 
-      left: "Lewo",
+            left: "Left",
 
-      right: "Prawo",
-    },
+            right: "Right",
+        },
+    };
 
-    english: {
-      up: "Up",
+    useEffect(() => {
+        if (!id) return;
 
-      down: "Down",
+        const roomRef = doc(db, "quixo_rooms", id);
 
-      left: "Left",
+        const unsubscribe = onSnapshot(roomRef, (snapshot) => {
+            if (!snapshot.exists()) return;
 
-      right: "Right",
-    },
-  }
+            const data = snapshot.data();
 
-  // =========================
-  // FIRESTORE SYNC
-  // =========================
+            setRoom(data);
 
-  useEffect(() => {
-    if (!id) return
-
-    const roomRef = doc(db, "quixo_rooms", id)
-
-    const unsubscribe = onSnapshot(roomRef, (snapshot) => {
-      if (!snapshot.exists()) return
-
-      const data = snapshot.data()
-
-      setRoom(data)
-
-      if (data.player1?.id === playerId) {
-        setRole("player1")
-      } else if (data.player2?.id === playerId) {
-        setRole("player2")
-      } else {
-        setRole(null)
-      }
-    })
-
-    return () => unsubscribe()
-  }, [id, playerId])
-
-  // =========================
-  // HELPERS
-  // =========================
-
-  const createEmptyBoard = () => {
-    return Array(SIZE * SIZE).fill(null)
-  }
-
-  const cloneBoard = (board) => {
-    if (Array.isArray(board)) {
-      return [...board]
-    }
-
-    return createEmptyBoard()
-  }
-
-  const index = (row, col) => {
-    return row * SIZE + col
-  }
-
-  const get = (board, row, col) => {
-    if (row < 0 || col < 0 || row >= SIZE || col >= SIZE) {
-      return null
-    }
-
-    return board[index(row, col)]
-  }
-
-  const isEdge = (row, col) => {
-    return row === 0 || col === 0 || row === SIZE - 1 || col === SIZE - 1
-  }
-
-  const isCorner = (row, col) => {
-    return (
-      (row === 0 && col === 0) ||
-      (row === 0 && col === SIZE - 1) ||
-      (row === SIZE - 1 && col === 0) ||
-      (row === SIZE - 1 && col === SIZE - 1)
-    )
-  }
-
-  const isValidPick = (piece) => {
-    return piece === null || piece === role
-  }
-  // =========================
-  // AVAILABLE DIRECTIONS
-  // =========================
-  //
-  // Kierunek oznacza stronę,
-  // z której klocek jest WSUWANY.
-  //
-  // down  -> wsuwanie od góry
-  // up    -> wsuwanie od dołu
-  // right -> wsuwanie od lewej
-  // left  -> wsuwanie od prawej
-  //
-  // Nie można wsunąć klocka z tej samej strony,
-  // z której został zabrany.
-  //
-
-const getMoveDirections = (row, col) => {
-  const directions = []
-
-  const top = row === 0
-  const bottom = row === SIZE - 1
-  const left = col === 0
-  const right = col === SIZE - 1
-
-
-  // =========================
-  // NAROŻNIKI
-  // zawsze 2 kierunki
-  // =========================
-
-  if (isCorner(row, col)) {
-
-    if (top && left) {
-      return ["up", "left"]
-    }
-
-    if (top && right) {
-      return ["up", "right"]
-    }
-
-    if (bottom && left) {
-      return ["down", "left"]
-    }
-
-    if (bottom && right) {
-      return ["down", "right"]
-    }
-
-  }
-
-
-  // =========================
-  // GÓRNA KRAWĘDŹ
-  // brak "down"
-  // =========================
-
-  if (top) {
-    directions.push(
-      "up",
-      "left",
-      "right"
-    )
-  }
-
-
-  // =========================
-  // DOLNA KRAWĘDŹ
-  // brak "up"
-  // =========================
-
-  else if (bottom) {
-    directions.push(
-      "down",
-      "left",
-      "right"
-    )
-  }
-
-
-  // =========================
-  // LEWA KRAWĘDŹ
-  // brak "right"
-  // =========================
-
-  else if (left) {
-    directions.push(
-      "left",
-      "up",
-      "down"
-    )
-  }
-
-
-  // =========================
-  // PRAWA KRAWĘDŹ
-  // brak "left"
-  // =========================
-
-  else if (right) {
-    directions.push(
-      "right",
-      "up",
-      "down"
-    )
-  }
-
-
-  return directions
-}
-
-  // =========================
-  // PUSH HELPERS
-  // =========================
-
-  const shiftColumnDown = (board, col, fromRow) => {
-    const newBoard = cloneBoard(board)
-
-    /*
-      Przesuwamy tylko pola
-      od góry do miejsca wyjęcia.
-
-      Pola poniżej miejsca wyjęcia
-      NIE ruszają się.
-    */
-
-    for (let row = fromRow; row > 0; row--) {
-      newBoard[index(row, col)] = newBoard[index(row - 1, col)]
-    }
-
-    return newBoard
-  }
-
-  const shiftColumnUp = (board, col, fromRow) => {
-    const newBoard = cloneBoard(board)
-
-    /*
-      Przesuwamy tylko pola
-      od dołu do miejsca wyjęcia
-    */
-
-    for (let row = fromRow; row < SIZE - 1; row++) {
-      newBoard[index(row, col)] = newBoard[index(row + 1, col)]
-    }
-
-    return newBoard
-  }
-
-  const shiftRowRight = (board, row, fromCol) => {
-    const newBoard = cloneBoard(board)
-
-    /*
-      Przesuwamy tylko pola
-      od lewej strony
-      do miejsca wyjęcia
-    */
-
-    for (let col = fromCol; col > 0; col--) {
-      newBoard[index(row, col)] = newBoard[index(row, col - 1)]
-    }
-
-    return newBoard
-  }
-
-  const shiftRowLeft = (board, row, fromCol) => {
-    const newBoard = cloneBoard(board)
-
-    /*
-      Przesuwamy tylko pola
-      od prawej strony
-      do miejsca wyjęcia
-    */
-
-    for (let col = fromCol; col < SIZE - 1; col++) {
-      newBoard[index(row, col)] = newBoard[index(row, col + 1)]
-    }
-
-    return newBoard
-  }
-  // =========================
-  // QUIXO PUSH ENGINE
-  // =========================
-
-  const pushPiece = (board, row, col, direction, player) => {
-    let newBoard = cloneBoard(board)
-
-    /*
-      Pobieramy wybrany klocek.
-
-      Jeżeli pole było puste,
-      gracz wkłada swój klocek.
-    */
-
-    let pickedPiece = newBoard[index(row,col)]
-    
-    if(pickedPiece === null){
-      pickedPiece = player
-    }
-    /*
-      Usuwamy klocek z planszy
-
-      W tym momencie istnieje
-      jedno puste miejsce.
-    */
-
-    newBoard[index(row, col)] = null
-
-    // =========================
-    // WSUNIĘCIE Z GÓRY
-    // =========================
-
-    if (direction === "down") {
-      /*
-        Przesuwamy tylko część
-        NAD wyjętym klockiem.
-
-        np.
-
-        X
-        A
-        B <- zabrany
-
-        wynik:
-
-        X
-        A
-        klocek
-
-
-      */
-
-      for (let r = row; r > 0; r--) {
-        newBoard[index(r, col)] = newBoard[index(r - 1, col)]
-      }
-
-      newBoard[index(0, col)] = pickedPiece
-    }
-
-    // =========================
-    // WSUNIĘCIE Z DOŁU
-    // =========================
-
-    if (direction === "up") {
-      for (let r = row; r < SIZE - 1; r++) {
-        newBoard[index(r, col)] = newBoard[index(r + 1, col)]
-      }
-
-      newBoard[index(SIZE - 1, col)] = pickedPiece
-    }
-
-    // =========================
-    // WSUNIĘCIE Z LEWEJ
-    // =========================
-
-    if (direction === "right") {
-      for (let c = col; c > 0; c--) {
-        newBoard[index(row, c)] = newBoard[index(row, c - 1)]
-      }
-
-      newBoard[index(row, 0)] = pickedPiece
-    }
-
-    // =========================
-    // WSUNIĘCIE Z PRAWEJ
-    // =========================
-
-    if (direction === "left") {
-      for (let c = col; c < SIZE - 1; c++) {
-        newBoard[index(row, c)] = newBoard[index(row, c + 1)]
-      }
-
-      newBoard[index(row, SIZE - 1)] = pickedPiece
-    }
-
-    return newBoard
-  }
-
-  // =========================
-  // VALID MOVE CHECK
-  // =========================
-
-
-  // =========================
-  // SELECT PIECE
-  // =========================
-
-  const handleCellClick = (row, col) => {
-    if (!room) return
-
-    if (!role) return
-
-    if (room.winner) return
-
-    if (room.currentTurn !== role) return
-
-    if (pushing) return
-
-    /*
-      Gracz może wybrać
-      tylko krawędź
-    */
-
-    if (!isEdge(row, col)) return
-
-    const board = cloneBoard(room.board)
-
-    const piece = board[index(row, col)]
-
-    /*
-      Można wyjąć:
-      - pusty klocek
-      - własny klocek
-
-      Nie można zabrać
-      przeciwnika.
-    */
-
-    if (!isValidPick(piece)) {
-      return
-    }
-
-    /*
-      Jeżeli kliknięto
-      aktualnie wybrany klocek
-      nic nie robimy
-    */
-
-    if (selectedEdge && selectedEdge.row === row && selectedEdge.col === col) {
-      return
-    }
-
-    /*
-      Ustawiamy nowy klocek
-    */
-
-    setSelectedEdge({
-      row,
-
-      col,
-    })
-
-    /*
-      Resetujemy kierunek
-    */
-
-    setSelectedDirection(null)
-  }
-
-  // =========================
-  // GET SELECTED DIRECTIONS
-  // =========================
-
-const getSelectedDirections = () => {
-  if (!selectedEdge) return []
-
-  const {
-    row,
-    col,
-  } = selectedEdge
-
-  return getMoveDirections(row,col)
-}
-
-  // =========================
-  // SELECT DIRECTION
-  // =========================
-
-  const chooseDirection = (direction) => {
-    if (!selectedEdge) return
-
-    setSelectedDirection(direction)
-  }
-  // =========================
-  // EXECUTE MOVE
-  // =========================
-
-  const startPushAnimation = (row, col, direction) => {
-  setMovingPiece({
-    row,
-
-    col,
-  })
-
-  setMoveAnimation(direction)
-
-  setPushing(true)
-}
-
-// =========================
-// END MOVE ANIMATION
-// =========================
-
-  const endPushAnimation = () => {
-    setMovingPiece(null)
-
-    setMoveAnimation(null)
-
-    setPushing(false)
-  }
-
-  // =========================
-  // ANIMATION CLASS
-  // =========================
-
-  const getAnimationClass = (row, col) => {
-    if (!movingPiece) return ""
-
-    if (movingPiece.row === row && movingPiece.col === col) {
-      return `move-${moveAnimation}`
-    }
-
-    return ""
-  }
-
-  const executeMove = async () => {
-    if (!selectedEdge || !selectedDirection || !room || !role || pushing) {
-      return
-    }
-
-    const {
-      row,
-
-      col,
-    } = selectedEdge
-
-    const oldBoard = cloneBoard(room.board)
-    /*
-      BLOKADA PODCZAS RUCHU
-    */
-      startPushAnimation(
-      row,
-      col,
-      selectedDirection
-    )
-
-
-    const newBoard = pushPiece(
-      oldBoard,
-      row,
-      col,
-      selectedDirection,
-      role
-    )
-    /*
-      SPRAWDZENIE WYGRANEJ
-    */
-
-    const winningLines = getWinningLines(newBoard)
-
-    const winner = winningLines.length > 0 ? role : null
-
-    /*
-      Krótka animacja
-      przed zapisem
-    */
-
-    await new Promise((resolve) => setTimeout(resolve, 500))
-
-    const roomRef = doc(db, "quixo_rooms", id)
-
-    await updateDoc(roomRef, {
-      board: newBoard,
-
-      winningLines,
-
-      winner,
-
-      currentTurn: winner ? null : role === "player1" ? "player2" : "player1",
-
-      ...(winner && {
-        winnerAt: Date.now(),
-      }),
-    })
-
-    /*
-      Czyścimy wybór
-    */
-
-   setSelectedEdge(null)
-   setSelectedDirection(null)
-
-
-   setTimeout(()=>{
-
-    endPushAnimation()
-
-  },450)
-  }
-
-  // =========================
-  // CONFIRM BUTTON HANDLER
-  // =========================
-
-  const confirmMove = () => {
-    if (!selectedDirection) return
-
-    executeMove()
-  }
-  // =========================
-// ANIMATION STATE
-// =========================
-
-
-
-// =========================
-// START MOVE ANIMATION
-// =========================
-
-
-  // =========================
-  // WIN CHECK
-  // =========================
-
-  const getWinningLines = (board) => {
-    const result = []
-
-    const directions = [
-      [0, 1], // poziomo
-
-      [1, 0], // pionowo
-
-      [1, 1], // skos prawy dół
-
-      [1, -1], // skos lewy dół
-    ]
-
-    const used = new Set()
-
-    for (let row = 0; row < SIZE; row++) {
-      for (let col = 0; col < SIZE; col++) {
-        const player = get(board, row, col)
-
-        if (!player) continue
-
-        for (const [dr, dc] of directions) {
-          const cells = []
-
-          let r = row
-
-          let c = col
-
-          while (
-            r >= 0 &&
-            c >= 0 &&
-            r < SIZE &&
-            c < SIZE &&
-            get(board, r, c) === player
-          ) {
-            cells.push(`${r}-${c}`)
-
-            r += dr
-
-            c += dc
-          }
-
-          if (cells.length >= SIZE) {
-            /*
-              Bierzemy pierwsze 5 pól.
-
-              W Quixo plansza ma 5x5,
-              więc każda pełna linia
-              ma dokładnie 5.
-            */
-
-            const line = cells.slice(0, SIZE).join("|")
-
-            if (!used.has(line)) {
-              used.add(line)
-
-              result.push(line)
+            if (data.player1?.id === playerId) {
+                setRole("player1");
+            } else if (data.player2?.id === playerId) {
+                setRole("player2");
+            } else {
+                setRole(null);
             }
-          }
+        });
+
+        return () => unsubscribe();
+    }, [id, playerId]);
+
+    const createEmptyBoard = useCallback(() => {
+        return Array(SIZE * SIZE).fill(null);
+    }, []);
+
+    const cloneBoard = useCallback(
+        (board) => {
+            if (Array.isArray(board)) {
+                return [...board];
+            }
+
+            return createEmptyBoard();
+        },
+        [createEmptyBoard]
+    );
+
+    const index = useCallback((row, col) => {
+        return row * SIZE + col;
+    }, []);
+
+    const get = useCallback(
+        (board, row, col) => {
+            if (row < 0 || col < 0 || row >= SIZE || col >= SIZE) {
+                return null;
+            }
+
+            return board[index(row, col)];
+        },
+        [index]
+    );
+
+    const isEdge = useCallback((row, col) => {
+        return row === 0 || col === 0 || row === SIZE - 1 || col === SIZE - 1;
+    }, []);
+
+    const isCorner = useCallback((row, col) => {
+        return (
+            (row === 0 && col === 0) ||
+            (row === 0 && col === SIZE - 1) ||
+            (row === SIZE - 1 && col === 0) ||
+            (row === SIZE - 1 && col === SIZE - 1)
+        );
+    }, []);
+
+    const isValidPick = useCallback(
+        (piece) => {
+            return piece === null || piece === role;
+        },
+        [role]
+    );
+
+    const getMoveDirections = useCallback(
+        (row, col) => {
+            const directions = [];
+
+            const top = row === 0;
+
+            const bottom = row === SIZE - 1;
+
+            const left = col === 0;
+
+            const right = col === SIZE - 1;
+
+            if (isCorner(row, col)) {
+                if (top && left) return ["up", "left"];
+
+                if (top && right) return ["up", "right"];
+
+                if (bottom && left) return ["down", "left"];
+
+                if (bottom && right) return ["down", "right"];
+            }
+
+            if (top) {
+                directions.push("up", "left", "right");
+            } else if (bottom) {
+                directions.push("down", "left", "right");
+            } else if (left) {
+                directions.push("left", "up", "down");
+            } else if (right) {
+                directions.push("right", "up", "down");
+            }
+
+            return directions;
+        },
+        [isCorner]
+    );
+
+    const pushPiece = useCallback(
+        (board, row, col, direction, player) => {
+            const newBoard = cloneBoard(board);
+
+            let pickedPiece = newBoard[index(row, col)];
+
+            if (pickedPiece === null) {
+                pickedPiece = player;
+            }
+
+            newBoard[index(row, col)] = null;
+
+            if (direction === "down") {
+                for (let r = row; r > 0; r--) {
+                    newBoard[index(r, col)] = newBoard[index(r - 1, col)];
+                }
+
+                newBoard[index(0, col)] = pickedPiece;
+            }
+
+            if (direction === "up") {
+                for (let r = row; r < SIZE - 1; r++) {
+                    newBoard[index(r, col)] = newBoard[index(r + 1, col)];
+                }
+
+                newBoard[index(SIZE - 1, col)] = pickedPiece;
+            }
+
+            if (direction === "right") {
+                for (let c = col; c > 0; c--) {
+                    newBoard[index(row, c)] = newBoard[index(row, c - 1)];
+                }
+
+                newBoard[index(row, 0)] = pickedPiece;
+            }
+
+            if (direction === "left") {
+                for (let c = col; c < SIZE - 1; c++) {
+                    newBoard[index(row, c)] = newBoard[index(row, c + 1)];
+                }
+
+                newBoard[index(row, SIZE - 1)] = pickedPiece;
+            }
+
+            return newBoard;
+        },
+
+        [cloneBoard, index]
+    );
+
+    const getWinningLines = useCallback(
+        (board) => {
+            const result = [];
+
+            const directions = [
+                [0, 1],
+
+                [1, 0],
+
+                [1, 1],
+
+                [1, -1],
+            ];
+
+            for (let row = 0; row < SIZE; row++) {
+                for (let col = 0; col < SIZE; col++) {
+                    const player = get(board, row, col);
+
+                    if (!player) continue;
+
+                    for (const [dr, dc] of directions) {
+                        const cells = [];
+
+                        let r = row;
+
+                        let c = col;
+
+                        while (r >= 0 && c >= 0 && r < SIZE && c < SIZE && get(board, r, c) === player) {
+                            cells.push(`${r}-${c}`);
+
+                            r += dr;
+
+                            c += dc;
+                        }
+
+                        if (cells.length >= SIZE) {
+                            result.push({
+                                player,
+
+                                cells: cells.slice(0, SIZE),
+                            });
+                        }
+                    }
+                }
+            }
+
+            return result;
+        },
+        [get]
+    );
+
+    const determineWinner = useCallback(
+        (board, currentPlayer) => {
+            const lines = getWinningLines(board);
+
+            const player1Win = lines.some((line) => line.player === "player1");
+
+            const player2Win = lines.some((line) => line.player === "player2");
+
+            if (player1Win && player2Win) {
+                return currentPlayer === "player1" ? "player2" : "player1";
+            }
+
+            if (player1Win) {
+                return "player1";
+            }
+
+            if (player2Win) {
+                return "player2";
+            }
+
+            return null;
+        },
+
+        [getWinningLines]
+    );
+
+    const handleCellClick = useCallback(
+        (row, col) => {
+            if (!room) return;
+
+            if (!role) return;
+
+            if (room.winner) return;
+
+            if (room.currentTurn !== role) return;
+
+            if (pushing) return;
+
+            if (!isEdge(row, col)) return;
+
+            const board = cloneBoard(room.board);
+
+            const piece = board[index(row, col)];
+
+            if (!isValidPick(piece)) {
+                return;
+            }
+
+            if (selectedEdge && selectedEdge.row === row && selectedEdge.col === col) {
+                return;
+            }
+
+            setSelectedEdge({
+                row,
+
+                col,
+            });
+
+            setSelectedDirection(null);
+        },
+
+        [room, role, pushing, cloneBoard, index, isEdge, isValidPick, selectedEdge]
+    );
+
+    const getSelectedDirections = useCallback(() => {
+        if (!selectedEdge) {
+            return [];
         }
-      }
+
+        return getMoveDirections(selectedEdge.row, selectedEdge.col);
+    }, [selectedEdge, getMoveDirections]);
+
+    const chooseDirection = (direction) => {
+        if (!selectedEdge) return;
+
+        setSelectedDirection(direction);
+    };
+
+    const startPushAnimation = (row, col, direction) => {
+        setMovingPiece({
+            row,
+
+            col,
+        });
+
+        setMoveAnimation(direction);
+
+        setPushing(true);
+    };
+
+    const endPushAnimation = () => {
+        setMovingPiece(null);
+
+        setMoveAnimation(null);
+
+        setPushing(false);
+    };
+
+    const getAnimationClass = (row, col) => {
+        if (!movingPiece) {
+            return "";
+        }
+
+        if (movingPiece.row === row && movingPiece.col === col) {
+            return `move-${moveAnimation}-q`;
+        }
+
+        return "";
+    };
+
+    const executeMove = async () => {
+        if (!selectedEdge || !selectedDirection || !room || !role || pushing) {
+            return;
+        }
+
+        const { row, col } = selectedEdge;
+
+        const oldBoard = cloneBoard(room.board);
+
+        startPushAnimation(row, col, selectedDirection);
+
+        const newBoard = pushPiece(oldBoard, row, col, selectedDirection, role);
+
+        const winningLines = getWinningLines(newBoard);
+
+        const winner = determineWinner(newBoard, role);
+
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        const roomRef = doc(db, "quixo_rooms", id);
+
+        await updateDoc(roomRef, {
+            board: newBoard,
+
+            winningLines,
+
+            winner,
+
+            currentTurn: winner ? null : role === "player1" ? "player2" : "player1",
+
+            ...(winner && {
+                winnerAt: serverTimestamp(),
+            }),
+        });
+
+        setSelectedEdge(null);
+
+        setSelectedDirection(null);
+
+        setTimeout(() => {
+            endPushAnimation();
+        }, 450);
+    };
+
+    const confirmMove = () => {
+        if (!selectedDirection) {
+            return;
+        }
+
+        executeMove();
+    };
+
+    const getWinnerName = () => {
+        if (!room?.winner) {
+            return "";
+        }
+
+        if (room.winner === "player1") {
+            return room.player1?.name || "Player 1";
+        }
+
+        return room.player2?.name || "Player 2";
+    };
+
+    if (!room) {
+        return <div className={`room-page-q ${theme}`}>{language === "polish" ? "Ładowanie..." : "Loading..."}</div>;
     }
 
-    return result
-  }
-
-  // =========================
-  // CHECK WINNER NAME
-  // =========================
-
-  const getWinnerName = () => {
-    if (!room?.winner) return ""
-
-    if (room.winner === "player1") {
-      return room.player1?.name || "Player 1"
-    }
-
-    return room.player2?.name || "Player 2"
-  }
-  // =========================
-  // RENDER CELL
-  // =========================
-
-  const renderCell = (cell, row, col) => {
-    const key = `${row}-${col}`
-
-    const selected = selectedEdge?.row === row && selectedEdge?.col === col
-
-    const availableDirections = selected ? getSelectedDirections() : []
-
     return (
-      <div
-        key={key}
+        <div className={`room-page-q ${theme}`}>
+            <div className="board-wrapper-q" ref={boardRef}>
+                <div
+                    className={["board-q", "quixo-board-q", theme, pushing ? "pushing-q" : ""].join(" ")}
 
-        className={[
-          "cell",
+                    style={{
+                        gridTemplateColumns: `repeat(${SIZE},1fr)`,
+                    }}
+                >
+                    {Array.from({
+                        length: SIZE,
+                    }).map((_, row) =>
+                        Array.from({
+                            length: SIZE,
+                        }).map((_, col) => {
+                            const cell = room.board?.[index(row, col)];
 
-          isEdge(row, col) ? "edge" : "",
+                            const selected = selectedEdge?.row === row && selectedEdge?.col === col;
 
-          selected ? "selected" : "",
+                            return (
+                                <div
+                                    key={`${row}-${col}`}
 
-          getAnimationClass(row, col),
+                                    className={[
+                                        "cell-q",
 
-          pushing && selected ? "pushing-piece-cell" : "",
-        ].join(" ")}
+                                        isEdge(row, col) ? "edge-q" : "",
 
-        onClick={() => handleCellClick(row, col)}
-      >
-        {cell && (
-          <div className={`piece ${cell === "player1" ? "x" : "o"}`}>
-            {cell === "player1" ? "X" : "O"}
-          </div>
-        )}
+                                        selected ? "selected-q" : "",
 
-        {selected && !pushing && (
-          <div className="direction-bar">
-            {availableDirections.map((direction) => (
-              <button
-                key={direction}
+                                        getAnimationClass(row, col),
+                                    ].join(" ")}
 
-                className={[
-                  "dir-btn",
+                                    onClick={() => handleCellClick(row, col)}
+                                >
+                                    {cell && (
+                                        <div className={`piece-q ${cell === "player1" ? "x-q" : "o-q"}`}>
+                                            {cell === "player1" ? "X" : "O"}
+                                        </div>
+                                    )}
 
-                  selectedDirection === direction ? "active" : "",
-                ].join(" ")}
+                                    {selected && !pushing && (
+                                        <div className="direction-bar-q">
+                                            {getSelectedDirections().map((direction) => (
+                                                <button
+                                                    key={direction}
 
-                onClick={(event) => {
-                  event.stopPropagation()
+                                                    className={[
+                                                        "dir-btn-q",
 
-                  chooseDirection(direction)
-                }}
-              >
-                {directionLabels[language]?.[direction] || direction}
-              </button>
-            ))}
+                                                        selectedDirection === direction ? "active-q" : "",
+                                                    ].join(" ")}
 
-            {selectedDirection && (
-              <button
-                className="confirm-btn"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
 
-                onClick={(event) => {
-                  event.stopPropagation()
+                                                        chooseDirection(direction);
+                                                    }}
+                                                >
+                                                    {directionLabels[language]?.[direction] || direction}
+                                                </button>
+                                            ))}
 
-                  confirmMove()
-                }}
-              >
-                {language === "polish" ? "Wsuń" : "Push"}
-              </button>
-            )}
-          </div>
-        )}
-      </div>
-    )
-  }
-  // =========================
-  // BOARD RENDER
-  // =========================
+                                            {selectedDirection && (
+                                                <button
+                                                    className="confirm-btn-q"
 
-  const renderBoard = () => {
-    const board = Array.isArray(room?.board)
-      ? room.board
-      : Array(SIZE * SIZE).fill(null)
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
 
-    return Array.from({
-      length: SIZE,
-    }).map((_, row) =>
-      Array.from({
-        length: SIZE,
-      }).map((_, col) => {
-        const cell = board[index(row, col)]
+                                                        confirmMove();
+                                                    }}
+                                                >
+                                                    {language === "polish" ? "Wsuń" : "Push"}
+                                                </button>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })
+                    )}
+                </div>
+            </div>
 
-        return renderCell(cell, row, col)
-      }),
-    )
-  }
+            <div className={`room-info-q ${theme}`}>
+                <p>
+                    🔴
+                    {language === "polish" ? " Gracz 1:" : " Player 1:"} {room.player1?.name || "-"}
+                </p>
 
-  // =========================
-  // LOADING SCREEN
-  // =========================
+                <p>
+                    🟡
+                    {language === "polish" ? " Gracz 2:" : " Player 2:"} {room.player2?.name || "-"}
+                </p>
 
-  if (!room) {
-    return (
-      <div className={`room-page ${theme}`}>
-        {language === "polish" ? "Ładowanie..." : "Loading..."}
-      </div>
-    )
-  }
+                {room.winner ? (
+                    <div className="winner-box-q">
+                        <p className="winner-text-q">
+                            🏆
+                            {language === "polish" ? " Wygrywa:" : " Winner:"} {getWinnerName()}
+                        </p>
 
-  // =========================
-  // MAIN UI
-  // =========================
+                        <button
+                            className="back-button-q"
 
-  return (
-    <div className={`room-page ${theme}`}>
-      <div
-        className="board-wrapper"
-
-        ref={boardRef}
-      >
-        <div
-          className={[
-            "board",
-
-            "quixo-board",
-
-            theme,
-
-            pushing ? "pushing" : "",
-          ].join(" ")}
-
-          style={{
-            gridTemplateColumns: `repeat(${SIZE},1fr)`,
-          }}
-        >
-          {renderBoard()}
+                            onClick={() => navigate("/")}
+                        >
+                            {language === "polish" ? "Powrót" : "Back"}
+                        </button>
+                    </div>
+                ) : (
+                    <p>
+                        {language === "polish" ? "Tura:" : "Turn:"}{" "}
+                        {room.currentTurn === "player1" ? room.player1?.name : room.player2?.name}
+                    </p>
+                )}
+            </div>
         </div>
-      </div>
-      
-      <div className={`room-info ${theme}`}>
-        <p>
-          🔴
-          {language === "polish" ? " Gracz 1:" : " Player 1:"}{" "}
-          {room.player1?.name || "-"}
-        </p>
-
-        <p>
-          🟡
-          {language === "polish" ? " Gracz 2:" : " Player 2:"}{" "}
-          {room.player2?.name || "-"}
-        </p>
-
-        {room.winner ? (
-          <div className="winner-box">
-            <p className="winner-text">
-              🏆
-              {language === "polish" ? " Wygrywa:" : " Winner:"}{" "}
-              {getWinnerName()}
-            </p>
-
-            <button
-              className="back-button"
-
-              onClick={() => navigate("/")}
-            >
-              {language === "polish" ? "Powrót" : "Back"}
-            </button>
-          </div>
-        ) : (
-          <p>
-            {language === "polish" ? "Tura:" : "Turn:"}{" "}
-            {room.currentTurn === "player1"
-              ? room.player1?.name
-              : room.player2?.name}
-          </p>
-        )}
-      </div>
-    </div>
-  )
+    );
 }
-

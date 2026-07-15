@@ -1,36 +1,31 @@
-import Icons from "../icons/Icons"
+import Icons from "../icons/Icons";
 
 const CppData = {
+    title: "C++",
 
-  title: "C++",
+    category: "Backend Language",
 
-  category: "Backend Language",
+    logo: <Icons name="cpp" />,
 
-  logo: <Icons name="cpp" />,
+    description: {
+        polish: "C++ wykorzystuję do tworzenia wydajnych aplikacji, algorytmów oraz projektów wymagających bezpośredniej kontroli nad pamięcią i wysokiej optymalizacji.",
 
-  description: {
-    polish:
-      "C++ wykorzystuję do tworzenia wydajnych aplikacji, algorytmów oraz projektów wymagających bezpośredniej kontroli nad pamięcią i wysokiej optymalizacji.",
+        english:
+            "I use C++ to build high-performance applications, algorithms and projects requiring low-level memory control and optimization.",
+    },
 
-    english:
-      "I use C++ to build high-performance applications, algorithms and projects requiring low-level memory control and optimization."
-  },
+    skills: [
+        "Object-Oriented Programming",
+        "Algorithms",
+        "Data Structures",
+        "Pointers",
+        "File Handling",
+        "Problem Solving",
+    ],
 
-  skills: [
+    projectsPath: "/projects/cpp",
 
-    "Object-Oriented Programming",
-    "Algorithms",
-    "Data Structures",
-    "Pointers",
-    "File Handling",
-    "Problem Solving"
+    projects: [],
+};
 
-  ],
-
-  projectsPath: "/projects/cpp",
-
-  projects: []
-
-}
-
-export default CppData
+export default CppData;
