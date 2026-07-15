@@ -1,11 +1,9 @@
 // import Icons from "../icons/Icons"
 
 const PythonProjectsData = {
-  title: "Python",
+    title: "Python",
 
-  projects: [
+    projects: [],
+};
 
-  ]
-}
-
-export default PythonProjectsData
+export default PythonProjectsData;

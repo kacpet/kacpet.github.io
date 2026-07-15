@@ -8,9 +8,9 @@
     align-items: center;
 
     backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
 
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgb(255 255 255 / 8%);
 
     position: relative;
     z-index: 5;
@@ -19,13 +19,13 @@
 /* ===== DARK ===== */
 
 .footer.dark {
-    background: rgba(8, 15, 32, 0.92);
+    background: rgb(8 15 32 / 92%);
 }
 
 /* ===== LIGHT ===== */
 
 .footer.light {
-    background: rgba(45, 74, 110, 0.92);
+    background: rgb(45 74 110 / 92%);
 }
 
 /* ===== CONTENT ===== */
@@ -62,13 +62,13 @@
 
     letter-spacing: 0.5px;
 
-    color: rgb(205, 205, 205);
+    color: rgb(205 205 205);
 
     opacity: 0.8;
 }
 
 .footer-item a {
-    color: rgb(220, 220, 220);
+    color: rgb(220 220 220);
 
     text-decoration: none;
 
@@ -86,8 +86,7 @@
 
 /* ===== MOBILE ===== */
 
-@media (max-width: 768px) {
-
+@media (width <= 768px) {
     .footer {
         padding: 32px 20px;
     }

@@ -1,10 +1,9 @@
 // import Icons from "../icons/Icons"
 
 const AngularProjectsData = {
-  title: "Angular",
+    title: "Angular",
 
-  projects: [
-  ]
-}
+    projects: [],
+};
 
-export default AngularProjectsData
+export default AngularProjectsData;

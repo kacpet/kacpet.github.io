@@ -4,8 +4,7 @@
 
     position: relative;
 
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden auto;
 }
 
 /* =========================
@@ -28,7 +27,7 @@
 }
 
 .home-bg-base.light {
-    background: #ffffff;
+    background: #fff;
 }
 
 /* ===== TŁO ===== */
@@ -61,7 +60,7 @@
     position: absolute;
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.25);
+    background: rgb(0 0 0 / 25%);
 }
 
 .home-bg.light::after {
@@ -71,15 +70,14 @@
 
     inset: 0;
 
-    background: rgba(255, 255, 255, 0);
+    background: rgb(255 255 255 / 0%);
 }
 
 /* ===== ANIMACJE ===== */
 
 @keyframes bgZoom {
-
     0% {
-        transform: scale(1.08) translateY(0px);
+        transform: scale(1.08) translateY(0);
     }
 
     100% {
@@ -88,7 +86,6 @@
 }
 
 @keyframes fadeUp {
-
     from {
         opacity: 0;
         transform: translateY(40px);
@@ -101,7 +98,6 @@
 }
 
 @keyframes fadeScale {
-
     from {
         opacity: 0;
         transform: scale(0.92);
@@ -114,7 +110,6 @@
 }
 
 @keyframes bgAppear {
-
     from {
         opacity: 0;
         transform: scale(1.25);
@@ -166,7 +161,7 @@
 }
 
 .header-home-page.dark h1 {
-    color: rgb(220, 220, 220);
+    color: rgb(220 220 220);
 
     font-size: clamp(2rem, 4vw, 4.3rem);
     font-weight: 700;
@@ -176,7 +171,7 @@
     letter-spacing: -1px;
     line-height: 1.1;
 
-    text-shadow: 0 0 18px rgba(90, 170, 255, 0.25);
+    text-shadow: 0 0 18px rgb(90 170 255 / 25%);
 }
 
 .header-home-page.light h1 {
@@ -204,17 +199,15 @@
 
     gap: 50px;
 
-    justify-items: center;
-    align-items: center;
+    place-items: center center;
 }
+
 /* ===== PRZYCISKI ===== */
 
 .nav-btn {
     width: min(90%, 460px);
 
-    padding:
-        clamp(20px, 2vw, 34px)
-        clamp(32px, 3vw, 54px);
+    padding: clamp(20px, 2vw, 34px) clamp(32px, 3vw, 54px);
 
     font-size: clamp(1.2rem, 1.5vw, 1.8rem);
     font-weight: 600;
@@ -226,11 +219,11 @@
     transition: all 0.3s ease;
 
     backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
 
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgb(255 255 255 / 15%);
 
-    background: rgba(255, 255, 255, 0.05);
+    background: rgb(255 255 255 / 5%);
 
     opacity: 0;
 
@@ -238,6 +231,7 @@
 }
 
 /* ===== UKŁAD ===== */
+
 .nav-btn.left {
     grid-column: 1;
     grid-row: 1;
@@ -269,7 +263,7 @@
 /* ===== DARK ===== */
 
 .nav-btn.dark {
-    color: rgb(200, 200, 200);
+    color: rgb(200 200 200);
 }
 
 /* ===== LIGHT ===== */
@@ -277,16 +271,16 @@
 .nav-btn.light {
     color: #4f6f8d;
 
-    background: rgba(255, 255, 255, 0.45);
+    background: rgb(255 255 255 / 45%);
 
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgb(255 255 255 / 60%);
 
     box-shadow:
-        0 6px 18px rgba(0, 0, 0, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+        0 6px 18px rgb(0 0 0 / 8%),
+        inset 0 1px 0 rgb(255 255 255 / 65%);
 
     backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
 }
 
 /* ===== HOVER ===== */
@@ -295,28 +289,27 @@
     transform: translateY(-2px);
 
     box-shadow:
-        0 10px 24px rgba(0, 0, 0, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.08);
+        0 10px 24px rgb(0 0 0 / 15%),
+        0 0 0 1px rgb(255 255 255 / 8%);
 
-    background: rgba(255, 255, 255, 0.14);
+    background: rgb(255 255 255 / 14%);
 }
 
 .nav-btn.light:hover {
-    background: rgba(255, 255, 255, 0.65);
+    background: rgb(255 255 255 / 65%);
 
-    border: 1px solid rgba(255, 255, 255, 0.85);
+    border: 1px solid rgb(255 255 255 / 85%);
 
     box-shadow:
-        0 12px 26px rgba(0, 0, 0, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        0 12px 26px rgb(0 0 0 / 12%),
+        inset 0 1px 0 rgb(255 255 255 / 95%);
 
     transform: translateY(-2px);
 }
 
 /* ===== MOBILE ===== */
 
-@media (max-width: 768px) {
-
+@media (width <= 768px) {
     .hero {
         min-height: calc(100vh - 64px);
 

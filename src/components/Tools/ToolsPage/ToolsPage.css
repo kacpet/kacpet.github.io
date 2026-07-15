@@ -31,20 +31,11 @@
 }
 
 .tools-page.dark {
-    background:
-        radial-gradient(circle at top left,
-            #0b2a55 0%,
-            #071a36 40%,
-            #050e1f 100%);
+    background: radial-gradient(circle at top left, #0b2a55 0%, #071a36 40%, #050e1f 100%);
 }
 
 .tools-page.light {
-    background:
-        radial-gradient(circle at top left,
-            #eef8ff 0%,
-            #d9efff 35%,
-            #b8e0ff 68%,
-            #8dcbff 100%);
+    background: radial-gradient(circle at top left, #eef8ff 0%, #d9efff 35%, #b8e0ff 68%, #8dcbff 100%);
 }
 
 /* =========================
@@ -75,31 +66,47 @@
 }
 
 .tools-page.dark .tools-blur-1 {
-    background: rgba(70, 170, 255, 0.24);
+    background: rgb(70 170 255 / 24%);
 }
 
 .tools-page.dark .tools-blur-2 {
-    background: rgba(90, 210, 255, 0.18);
+    background: rgb(90 210 255 / 18%);
 }
 
 .tools-page.light .tools-blur-1 {
-    background: rgba(90, 180, 255, 0.22);
+    background: rgb(90 180 255 / 22%);
 }
 
 .tools-page.light .tools-blur-2 {
-    background: rgba(120, 210, 255, 0.18);
+    background: rgb(120 210 255 / 18%);
 }
 
 @keyframes floatBlur1 {
-    0% { transform: translate3d(0,0,0); }
-    50% { transform: translate3d(30px,20px,0); }
-    100% { transform: translate3d(0,0,0); }
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(30px, 20px, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 @keyframes floatBlur2 {
-    0% { transform: translate3d(0,0,0); }
-    50% { transform: translate3d(-25px,-20px,0); }
-    100% { transform: translate3d(0,0,0); }
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(-25px, -20px, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 /* =========================
@@ -150,7 +157,7 @@
     justify-content: center;
 
     backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    backdrop-filter: blur(22px);
 
     transition:
         transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -163,18 +170,19 @@
 }
 
 .tools-page.dark .tools-logo {
-    background: rgba(10, 25, 55, 0.5);
-    border: 1px solid rgba(120, 190, 255, 0.16);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    background: rgb(10 25 55 / 50%);
+    border: 1px solid rgb(120 190 255 / 16%);
+    box-shadow: 0 10px 40px rgb(0 0 0 / 25%);
 }
 
 .tools-page.light .tools-logo {
-    background: rgba(255,255,255,0.58);
-    border: 1px solid rgba(120, 180, 255, 0.24);
-    box-shadow: 0 10px 35px rgba(60,120,180,0.12);
+    background: rgb(255 255 255 / 58%);
+    border: 1px solid rgb(120 180 255 / 24%);
+    box-shadow: 0 10px 35px rgb(60 120 180 / 12%);
 }
 
 /* 🔥 KLUCZ: IDENTYCZNE SKALOWANIE JAK W LANG */
+
 .tools-logo svg,
 .tools-logo > * {
     width: 100%;
@@ -200,8 +208,13 @@
     opacity: 0.75;
 }
 
-.tools-page.dark .tools-subtitle { color: #cfe7ff; }
-.tools-page.light .tools-subtitle { color: #3a6992; }
+.tools-page.dark .tools-subtitle {
+    color: #cfe7ff;
+}
+
+.tools-page.light .tools-subtitle {
+    color: #3a6992;
+}
 
 .tools-title {
     margin-top: 12px;
@@ -213,8 +226,13 @@
     line-height: 1;
 }
 
-.tools-page.dark .tools-title { color: #edf6ff; }
-.tools-page.light .tools-title { color: #1f4f7a; }
+.tools-page.dark .tools-title {
+    color: #edf6ff;
+}
+
+.tools-page.light .tools-title {
+    color: #1f4f7a;
+}
 
 .tools-description {
     max-width: 760px;
@@ -225,7 +243,7 @@
 }
 
 .tools-page.dark .tools-description {
-    color: rgba(232,241,255,0.84);
+    color: rgb(232 241 255 / 84%);
 }
 
 .tools-page.light .tools-description {
@@ -247,7 +265,7 @@
     border-radius: 34px;
 
     backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
 
     transition:
         transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -261,21 +279,20 @@
 }
 
 .tools-page.dark .tools-card {
-    background: rgba(10, 25, 55, 0.44);
-    border: 1px solid rgba(120, 190, 255, 0.14);
+    background: rgb(10 25 55 / 44%);
+    border: 1px solid rgb(120 190 255 / 14%);
 }
 
 .tools-page.light .tools-card {
-    background: rgba(255,255,255,0.62);
-    border: 1px solid rgba(120, 180, 255, 0.24);
+    background: rgb(255 255 255 / 62%);
+    border: 1px solid rgb(120 180 255 / 24%);
 }
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media (max-width: 768px) {
-
+@media (width <= 768px) {
     .tools-logo {
         width: 140px;
         height: 140px;
@@ -288,6 +305,7 @@
         transform: scale(1.18);
     }
 }
+
 /* =========================
    ENTER ANIMATION (LIKE LANG)
 ========================= */
@@ -311,6 +329,7 @@
         opacity: 0;
         transform: translate3d(0, 28px, 0) scale(0.97);
     }
+
     to {
         opacity: 1;
         transform: translate3d(0, 0, 0) scale(1);
@@ -328,11 +347,14 @@
 }
 
 /* item chip like skill-item */
+
 .tools-item {
     padding: 13px 18px;
     border-radius: 999px;
 
-    transition: transform 0.3s ease, background 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
 }
 
 .tools-item:hover {
@@ -345,15 +367,16 @@
 }
 
 /* THEMING */
+
 .tools-page.dark .tools-item {
-    background: rgba(80, 170, 255, 0.08);
-    border: 1px solid rgba(120, 190, 255, 0.12);
+    background: rgb(80 170 255 / 8%);
+    border: 1px solid rgb(120 190 255 / 12%);
     color: #e6f2ff;
 }
 
 .tools-page.light .tools-item {
-    background: rgba(255,255,255,0.76);
-    border: 1px solid rgba(120, 180, 255, 0.18);
+    background: rgb(255 255 255 / 76%);
+    border: 1px solid rgb(120 180 255 / 18%);
     color: #1f4f7a;
 }
 
@@ -364,6 +387,7 @@
 .tools-card .section-top {
     margin-bottom: 24px;
 }
+
 /* =========================
    SECTION HEADER FIX (TOOLS)
 ========================= */
@@ -374,19 +398,22 @@
 }
 
 /* DARK */
+
 .tools-page.dark .section-top h2 {
     color: #edf6ff;
 }
 
 /* LIGHT */
+
 .tools-page.light .section-top h2 {
     color: #1f4f7a;
 }
 
 /* DOT */
+
 .tools-page.dark .section-dot {
     background: #6dc0ff;
-    box-shadow: 0 0 14px rgba(109, 192, 255, 0.6);
+    box-shadow: 0 0 14px rgb(109 192 255 / 60%);
 }
 
 .tools-page.light .section-dot {

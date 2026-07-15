@@ -1,1307 +1,687 @@
-/* =========================
-   ROOM LAYOUT
-========================= */
+.room-page-q {
+    position: relative;
 
-.room-page {
-  min-height: 100vh;
+    min-height: 100vh;
+    width: 100%;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
 
-  gap: 28px;
+    align-items: center;
+    justify-content: center;
 
-  font-family: system-ui, sans-serif;
+    gap: 28px;
 
-  padding: 20px;
+    overflow: hidden;
 
-  transition:
-    background 0.3s ease,
-    color 0.3s ease;
+    padding: 120px 24px 80px;
+
+    font-family: system-ui, sans-serif;
+
+    transition:
+        background 0.4s ease,
+        color 0.4s ease;
 }
-
-
-/* =========================
-   THEMES
-========================= */
-
-.room-page.dark {
-  background:
-    radial-gradient(
-      circle at top,
-      #0f172a,
-      #050814
-    );
-
-  color: white;
-}
-
-
-.room-page.light {
-  background:
-    radial-gradient(
-      circle at top,
-      #f8fafc,
-      #e2e8f0
-    );
-
-  color: #0f172a;
-}
-
-
 
 /* =========================
-   INFO PANEL
+   BACKGROUND
 ========================= */
 
-.room-info {
+.room-page-q.dark {
+    background: radial-gradient(circle at top left, #3ea6ff 0%, #1d4f9c 35%, #081f4d 70%, #020b1d 100%);
 
-  display: flex;
-
-  gap: 20px;
-
-  align-items: center;
-
-  font-size: 18px;
-
-
-  padding: 12px 18px;
-
-  border-radius: 12px;
-
-
-  backdrop-filter: blur(8px);
-
-
-  transition:
-    background .3s ease,
-    border .3s ease;
-
+    color: rgb(220 220 220);
 }
 
+.room-page-q.light {
+    background: radial-gradient(circle at top left, #eef8ff 0%, #d6efff 30%, #a8dbff 65%, #7bc4ff 100%);
 
-
-.room-page.dark .room-info {
-
-  background:
-    rgba(17,24,39,.85);
-
-  border:
-    1px solid #374151;
-
+    color: #3f6a8a;
 }
 
+.room-page-q::before {
+    content: "";
 
+    position: absolute;
 
-.room-page.light .room-info {
+    inset: 0;
 
-  background:
-    rgba(255,255,255,.85);
-
-  border:
-    1px solid #cbd5e1;
-
+    z-index: 0;
 }
 
-
-
-.room-info p {
-
-  opacity: .9;
-
+.room-page-q.dark::before {
+    background: linear-gradient(to bottom, rgb(255 255 255 / 3%), rgb(0 0 0 / 18%));
 }
 
-
+.room-page-q.light::before {
+    background: linear-gradient(to bottom, rgb(255 255 255 / 45%), rgb(255 255 255 / 8%));
+}
 
 /* =========================
-   BOARD WRAPPER
+   INFO
 ========================= */
 
+.room-info-q {
+    position: relative;
 
-.board-wrapper {
+    z-index: 2;
 
-  position: relative;
+    display: flex;
 
-  display:flex;
+    align-items: center;
 
-  align-items:center;
+    gap: 20px;
 
-  justify-content:center;
+    padding: 14px 22px;
 
-  z-index:10;
+    border-radius: 18px;
 
+    backdrop-filter: blur(16px);
+
+    font-size: 18px;
+
+    transition:
+        transform 0.3s ease,
+        background 0.4s ease;
 }
 
+.room-info-q:hover {
+    transform: translateY(-4px);
+}
 
+.room-page-q.dark .room-info-q {
+    background: rgb(8 20 45 / 45%);
 
+    border: 1px solid rgb(255 255 255 / 8%);
+
+    box-shadow: 0 20px 60px rgb(0 0 0 / 35%);
+}
+
+.room-page-q.light .room-info-q {
+    background: rgb(255 255 255 / 45%);
+
+    border: 1px solid rgb(255 255 255 / 40%);
+
+    box-shadow: 0 20px 60px rgb(15 23 42 / 12%);
+}
 
 /* =========================
-   QUIXO BOARD
+   BOARD
 ========================= */
 
+.board-wrapper-q {
+    position: relative;
 
-.board.quixo-board {
+    z-index: 5;
 
+    display: flex;
 
-  display:grid;
+    justify-content: center;
 
-
-  grid-template-columns:
-    repeat(5,1fr);
-
-
-  gap:10px;
-
-
-  padding:18px;
-
-
-  border-radius:18px;
-
-
-
-  box-shadow:
-    0 25px 70px
-    rgba(0,0,0,.6);
-
-
-
-  transition:
-    transform .25s ease,
-    filter .25s ease;
-
-
-  will-change:
-    transform;
-
+    align-items: center;
 }
 
+.board-q {
+    display: grid;
 
+    grid-template-columns: repeat(5, 1fr);
 
-.room-page.dark
-.board.quixo-board {
+    gap: 10px;
 
-  background:#111827;
+    padding: 18px;
 
+    border-radius: 32px;
+
+    backdrop-filter: blur(18px);
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
 }
 
+.room-page-q.dark .board-q {
+    background: rgb(8 20 45 / 55%);
 
-
-.room-page.light
-.board.quixo-board {
-
-  background:white;
-
-
-  box-shadow:
-    0 25px 70px
-    rgba(0,0,0,.15);
-
+    box-shadow: 0 25px 70px rgb(0 0 0 / 45%);
 }
 
+.room-page-q.light .board-q {
+    background: rgb(255 255 255 / 55%);
 
-
-/* =========================
-   BOARD PUSH ANIMATION
-========================= */
-
-
-.board.quixo-board.pushing {
-
-
-  animation:
-    boardPush
-    .25s ease;
-
-
+    box-shadow: 0 25px 70px rgb(15 23 42 / 15%);
 }
 
-
-
-@keyframes boardPush {
-
-
-  0% {
-
-    transform:
-      scale(1);
-
-    filter:
-      brightness(1);
-
-  }
-
-
-
-  40% {
-
-    transform:
-      scale(1.03);
-
-    filter:
-      brightness(1.12);
-
-  }
-
-
-
-  100% {
-
-    transform:
-      scale(1);
-
-    filter:
-      brightness(1);
-
-  }
-
-
+.board-q.pushing-q {
+    animation: boardPushQ 0.25s ease;
 }
 
+@keyframes boardPushQ {
+    0% {
+        transform: scale(1);
+    }
 
+    40% {
+        transform: scale(1.03);
+
+        filter: brightness(1.12);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
 
 /* =========================
    CELLS
 ========================= */
 
+.cell-q {
+    width: 70px;
 
-.cell {
+    height: 70px;
 
+    border-radius: 18px;
 
-  width:70px;
+    display: flex;
 
-  height:70px;
+    justify-content: center;
 
+    align-items: center;
 
-  border-radius:12px;
+    position: relative;
 
+    cursor: pointer;
 
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-
-
-  position:relative;
-
-
-  cursor:pointer;
-
-
-
-  transition:
-
-    transform .15s ease,
-
-    background .15s ease,
-
-    box-shadow .15s ease;
-
-
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
+.room-page-q.dark .cell-q {
+    background: rgb(255 255 255 / 8%);
 
-
-
-.room-page.dark
-.cell {
-
-  background:#1f2937;
-
+    border: 1px solid rgb(255 255 255 / 8%);
 }
 
+.room-page-q.light .cell-q {
+    background: rgb(255 255 255 / 45%);
 
-
-
-.room-page.light
-.cell {
-
-  background:#e5e7eb;
-
+    border: 1px solid rgb(255 255 255 / 35%);
 }
 
-
-
-
-.cell:hover {
-
-
-  transform:
-    scale(1.05);
-
+.cell-q:hover {
+    transform: scale(1.05);
 }
 
-
-
-.cell:active {
-
-
-  transform:
-    scale(.95);
-
+.cell-q:active {
+    transform: scale(0.95);
 }
 
+.cell-q.edge-q {
+    outline: 2px solid #38bdf8;
 
-
-
-/* =========================
-   EDGE CELLS
-========================= */
-
-
-.cell.edge {
-
-
-  outline:
-    2px solid #38bdf8;
-
-
-
-  box-shadow:
-
-    0 0 14px
-
-    rgba(56,189,248,.45);
-
+    box-shadow: 0 0 14px rgb(56 189 248 / 45%);
 }
 
+.cell-q.selected-q {
+    outline: 2px solid #f59e0b;
 
+    box-shadow: 0 0 18px rgb(245 158 11 / 60%);
 
-/* =========================
-   SELECTED BLOCK
-========================= */
+    transform: scale(1.08);
 
-
-.cell.selected {
-
-
-  outline:
-    2px solid #f59e0b;
-
-
-
-  box-shadow:
-
-    0 0 18px
-
-    rgba(245,158,11,.6);
-
-
-
-  transform:
-    scale(1.08);
-
-
-
-  z-index:20;
-
+    z-index: 20;
+}
+.cell-q.lifting-q {
+    animation: liftPieceQ 0.25s ease;
 }
 
+@keyframes liftPieceQ {
+    0% {
+        transform: translateY(0) scale(1);
+    }
 
+    50% {
+        transform: translateY(-18px) scale(1.12);
+    }
 
-
-/* =========================
-   TAKEN / LIFT ANIMATION
-========================= */
-
-
-.cell.lifting {
-
-
-  animation:
-
-    liftPiece
-    .25s ease;
-
-
+    100% {
+        transform: translateY(0) scale(1);
+    }
 }
 
-
-
-@keyframes liftPiece {
-
-
-  0% {
-
-    transform:
-      translateY(0)
-      scale(1);
-
-  }
-
-
-
-  50% {
-
-    transform:
-      translateY(-18px)
-      scale(1.12);
-
-  }
-
-
-
-  100% {
-
-    transform:
-      translateY(0)
-      scale(1);
-
-  }
-
-
-}
 /* =========================
    PIECES
 ========================= */
 
+.piece-q {
+    width: 55px;
 
-.piece {
+    height: 55px;
 
+    display: flex;
 
-  width:55px;
+    align-items: center;
 
-  height:55px;
+    justify-content: center;
 
+    border-radius: 14px;
 
+    font-size: 38px;
 
-  display:flex;
+    font-weight: 800;
 
-  align-items:center;
+    user-select: none;
 
-  justify-content:center;
+    animation: pieceAppearQ 0.18s ease;
 
-
-
-  font-size:38px;
-
-  font-weight:800;
-
-
-
-  border-radius:10px;
-
-
-
-  user-select:none;
-
-
-
-  animation:
-
-    pieceAppear
-
-    .18s ease;
-
-
-
-  box-shadow:
-
-    inset 0 0 10px rgba(0,0,0,.55),
-
-    0 6px 12px rgba(0,0,0,.35);
-
-
+    box-shadow:
+        inset 0 0 10px rgb(0 0 0 / 35%),
+        0 6px 12px rgb(0 0 0 / 25%);
 }
 
-
-
-
-
-.piece.x {
-
-
-  color:#ef4444;
-
-
+.piece-q.x-q {
+    color: #ef4444;
 }
 
-
-
-.piece.o {
-
-
-  color:#facc15;
-
-
+.piece-q.o-q {
+    color: #facc15;
 }
 
+@keyframes pieceAppearQ {
+    from {
+        transform: scale(0.3);
 
+        opacity: 0;
+    }
 
+    to {
+        transform: scale(1);
 
-
-@keyframes pieceAppear {
-
-
-  from {
-
-
-    transform:
-      scale(.3);
-
-
-    opacity:
-      0;
-
-
-  }
-
-
-
-  to {
-
-
-    transform:
-      scale(1);
-
-
-    opacity:
-      1;
-
-
-  }
-
-
+        opacity: 1;
+    }
 }
 
+.piece-q.moving-q {
+    animation: pieceMoveQ 0.35s ease;
 
+    z-index: 100;
+}
 
+@keyframes pieceMoveQ {
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.15) translateY(-25px);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
 
 /* =========================
-   MOVING PIECE EFFECT
-   (wyjmowany klocek)
+   OUTSIDE PIECE
 ========================= */
 
+.outside-piece-q {
+    position: absolute;
 
-.piece.moving {
+    pointer-events: none;
 
+    z-index: 200;
 
-  animation:
-
-
-    pieceMove
-
-    .35s ease;
-
-
-  z-index:100;
-
-
+    animation: pushOutsideQ 0.35s ease;
 }
 
+@keyframes pushOutsideQ {
+    0% {
+        transform: scale(1) translate(0, 0);
 
+        opacity: 1;
+    }
 
+    70% {
+        transform: scale(1.15);
+    }
 
-@keyframes pieceMove {
+    100% {
+        transform: scale(0.9);
 
-
-  0% {
-
-
-    transform:
-      scale(1);
-
-
-  }
-
-
-
-  40% {
-
-
-    transform:
-
-      scale(1.15)
-
-      translateY(-25px);
-
-
-  }
-
-
-
-  100% {
-
-
-    transform:
-
-      scale(1);
-
-
-  }
-
-
+        opacity: 0;
+    }
 }
-
-
-
-
 
 /* =========================
-   OUTSIDE PUSH PIECE
-   (klocek poza planszą)
+   SLIDE ANIMATIONS
 ========================= */
 
-
-.outside-piece {
-
-
-  position:absolute;
-
-
-
-  pointer-events:none;
-
-
-
-  z-index:200;
-
-
-
-  animation:
-
-
-    pushOutside
-
-    .35s ease;
-
-
+.cell-q.slide-left-q {
+    animation: slideLeftQ 0.25s ease;
 }
 
-
-
-
-
-@keyframes pushOutside {
-
-
-
-  0% {
-
-
-    transform:
-
-      scale(1)
-
-      translate(0,0);
-
-
-    opacity:1;
-
-
-  }
-
-
-
-  70% {
-
-
-    transform:
-
-      scale(1.15);
-
-
-  }
-
-
-
-  100% {
-
-
-    transform:
-
-      scale(.9);
-
-
-    opacity:0;
-
-
-  }
-
-
+.cell-q.slide-right-q {
+    animation: slideRightQ 0.25s ease;
 }
 
-
-
-
-
-/* =========================
-   SLIDE CELLS
-   PRZESUWANIE LINII QUIXO
-========================= */
-
-
-.cell.slide-left {
-
-
-  animation:
-
-
-    slideLeft
-
-    .25s ease;
-
-
+.cell-q.slide-up-q {
+    animation: slideUpQ 0.25s ease;
 }
 
-
-
-.cell.slide-right {
-
-
-  animation:
-
-
-    slideRight
-
-    .25s ease;
-
-
+.cell-q.slide-down-q {
+    animation: slideDownQ 0.25s ease;
 }
 
+@keyframes slideLeftQ {
+    from {
+        transform: translateX(40px);
+    }
 
-
-.cell.slide-up {
-
-
-  animation:
-
-
-    slideUp
-
-    .25s ease;
-
-
+    to {
+        transform: translateX(0);
+    }
 }
 
+@keyframes slideRightQ {
+    from {
+        transform: translateX(-40px);
+    }
 
-
-.cell.slide-down {
-
-
-  animation:
-
-
-    slideDown
-
-    .25s ease;
-
-
+    to {
+        transform: translateX(0);
+    }
 }
 
+@keyframes slideUpQ {
+    from {
+        transform: translateY(40px);
+    }
 
-
-
-
-@keyframes slideLeft {
-
-
-  from {
-
-
-    transform:
-
-      translateX(40px);
-
-
-  }
-
-
-
-  to {
-
-
-    transform:
-
-      translateX(0);
-
-
-  }
-
-
+    to {
+        transform: translateY(0);
+    }
 }
 
+@keyframes slideDownQ {
+    from {
+        transform: translateY(-40px);
+    }
 
-
-@keyframes slideRight {
-
-
-  from {
-
-
-    transform:
-
-      translateX(-40px);
-
-
-  }
-
-
-
-  to {
-
-
-    transform:
-
-      translateX(0);
-
-
-  }
-
-
+    to {
+        transform: translateY(0);
+    }
 }
-
-
-
-@keyframes slideUp {
-
-
-  from {
-
-
-    transform:
-
-      translateY(40px);
-
-
-  }
-
-
-
-  to {
-
-
-    transform:
-
-      translateY(0);
-
-
-  }
-
-
-}
-
-
-
-@keyframes slideDown {
-
-
-  from {
-
-
-    transform:
-
-      translateY(-40px);
-
-
-  }
-
-
-
-  to {
-
-
-    transform:
-
-      translateY(0);
-
-
-  }
-
-
-}
-
-
-
-
 
 /* =========================
    DIRECTION BAR
 ========================= */
 
+.direction-bar-q {
+    position: absolute;
 
-.direction-bar {
+    bottom: -55px;
 
+    left: 50%;
 
-  position:absolute;
+    transform: translateX(-50%);
 
+    display: flex;
 
+    gap: 8px;
 
-  bottom:-55px;
+    padding: 8px;
 
+    border-radius: 16px;
 
+    backdrop-filter: blur(16px);
 
-  left:50%;
-
-
-
-  transform:
-
-    translateX(-50%);
-
-
-
-  display:flex;
-
-
-
-  gap:6px;
-
-
-
-  padding:7px;
-
-
-
-  border-radius:10px;
-
-
-
-  z-index:999;
-
-
-
-  backdrop-filter:
-
-    blur(10px);
-
-
-
-  background:
-
-    rgba(17,24,39,.95);
-
-
-
-  border:
-
-    1px solid #374151;
-
-
+    z-index: 999;
 }
 
+.room-page-q.dark .direction-bar-q {
+    background: rgb(8 20 45 / 85%);
 
+    border: 1px solid rgb(255 255 255 / 12%);
+}
 
+.room-page-q.light .direction-bar-q {
+    background: rgb(255 255 255 / 55%);
+
+    border: 1px solid rgb(255 255 255 / 40%);
+}
 
 /* =========================
    DIRECTION BUTTONS
 ========================= */
 
+.dir-btn-q {
+    position: relative;
 
-.dir-btn {
+    border: none;
 
+    cursor: pointer;
 
-  position:relative;
+    padding: 8px 14px;
 
+    border-radius: 10px;
 
+    font-size: 12px;
 
-  border:none;
+    text-transform: uppercase;
 
-
-
-  cursor:pointer;
-
-
-
-  padding:
-
-    7px 12px;
-
-
-
-  border-radius:8px;
-
-
-
-  font-size:12px;
-
-
-
-  text-transform:uppercase;
-
-
-
-  background:#1f2937;
-
-
-
-  color:#cbd5e1;
-
-
-
-  transition:
-
-    .15s ease;
-
-
+    transition: 0.2s ease;
 }
 
+.room-page-q.dark .dir-btn-q {
+    background: rgb(255 255 255 / 8%);
 
-
-
-.dir-btn:hover {
-
-
-  transform:
-
-    scale(1.05);
-
-
-
-  background:#273244;
-
-
+    color: #cbd5e1;
 }
 
+.room-page-q.light .dir-btn-q {
+    background: rgb(255 255 255 / 60%);
 
-
-
-
-.dir-btn.active {
-
-
-  background:#38bdf8;
-
-
-
-  color:#0f172a;
-
-
-
-  font-weight:700;
-
-
-
-  transform:
-
-    scale(1.1);
-
-
-
-  box-shadow:
-
-
-    0 0 14px
-
-    rgba(56,189,248,.6);
-
-
+    color: #3f6a8a;
 }
 
-
-
-
-
-.dir-btn.active::after {
-
-
-  content:"";
-
-
-
-  position:absolute;
-
-
-
-  inset:-3px;
-
-
-
-  border-radius:10px;
-
-
-
-  border:
-
-    1px solid
-
-    rgba(56,189,248,.6);
-
-
-
-  animation:
-
-
-    dirPulse
-
-    .8s infinite;
-
-
+.dir-btn-q:hover {
+    transform: scale(1.05);
 }
 
+.dir-btn-q.active-q {
+    background: #38bdf8;
 
+    color: #0f172a;
 
+    font-weight: 700;
 
-@keyframes dirPulse {
+    transform: scale(1.1);
 
-
-  0% {
-
-
-    opacity:.3;
-
-
-    transform:
-
-      scale(1);
-
-
-  }
-
-
-
-  50% {
-
-
-    opacity:.8;
-
-
-    transform:
-
-      scale(1.05);
-
-
-  }
-
-
-
-  100% {
-
-
-    opacity:.3;
-
-
-    transform:
-
-      scale(1);
-
-
-  }
-
-
+    box-shadow: 0 0 14px rgb(56 189 248 / 60%);
 }
 
+.dir-btn-q.active-q::after {
+    content: "";
 
+    position: absolute;
 
+    inset: -3px;
 
+    border-radius: 12px;
 
+    border: 1px solid rgb(56 189 248 / 60%);
+
+    animation: dirPulseQ 0.8s infinite;
+}
+
+@keyframes dirPulseQ {
+    0% {
+        opacity: 0.3;
+
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 0.3;
+
+        transform: scale(1);
+    }
+}
+/* =========================
+   CONFIRM PUSH BUTTON
+========================= */
+
+.confirm-btn-q {
+    border: none;
+
+    cursor: pointer;
+
+    padding: 9px 18px;
+
+    border-radius: 12px;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.3s ease;
+
+    animation: confirmAppearQ 0.25s ease;
+}
+
+/* DARK */
+
+.room-page-q.dark .confirm-btn-q {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+
+    color: #052e16;
+
+    box-shadow: 0 6px 18px rgb(34 197 94 / 35%);
+}
+
+/* LIGHT */
+
+.room-page-q.light .confirm-btn-q {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+
+    color: #14532d;
+
+    box-shadow: 0 6px 18px rgb(34 197 94 / 25%);
+}
+
+/* HOVER */
+
+.confirm-btn-q:hover {
+    transform: scale(1.08) translateY(-2px);
+
+    box-shadow: 0 10px 25px rgb(34 197 94 / 45%);
+}
+
+/* CLICK */
+
+.confirm-btn-q:active {
+    transform: scale(0.95);
+}
+
+/* ANIMACJA POJAWIENIA */
+
+@keyframes confirmAppearQ {
+    from {
+        opacity: 0;
+
+        transform: scale(0.7) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: scale(1) translateY(0);
+    }
+}
 /* =========================
    WINNER
 ========================= */
 
+.winner-box-q {
+    display: flex;
 
-.winner-box {
+    align-items: center;
 
-
-  display:flex;
-
-
-
-  align-items:center;
-
-
-
-  gap:15px;
-
-
+    gap: 15px;
 }
 
-
-
-.winner-text {
-
-
-  font-weight:700;
-
-
+.winner-text-q {
+    font-weight: 700;
 }
 
+.back-button-q {
+    border: none;
 
+    padding: 10px 18px;
 
-.back-button {
+    border-radius: 14px;
 
+    cursor: pointer;
 
-  border:none;
+    background: #38bdf8;
 
+    color: #0f172a;
 
+    font-weight: 700;
 
-  padding:
-
-    8px 16px;
-
-
-
-  border-radius:10px;
-
-
-
-  cursor:pointer;
-
-
-
-  background:#38bdf8;
-
-
-
-  color:#0f172a;
-
-
-
-  font-weight:700;
-
-
-
-  transition:.2s ease;
+    transition: 0.2s ease;
 }
 
-
-
-
-.back-button:hover {
-  transform:
-  scale(1.05);
+.back-button-q:hover {
+    transform: scale(1.05);
 }
-
-
-
-
 
 /* =========================
    RESPONSIVE
 ========================= */
 
+@media (width <= 600px) {
+    .cell-q {
+        width: 52px;
 
-@media(max-width:600px){
+        height: 52px;
+    }
 
+    .piece-q {
+        width: 42px;
 
+        height: 42px;
 
-  .cell {
-    width:52px;
-    height:52px;
-  }
+        font-size: 28px;
+    }
 
+    .direction-bar-q {
+        bottom: -65px;
 
+        flex-wrap: wrap;
+    }
 
-  .piece {
-    width:42px;
-    height:42px;
-    font-size:28px;
-  }
+    .room-info-q {
+        flex-direction: column;
 
+        gap: 8px;
 
-
-  .direction-bar {
-    bottom:-65px;
-    flex-wrap:wrap;
-  }
-
-  .room-info {
-    flex-direction:column;
-    gap:8px;
-    font-size:15px;
-  }
-
+        font-size: 15px;
+    }
 }

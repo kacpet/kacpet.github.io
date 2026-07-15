@@ -1,10 +1,9 @@
 // import Icons from "../icons/Icons"
 
 const VueProjectsData = {
-  title: "Vue",
+    title: "Vue",
 
-  projects: [
-  ]
-}
+    projects: [],
+};
 
-export default VueProjectsData
+export default VueProjectsData;

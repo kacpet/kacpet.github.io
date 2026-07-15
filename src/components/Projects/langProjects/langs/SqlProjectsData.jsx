@@ -1,11 +1,9 @@
 // import Icons from "../icons/Icons"
 
 const SqlProjectsData = {
-  title: "SQL",
+    title: "SQL",
 
-  projects: [
+    projects: [],
+};
 
-  ]
-}
-
-export default SqlProjectsData
+export default SqlProjectsData;

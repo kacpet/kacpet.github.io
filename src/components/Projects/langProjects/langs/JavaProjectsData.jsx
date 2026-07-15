@@ -1,11 +1,9 @@
 // import Icons from "../icons/Icons"
 
 const JavaProjectsData = {
-  title: "Java",
+    title: "Java",
 
-  projects: [
+    projects: [],
+};
 
-  ]
-}
-
-export default JavaProjectsData
+export default JavaProjectsData;

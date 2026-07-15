@@ -14,7 +14,6 @@
     transition: background 0.4s ease;
 }
 
-
 .about-overlay {
     position: absolute;
     inset: 0;
@@ -22,43 +21,20 @@
     transition: background 0.4s ease;
 }
 
-
-
 .about.dark {
-    background: radial-gradient(
-        circle at top left,
-        #3ea6ff 0%,
-        #1d4f9c 35%,
-        #081f4d 70%,
-        #020b1d 100%
-    );
+    background: radial-gradient(circle at top left, #3ea6ff 0%, #1d4f9c 35%, #081f4d 70%, #020b1d 100%);
 }
 
 .about.light {
-    background: radial-gradient(
-        circle at top left,
-        #eef8ff 0%,
-        #d6efff 30%,
-        #a8dbff 65%,
-        #7bc4ff 100%
-    );
+    background: radial-gradient(circle at top left, #eef8ff 0%, #d6efff 30%, #a8dbff 65%, #7bc4ff 100%);
 }
 
-
 .about.dark .about-overlay {
-    background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.03),
-        rgba(0,0,0,0.18)
-    );
+    background: linear-gradient(to bottom, rgb(255 255 255 / 3%), rgb(0 0 0 / 18%));
 }
 
 .about.light .about-overlay {
-    background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.45),
-        rgba(255,255,255,0.08)
-    );
+    background: linear-gradient(to bottom, rgb(255 255 255 / 45%), rgb(255 255 255 / 8%));
 }
 
 .about-content {
@@ -83,32 +59,31 @@
     gap: 28px;
 }
 
-
 .about-right {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
 .about-title {
     font-size: clamp(3rem, 8vw, 5.5rem);
     font-weight: 800;
     letter-spacing: -2px;
 
-    transition: color 0.4s ease, text-shadow 0.4s ease;
+    transition:
+        color 0.4s ease,
+        text-shadow 0.4s ease;
 }
 
 .about.dark .about-title {
-    color: rgb(220, 220, 220);
-    text-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    color: rgb(220 220 220);
+    text-shadow: 0 10px 30px rgb(0 0 0 / 35%);
 }
 
 .about.light .about-title {
     color: #3f6a8a;
-    text-shadow: 0 10px 25px rgba(255,255,255,0.4);
+    text-shadow: 0 10px 25px rgb(255 255 255 / 40%);
 }
-
 
 .subtitle-row {
     margin-top: 6px;
@@ -130,7 +105,7 @@
 }
 
 .about.dark .about-subtitle {
-    color: rgb(220, 220, 220,0.75);
+    color: rgb(220 220 220 / 75%);
 }
 
 .about.light .about-subtitle {
@@ -149,21 +124,21 @@
     font-weight: 600;
 
     backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
 
     transition: all 0.4s ease;
 }
 
 .about.dark .availability-badge {
-    background: rgba(0, 0, 0, 0.25);
-    color: rgb(220, 220, 220);
-    border: 1px solid rgba(255,255,255,0.12);
+    background: rgb(0 0 0 / 25%);
+    color: rgb(220 220 220);
+    border: 1px solid rgb(255 255 255 / 12%);
 }
 
 .about.light .availability-badge {
-    background: rgba(255,255,255,0.45);
+    background: rgb(255 255 255 / 45%);
     color: #3f6a8a;
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 1px solid rgb(255 255 255 / 50%);
 }
 
 .status-dot {
@@ -171,15 +146,26 @@
     height: 8px;
     border-radius: 50%;
     background: #22c55e;
-    box-shadow: 0 0 10px rgba(34,197,94,0.7);
+    box-shadow: 0 0 10px rgb(34 197 94 / 70%);
 
     animation: pulse 1.8s infinite;
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.4); opacity: 0.6; }
-    100% { transform: scale(1); opacity: 1; }
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.4);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .image-frame {
@@ -187,7 +173,7 @@
     border-radius: 34px;
 
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
 
     transition: transform 0.3s ease;
 }
@@ -221,14 +207,13 @@
     transform: scale(1.04);
 }
 
-
 .about-box {
     width: 100%;
     border-radius: 32px;
     padding: 42px;
 
     backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
 
     transition: transform 0.3s ease;
 }
@@ -238,17 +223,16 @@
 }
 
 .about.dark .about-box {
-    background: rgba(8, 20, 45, 0.45);
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    background: rgb(8 20 45 / 45%);
+    border: 1px solid rgb(255 255 255 / 8%);
+    box-shadow: 0 20px 60px rgb(0 0 0 / 35%);
 }
 
 .about.light .about-box {
-    background: rgba(255,255,255,0.45);
-    border: 1px solid rgba(255,255,255,0.4);
-    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+    background: rgb(255 255 255 / 45%);
+    border: 1px solid rgb(255 255 255 / 40%);
+    box-shadow: 0 20px 60px rgb(15 23 42 / 12%);
 }
-
 
 .about-description {
     max-width: 680px;
@@ -261,7 +245,7 @@
 }
 
 .about.dark .about-description {
-    color: rgba(255,255,255,0.85);
+    color: rgb(255 255 255 / 85%);
 }
 
 .about.light .about-description {
@@ -273,14 +257,14 @@
         opacity: 0;
         transform: translateY(40px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .about-content {
         grid-template-columns: 1fr;
         gap: 30px;

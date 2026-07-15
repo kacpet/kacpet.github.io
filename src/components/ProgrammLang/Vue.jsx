@@ -1,36 +1,24 @@
-import Icons from "../icons/Icons"
+import Icons from "../icons/Icons";
 
 const VueData = {
+    title: "Vue",
 
-  title: "Vue",
+    category: "Frontend Framework",
 
-  category: "Frontend Framework",
+    logo: <Icons name="vue" />,
 
-  logo: <Icons name="vue" />,
+    description: {
+        polish: "Vue wykorzystuję do budowy lekkich i elastycznych interfejsów użytkownika, stawiając na prostotę, reaktywność i szybki rozwój aplikacji.",
 
-  description: {
-    polish:
-      "Vue wykorzystuję do budowy lekkich i elastycznych interfejsów użytkownika, stawiając na prostotę, reaktywność i szybki rozwój aplikacji.",
+        english:
+            "I use Vue to build lightweight and flexible user interfaces, focusing on simplicity, reactivity and fast application development.",
+    },
 
-    english:
-      "I use Vue to build lightweight and flexible user interfaces, focusing on simplicity, reactivity and fast application development."
-  },
+    skills: ["Vue Components", "Reactivity", "Vue Router", "State Management", "Directives", "Composition API"],
 
-  skills: [
+    projectsPath: "/projects/vue",
 
-    "Vue Components",
-    "Reactivity",
-    "Vue Router",
-    "State Management",
-    "Directives",
-    "Composition API"
+    projects: [],
+};
 
-  ],
-
-  projectsPath: "/projects/vue",
-
-  projects: []
-
-}
-
-export default VueData
+export default VueData;

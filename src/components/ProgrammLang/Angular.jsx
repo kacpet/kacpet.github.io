@@ -1,36 +1,23 @@
-import Icons from "../icons/Icons"
+import Icons from "../icons/Icons";
 
 const AngularData = {
+    title: "Angular",
 
-  title: "Angular",
+    category: "Frontend Framework",
 
-  category: "Frontend Framework",
+    logo: <Icons name="angular" />,
 
-  logo: <Icons name="angular" />,
+    description: {
+        polish: "Angular wykorzystuję do budowy rozbudowanych aplikacji frontendowych opartych o architekturę komponentową.",
 
-  description: {
-    polish:
-      "Angular wykorzystuję do budowy rozbudowanych aplikacji frontendowych opartych o architekturę komponentową.",
+        english: "I use Angular to build scalable frontend applications based on component architecture.",
+    },
 
-    english:
-      "I use Angular to build scalable frontend applications based on component architecture."
-  },
+    skills: ["Components", "Routing", "TypeScript", "Services", "REST API", "Forms"],
 
-  skills: [
+    projectsPath: "/projects/angular",
 
-    "Components",
-    "Routing",
-    "TypeScript",
-    "Services",
-    "REST API",
-    "Forms"
+    projects: [],
+};
 
-  ],
-
-  projectsPath: "/projects/angular",
-
-  projects: []
-
-}
-
-export default AngularData
+export default AngularData;
