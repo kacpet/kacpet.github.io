@@ -7,15 +7,11 @@
 
 .App {
     min-height: 100vh;
-
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-
     transition: 0.3s;
-
     overflow: y-scroll;
     overflow-x: hidden;
-
     position: relative;
 }

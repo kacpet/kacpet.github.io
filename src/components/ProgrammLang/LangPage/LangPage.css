@@ -1,29 +1,21 @@
 .lang-page {
     position: relative;
-
     min-height: 100vh;
     width: 100%;
-
     overflow-x: hidden;
-
     display: flex;
     justify-content: center;
-
     padding: 140px 24px 100px;
-
     transition:
         background 0.45s ease,
         color 0.45s ease;
 }
-
 /* =========================
    BACKGROUND
 ========================= */
-
 .lang-background {
     position: absolute;
     inset: 0;
-
     overflow: hidden;
 }
 
@@ -34,38 +26,29 @@
 .lang-page.light {
     background: radial-gradient(circle at top left, #eef8ff 0%, #d9efff 35%, #b8e0ff 68%, #8dcbff 100%);
 }
-
 /* =========================
    BLURS
 ========================= */
-
 .lang-bg-blur {
     position: absolute;
-
     border-radius: 50%;
-
     filter: blur(140px);
-
     pointer-events: none;
 }
 
 .lang-blur-1 {
     width: 420px;
     height: 420px;
-
     top: -140px;
     left: -120px;
-
     animation: floatBlur1 16s ease-in-out infinite;
 }
 
 .lang-blur-2 {
     width: 320px;
     height: 320px;
-
     bottom: -100px;
     right: -80px;
-
     animation: floatBlur2 18s ease-in-out infinite;
 }
 
@@ -89,11 +72,9 @@
     0% {
         transform: translate3d(0, 0, 0);
     }
-
     50% {
         transform: translate3d(30px, 20px, 0);
     }
-
     100% {
         transform: translate3d(0, 0, 0);
     }
@@ -103,53 +84,41 @@
     0% {
         transform: translate3d(0, 0, 0);
     }
-
     50% {
         transform: translate3d(-25px, -20px, 0);
     }
-
     100% {
         transform: translate3d(0, 0, 0);
     }
 }
-
 /* =========================
    CONTAINER
 ========================= */
-
 .lang-container {
     position: relative;
     z-index: 2;
-
     width: 100%;
     max-width: 1220px;
-
     display: flex;
     flex-direction: column;
     gap: 70px;
 }
-
 /* =========================
    HERO
 ========================= */
-
 .lang-hero {
     display: flex;
     align-items: center;
     gap: 44px;
-
     flex-wrap: wrap;
 }
-
 /* =========================
    ENTER ANIMATION
 ========================= */
-
 .lang-logo-wrapper,
 .lang-heading,
 .lang-card {
     opacity: 0;
-
     transform: translate3d(0, 24px, 0) scale(0.98);
 }
 
@@ -163,21 +132,16 @@
 @keyframes enterAnimation {
     from {
         opacity: 0;
-
         transform: translate3d(0, 28px, 0) scale(0.97);
     }
-
     to {
         opacity: 1;
-
         transform: translate3d(0, 0, 0) scale(1);
     }
 }
-
 /* =========================
    LOGO
 ========================= */
-
 .lang-logo-wrapper {
     flex-shrink: 0;
 }
@@ -185,18 +149,13 @@
 .lang-logo {
     width: 170px;
     height: 170px;
-
     padding: 28px;
-
     border-radius: 42px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     backdrop-filter: blur(22px);
     backdrop-filter: blur(22px);
-
     transition:
         transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
         background 0.35s ease,
@@ -210,7 +169,6 @@
 .lang-page.dark .lang-logo {
     background: rgb(10 25 55 / 50%);
     border: 1px solid rgb(120 190 255 / 16%);
-
     box-shadow:
         0 10px 40px rgb(0 0 0 / 25%),
         inset 0 1px 0 rgb(255 255 255 / 3%);
@@ -219,39 +177,29 @@
 .lang-page.light .lang-logo {
     background: rgb(255 255 255 / 58%);
     border: 1px solid rgb(120 180 255 / 24%);
-
     box-shadow:
         0 10px 35px rgb(60 120 180 / 12%),
         inset 0 1px 0 rgb(255 255 255 / 60%);
 }
-
 /* SVG zajmuje całe dostępne miejsce */
-
 .lang-logo svg {
     width: 100%;
     height: 100%;
-
     display: block;
-
     object-fit: contain;
 }
-
 /* =========================
    TEXT
 ========================= */
-
 .lang-heading {
     flex: 1;
 }
 
 .lang-subtitle {
     font-size: 0.82rem;
-
     letter-spacing: 0.24em;
     text-transform: uppercase;
-
     font-weight: 600;
-
     opacity: 0.75;
 }
 
@@ -265,10 +213,8 @@
 
 .lang-title {
     margin-top: 12px;
-
     font-size: clamp(3rem, 8vw, 5.4rem);
     font-weight: 800;
-
     letter-spacing: -2.5px;
     line-height: 1;
 }
@@ -283,9 +229,7 @@
 
 .lang-description {
     max-width: 760px;
-
     margin-top: 24px;
-
     font-size: 1.08rem;
     line-height: 1.9;
 }
@@ -297,30 +241,22 @@
 .lang-page.light .lang-description {
     color: #35597a;
 }
-
 /* =========================
    GRID
 ========================= */
-
 .lang-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-
     gap: 34px;
 }
-
 /* =========================
    CARD
 ========================= */
-
 .lang-card {
     padding: 34px;
-
     border-radius: 34px;
-
     backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
-
     transition:
         transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
         background 0.35s ease,
@@ -334,43 +270,33 @@
 
 .lang-page.dark .lang-card {
     background: rgb(10 25 55 / 44%);
-
     border: 1px solid rgb(120 190 255 / 14%);
-
     box-shadow: 0 8px 30px rgb(0 0 0 / 18%);
 }
 
 .lang-page.light .lang-card {
     background: rgb(255 255 255 / 62%);
-
     border: 1px solid rgb(120 180 255 / 24%);
-
     box-shadow: 0 8px 24px rgb(90 150 210 / 10%);
 }
-
 /* =========================
    SECTION HEADER
 ========================= */
-
 .section-top {
     display: flex;
     align-items: center;
-
     gap: 12px;
-
     margin-bottom: 30px;
 }
 
 .section-dot {
     width: 10px;
     height: 10px;
-
     border-radius: 50%;
 }
 
 .lang-page.dark .section-dot {
     background: #6dc0ff;
-
     box-shadow: 0 0 14px rgb(109 192 255 / 60%);
 }
 
@@ -390,23 +316,18 @@
 .lang-page.light .section-top h2 {
     color: #1f4f7a;
 }
-
 /* =========================
    SKILLS
 ========================= */
-
 .skills-list {
     display: flex;
     flex-wrap: wrap;
-
     gap: 14px;
 }
 
 .skill-item {
     padding: 13px 18px;
-
     border-radius: 999px;
-
     transition:
         transform 0.3s ease,
         background 0.3s ease;
@@ -418,36 +339,27 @@
 
 .lang-page.dark .skill-item {
     background: rgb(80 170 255 / 8%);
-
     border: 1px solid rgb(120 190 255 / 12%);
-
     color: #e6f2ff;
 }
 
 .lang-page.light .skill-item {
     background: rgb(255 255 255 / 76%);
-
     border: 1px solid rgb(120 180 255 / 18%);
-
     color: #1f4f7a;
 }
-
 /* =========================
    PROJECTS
 ========================= */
-
 .projects-list {
     display: flex;
     flex-direction: column;
-
     gap: 20px;
 }
 
 .project-item {
     padding: 24px;
-
     border-radius: 24px;
-
     transition:
         transform 0.35s ease,
         background 0.35s ease;
@@ -459,19 +371,16 @@
 
 .lang-page.dark .project-item {
     background: rgb(80 170 255 / 6%);
-
     border: 1px solid rgb(120 190 255 / 10%);
 }
 
 .lang-page.light .project-item {
     background: rgb(255 255 255 / 72%);
-
     border: 1px solid rgb(120 180 255 / 20%);
 }
 
 .project-item h3 {
     margin-bottom: 12px;
-
     font-size: 1.15rem;
     font-weight: 700;
 }
@@ -495,11 +404,9 @@
 .lang-page.light .project-item p {
     color: #456783;
 }
-
 /* =========================
    RESPONSIVE
 ========================= */
-
 @media (width <= 900px) {
     .lang-grid {
         grid-template-columns: 1fr;
@@ -510,43 +417,32 @@
     .lang-page {
         padding: 110px 18px 80px;
     }
-
     .lang-container {
         gap: 50px;
     }
-
     .lang-hero {
         gap: 28px;
     }
-
     .lang-logo {
         width: 120px;
         height: 120px;
-
         padding: 20px;
-
         border-radius: 30px;
     }
-
     .lang-title {
         font-size: 3rem;
     }
-
     .lang-description {
         font-size: 1rem;
     }
-
     .lang-card {
         padding: 26px;
-
         border-radius: 28px;
     }
 }
-
 /* =========================
    SVG ICON FIX
 ========================= */
-
 .lang-logo > * {
     width: 100%;
     height: 100%;
@@ -555,62 +451,42 @@
 .lang-logo svg {
     width: 100%;
     height: 100%;
-
     display: block;
-
     overflow: visible;
-
     flex-shrink: 0;
-
     object-fit: contain;
 }
-
 /* dla path / g / rect itd */
-
 .lang-logo svg * {
     vector-effect: non-scaling-stroke;
 }
-
 /* =========================
    CTA BUTTON (HERO)
 ========================= */
-
 .lang-projects-cta {
     margin-top: 28px;
-
     padding: 14px 26px;
-
     border-radius: 999px;
-
     font-weight: 700;
     font-size: 1rem;
-
     cursor: pointer;
-
     border: 1px solid rgb(120 190 255 / 25%);
-
     backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
-
     transition:
         transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
         background 0.35s ease,
         box-shadow 0.35s ease,
         border 0.35s ease;
-
     animation: enterAnimation 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     animation-delay: var(--d);
-
     opacity: 0;
     transform: translateY(20px);
 }
-
 /* DARK */
-
 .lang-page.dark .lang-projects-cta {
     background: rgb(80 170 255 / 15%);
     color: #eaf6ff;
-
     box-shadow: 0 10px 30px rgb(0 0 0 / 25%);
 }
 
@@ -618,13 +494,10 @@
     transform: translateY(-4px) scale(1.03);
     background: rgb(90 190 255 / 25%);
 }
-
 /* LIGHT */
-
 .lang-page.light .lang-projects-cta {
     background: rgb(255 255 255 / 75%);
     color: #1f4f7a;
-
     box-shadow: 0 10px 25px rgb(90 150 210 / 15%);
 }
 

@@ -6,13 +6,15 @@ const ANIMATION_TIME = 500;
 
 function ImageSlider({ project, theme, language }) {
     const images =
-        language === "polish"
-            ? theme === "dark"
-                ? project.imgsDarkPL
-                : project.imgsLightPL
-            : theme === "dark"
-              ? project.imgsDarkENG
-              : project.imgsLightENG;
+        project.universalImgs?.length > 0
+            ? project.universalImgs
+            : language === "polish"
+              ? theme === "dark"
+                  ? project.imgsDarkPL
+                  : project.imgsLightPL
+              : theme === "dark"
+                ? project.imgsDarkENG
+                : project.imgsLightENG;
 
     const [current, setCurrent] = useState(0);
     const [next, setNext] = useState(null);
@@ -21,21 +23,26 @@ function ImageSlider({ project, theme, language }) {
 
     const changeSlide = (index, dir = "next") => {
         if (animating) return;
+
         if (index === current) return;
 
         setDirection(dir);
+
         setNext(index);
+
         setAnimating(true);
 
         setTimeout(() => {
             setCurrent(index);
+
             setNext(null);
+
             setAnimating(false);
         }, ANIMATION_TIME);
     };
 
     useEffect(() => {
-        if (images.length <= 1) return;
+        if (!images || images.length <= 1) return;
 
         const interval = setInterval(() => {
             changeSlide((current + 1) % images.length, "next");
@@ -63,7 +70,9 @@ function ImageSlider({ project, theme, language }) {
                     {images.map((_, index) => (
                         <button
                             key={index}
+
                             className={`slider-dot ${index === current ? "active" : ""}`}
+
                             onClick={() => changeSlide(index, index > current ? "next" : "prev")}
                         />
                     ))}

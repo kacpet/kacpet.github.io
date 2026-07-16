@@ -1,19 +1,14 @@
 .cv {
     min-height: 100vh;
     width: 100%;
-
     display: flex;
     justify-content: center;
-
     padding: 140px 24px 100px;
-
     transition: background 0.4s ease;
 }
-
 /* =========================
    BACKGROUND
 ========================= */
-
 .cv.dark {
     background: radial-gradient(circle at top left, #0b2a55 0%, #071a36 40%, #050e1f 100%);
 }
@@ -21,11 +16,9 @@
 .cv.light {
     background: radial-gradient(circle at top left, #eaf6ff 0%, #cfeaff 35%, #a8d8ff 70%, #7bbfff 100%);
 }
-
 /* =========================
    ENTER ANIMATION WRAPPER
 ========================= */
-
 .cv {
     opacity: 1;
     transform: none;
@@ -40,30 +33,24 @@
         opacity: 0;
         transform: translate3d(0, 12px, 0);
     }
-
     to {
         opacity: 1;
         transform: translate3d(0, 0, 0);
     }
 }
-
 /* =========================
    CONTAINER
 ========================= */
-
 .cv-container {
     width: 100%;
     max-width: 1200px;
-
     display: flex;
     flex-direction: column;
     gap: 70px;
 }
-
 /* =========================
    HEADER
 ========================= */
-
 .cv-header {
     text-align: center;
 }
@@ -81,11 +68,9 @@
 .cv.light .cv-header h1 {
     color: #1f4f7a;
 }
-
 /* =========================
    GRID
 ========================= */
-
 .cv-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -98,18 +83,14 @@
     flex-direction: column;
     gap: 35px;
 }
-
 /* =========================
    CARD
 ========================= */
-
 .cv-card {
     padding: 32px;
     border-radius: 28px;
-
     backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
-
     transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -128,7 +109,6 @@
 .cv.cv-enter .cv-card {
     opacity: 0;
     transform: translate3d(0, 14px, 0) scale(0.985);
-
     animation: cardEnter 1.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     animation-delay: var(--d);
 }
@@ -138,7 +118,6 @@
         opacity: 0;
         transform: translate3d(0, 16px, 0) scale(0.98);
     }
-
     to {
         opacity: 1;
         transform: translate3d(0, 0, 0) scale(1);
@@ -148,11 +127,9 @@
 .cv-card:hover {
     transform: translate3d(0, -5px, 0) scale(1.015);
 }
-
 /* =========================
    SKILLS
 ========================= */
-
 .skill-grid {
     display: flex;
     flex-direction: column;
@@ -164,10 +141,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding: 12px 16px;
     border-radius: 14px;
-
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -185,30 +160,24 @@
 .skill-icon {
     width: 22px;
     height: 22px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     flex-shrink: 0;
 }
 
 .skill-icon svg {
     width: 100%;
     height: 100%;
-
     display: block;
-
     object-fit: contain;
 }
 
 .skill-more {
     font-size: 0.82rem;
     opacity: 0.75;
-
     padding: 6px 10px;
     border-radius: 999px;
-
     transition: 0.25s ease;
 }
 
@@ -236,21 +205,17 @@
     background: rgb(120 180 255 / 18%);
     color: #1f4f7a;
 }
-
 /* =========================
    RESPONSIVE
 ========================= */
-
 @media (width <= 768px) {
     .cv {
         padding-top: 110px;
     }
-
     .cv-grid {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-
     .cv-card {
         padding: 24px;
     }
@@ -260,46 +225,35 @@
     position: relative;
     overflow: hidden;
 }
-
 /* label */
-
 .motto-label {
     font-size: 0.75rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     opacity: 0.6;
 }
-
 /* ⭐ GŁÓWNE MOTTO */
-
 .motto-text {
     font-family: "Playfair Display", serif;
     font-size: 1.6rem;
     font-weight: 600;
     letter-spacing: 0.05em;
     line-height: 1.4;
-
     margin-top: 10px;
-
     /* delikatny “premium look” */
     background: linear-gradient(90deg, #fff, #b3b3b3);
     background-clip: text;
     -webkit-text-fill-color: transparent;
-
     position: relative;
 }
-
 /* dekoracyjna linia pod motto */
-
 .motto-text::after {
     content: "";
     position: absolute;
     left: 0;
     bottom: -10px;
-
     width: 60px;
     height: 2px;
-
     background: linear-gradient(90deg, #fff, transparent);
     opacity: 0.6;
 }
@@ -308,13 +262,11 @@
     background: none;
     background-clip: unset;
     -webkit-text-fill-color: unset;
-
-    color: #1f3f5f; /* ciemniejszy, elegancki granat */
+    color: #1f3f5f;
+    /* ciemniejszy, elegancki granat */
     font-weight: 600;
 }
-
 /* delikatnie dopasuj też linię pod spodem */
-
 .cv.light .motto-text::after {
     background: linear-gradient(90deg, #1f3f5f, transparent);
 }

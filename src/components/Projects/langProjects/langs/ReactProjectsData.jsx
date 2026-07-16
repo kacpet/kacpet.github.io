@@ -69,7 +69,21 @@ const ReactProjectsData = {
                 english: "Modern portfolio/CV built with React. Includes projects, skills sections and interactive UI.",
             },
 
-            imgsLightPL: [CVLightPL1, CVLightPL2, CVLightPL3, CVLightPL4, CVLightPL5, CVLightPL6, CVLightPL7, CVLightPL8, CVLightPL9, CVLightPL10, CVLightPL11, CVLightPL12, CVLightPL13],
+            imgsLightPL: [
+                CVLightPL1,
+                CVLightPL2,
+                CVLightPL3,
+                CVLightPL4,
+                CVLightPL5,
+                CVLightPL6,
+                CVLightPL7,
+                CVLightPL8,
+                CVLightPL9,
+                CVLightPL10,
+                CVLightPL11,
+                CVLightPL12,
+                CVLightPL13,
+            ],
 
             imgsDarkPL: [
                 CVDarkPL1,
@@ -122,7 +136,7 @@ const ReactProjectsData = {
             tags: ["React", "JavaScript", "Firebase"],
             pageLink: "https://kacpet.github.io",
             github: "https://github.com/kacpet/kacpet.github.io",
-        },
+        }
     ],
 };
 
