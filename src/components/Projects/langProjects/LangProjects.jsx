@@ -50,14 +50,27 @@ function LangProjects({ theme, language, data }) {
                                     </div>
 
                                     <div className="project-actions">
-                                        <a
-                                            href={project.github}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="project-github"
-                                        >
-                                            GitHub
-                                        </a>
+                                        {project.pageLink && (
+                                            <a
+                                                href={project.pageLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="project-page"
+                                            >
+                                                {language === "polish" ? "Strona" : "Live Demo"}
+                                            </a>
+                                        )}
+
+                                        {project.github && (
+                                            <a
+                                                href={project.github}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="project-github"
+                                            >
+                                                GitHub
+                                            </a>
+                                        )}
                                     </div>
                                 </div>
                             </article>

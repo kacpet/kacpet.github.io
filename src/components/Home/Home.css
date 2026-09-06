@@ -1,85 +1,63 @@
 .home {
     min-height: 100vh;
     width: 100%;
-
     position: relative;
-
     overflow: hidden auto;
 }
-
 /* =========================
    BAZOWE TŁO (DODANE)
    natychmiastowy kolor w dark mode
 ========================= */
-
 .home-bg-base {
     position: fixed;
     inset: 0;
-
     width: 100%;
     height: 100vh;
-
     z-index: -2;
 }
 
 .home-bg-base.dark {
-    background: #0b1b3a; /* granat startowy */
+    background: #0b1b3a;
+    /* granat startowy */
 }
 
 .home-bg-base.light {
     background: #fff;
 }
-
 /* ===== TŁO ===== */
-
 .home-bg {
     position: fixed;
     inset: 0;
-
     width: 100%;
     height: 100vh;
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
     transform: scale(1.1);
-
     animation:
         bgAppear 1.4s ease,
         bgZoom 8s ease-in-out infinite alternate;
-
     z-index: -1;
 }
-
 /* ===== OVERLAY ===== */
-
 .home-bg.dark::after {
     content: "";
-
     position: absolute;
     inset: 0;
-
     background: rgb(0 0 0 / 25%);
 }
 
 .home-bg.light::after {
     content: "";
-
     position: absolute;
-
     inset: 0;
-
     background: rgb(255 255 255 / 0%);
 }
-
 /* ===== ANIMACJE ===== */
-
 @keyframes bgZoom {
     0% {
         transform: scale(1.08) translateY(0);
     }
-
     100% {
         transform: scale(1.18) translateY(-20px);
     }
@@ -90,7 +68,6 @@
         opacity: 0;
         transform: translateY(40px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -102,7 +79,6 @@
         opacity: 0;
         transform: scale(0.92);
     }
-
     to {
         opacity: 1;
         transform: scale(1);
@@ -114,235 +90,161 @@
         opacity: 0;
         transform: scale(1.25);
     }
-
     to {
         opacity: 1;
     }
 }
-
 /* ===== HERO ===== */
-
 .hero {
     width: 100%;
     min-height: calc(100vh - 64px);
-
     display: flex;
     flex-direction: column;
-
     justify-content: center;
     align-items: center;
-
     padding-left: 32px;
     padding-right: 32px;
-
     position: relative;
     z-index: 2;
 }
-
 /* ===== HEADER ===== */
-
 .header-home-page {
     display: flex;
     justify-content: center;
     align-items: center;
-
     padding: 24px 36px;
-
     border-radius: 24px;
-
     transition: 0.3s ease;
-
     margin-bottom: 55px;
-
     opacity: 0;
-
     animation: fadeScale 0.9s ease forwards;
     animation-delay: 0.2s;
 }
 
 .header-home-page.dark h1 {
     color: rgb(220 220 220);
-
     font-size: clamp(2rem, 4vw, 4.3rem);
     font-weight: 700;
-
     text-align: center;
-
     letter-spacing: -1px;
     line-height: 1.1;
-
     text-shadow: 0 0 18px rgb(90 170 255 / 25%);
 }
 
 .header-home-page.light h1 {
     color: #3f6a8a;
-
     font-size: clamp(2rem, 4vw, 4.3rem);
     font-weight: 700;
-
     text-align: center;
-
     letter-spacing: -1px;
     line-height: 1.1;
 }
-
 /* ===== KONTAINER ===== */
-
 .buttons-container {
     width: 100%;
     max-width: 1200px;
-
     display: grid;
-
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto auto;
-
     gap: 50px;
-
     place-items: center center;
 }
-
 /* ===== PRZYCISKI ===== */
-
 .nav-btn {
     width: min(90%, 460px);
-
     padding: clamp(20px, 2vw, 34px) clamp(32px, 3vw, 54px);
-
     font-size: clamp(1.2rem, 1.5vw, 1.8rem);
     font-weight: 600;
-
     border-radius: 18px;
-
     cursor: pointer;
-
     transition: all 0.3s ease;
-
     backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
-
     border: 1px solid rgb(255 255 255 / 15%);
-
     background: rgb(255 255 255 / 5%);
-
     opacity: 0;
-
     animation: fadeUp 0.8s ease forwards;
 }
-
 /* ===== UKŁAD ===== */
-
 .nav-btn.left {
     grid-column: 1;
     grid-row: 1;
-
     animation-delay: 0.45s;
 }
 
 .nav-btn.right {
     grid-column: 2;
     grid-row: 1;
-
     animation-delay: 0.65s;
 }
 
 .nav-btn.bottom {
     grid-column: 1;
     grid-row: 2;
-
     animation-delay: 0.85s;
 }
 
 .nav-btn.game {
     grid-column: 2;
     grid-row: 2;
-
     animation-delay: 1.05s;
 }
-
 /* ===== DARK ===== */
-
 .nav-btn.dark {
     color: rgb(200 200 200);
 }
-
 /* ===== LIGHT ===== */
-
 .nav-btn.light {
     color: #4f6f8d;
-
     background: rgb(255 255 255 / 45%);
-
     border: 1px solid rgb(255 255 255 / 60%);
-
     box-shadow:
         0 6px 18px rgb(0 0 0 / 8%),
         inset 0 1px 0 rgb(255 255 255 / 65%);
-
     backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
 }
-
 /* ===== HOVER ===== */
-
 .nav-btn:hover {
     transform: translateY(-2px);
-
     box-shadow:
         0 10px 24px rgb(0 0 0 / 15%),
         0 0 0 1px rgb(255 255 255 / 8%);
-
     background: rgb(255 255 255 / 14%);
 }
 
 .nav-btn.light:hover {
     background: rgb(255 255 255 / 65%);
-
     border: 1px solid rgb(255 255 255 / 85%);
-
     box-shadow:
         0 12px 26px rgb(0 0 0 / 12%),
         inset 0 1px 0 rgb(255 255 255 / 95%);
-
     transform: translateY(-2px);
 }
-
 /* ===== MOBILE ===== */
-
 @media (width <= 768px) {
     .hero {
         min-height: calc(100vh - 64px);
-
         display: flex;
         flex-direction: column;
-
         padding-top: 100px;
         padding-bottom: 40px;
     }
-
     .header-home-page {
         margin-bottom: 40px;
     }
-
     .buttons-container {
         flex: 1;
-
         width: 100%;
-
         display: flex;
         flex-direction: column;
-
         justify-content: space-evenly;
-
         gap: 20px;
-
         align-items: center;
     }
-
     .nav-btn {
         width: 90%;
         max-width: 340px;
-
         font-size: 1.15rem;
     }
 }

@@ -1,51 +1,36 @@
 .room-page-q {
     position: relative;
-
     min-height: 100vh;
     width: 100%;
-
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
-
     gap: 28px;
-
     overflow: hidden;
-
     padding: 120px 24px 80px;
-
     font-family: system-ui, sans-serif;
-
     transition:
         background 0.4s ease,
         color 0.4s ease;
 }
-
 /* =========================
    BACKGROUND
 ========================= */
-
 .room-page-q.dark {
     background: radial-gradient(circle at top left, #3ea6ff 0%, #1d4f9c 35%, #081f4d 70%, #020b1d 100%);
-
     color: rgb(220 220 220);
 }
 
 .room-page-q.light {
     background: radial-gradient(circle at top left, #eef8ff 0%, #d6efff 30%, #a8dbff 65%, #7bc4ff 100%);
-
     color: #3f6a8a;
 }
 
 .room-page-q::before {
     content: "";
-
     position: absolute;
-
     inset: 0;
-
     z-index: 0;
 }
 
@@ -56,30 +41,19 @@
 .room-page-q.light::before {
     background: linear-gradient(to bottom, rgb(255 255 255 / 45%), rgb(255 255 255 / 8%));
 }
-
 /* =========================
    INFO
 ========================= */
-
 .room-info-q {
     position: relative;
-
     z-index: 2;
-
     display: flex;
-
     align-items: center;
-
     gap: 20px;
-
     padding: 14px 22px;
-
     border-radius: 18px;
-
     backdrop-filter: blur(16px);
-
     font-size: 18px;
-
     transition:
         transform 0.3s ease,
         background 0.4s ease;
@@ -91,49 +65,33 @@
 
 .room-page-q.dark .room-info-q {
     background: rgb(8 20 45 / 45%);
-
     border: 1px solid rgb(255 255 255 / 8%);
-
     box-shadow: 0 20px 60px rgb(0 0 0 / 35%);
 }
 
 .room-page-q.light .room-info-q {
     background: rgb(255 255 255 / 45%);
-
     border: 1px solid rgb(255 255 255 / 40%);
-
     box-shadow: 0 20px 60px rgb(15 23 42 / 12%);
 }
-
 /* =========================
    BOARD
 ========================= */
-
 .board-wrapper-q {
     position: relative;
-
     z-index: 5;
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 }
 
 .board-q {
     display: grid;
-
     grid-template-columns: repeat(5, 1fr);
-
     gap: 10px;
-
     padding: 18px;
-
     border-radius: 32px;
-
     backdrop-filter: blur(18px);
-
     transition:
         transform 0.25s ease,
         filter 0.25s ease;
@@ -141,13 +99,11 @@
 
 .room-page-q.dark .board-q {
     background: rgb(8 20 45 / 55%);
-
     box-shadow: 0 25px 70px rgb(0 0 0 / 45%);
 }
 
 .room-page-q.light .board-q {
     background: rgb(255 255 255 / 55%);
-
     box-shadow: 0 25px 70px rgb(15 23 42 / 15%);
 }
 
@@ -159,39 +115,26 @@
     0% {
         transform: scale(1);
     }
-
     40% {
         transform: scale(1.03);
-
         filter: brightness(1.12);
     }
-
     100% {
         transform: scale(1);
     }
 }
-
 /* =========================
    CELLS
 ========================= */
-
 .cell-q {
     width: 70px;
-
     height: 70px;
-
     border-radius: 18px;
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     position: relative;
-
     cursor: pointer;
-
     transition:
         transform 0.15s ease,
         background 0.15s ease,
@@ -200,13 +143,11 @@
 
 .room-page-q.dark .cell-q {
     background: rgb(255 255 255 / 8%);
-
     border: 1px solid rgb(255 255 255 / 8%);
 }
 
 .room-page-q.light .cell-q {
     background: rgb(255 255 255 / 45%);
-
     border: 1px solid rgb(255 255 255 / 35%);
 }
 
@@ -220,19 +161,16 @@
 
 .cell-q.edge-q {
     outline: 2px solid #38bdf8;
-
     box-shadow: 0 0 14px rgb(56 189 248 / 45%);
 }
 
 .cell-q.selected-q {
     outline: 2px solid #f59e0b;
-
     box-shadow: 0 0 18px rgb(245 158 11 / 60%);
-
     transform: scale(1.08);
-
     z-index: 20;
 }
+
 .cell-q.lifting-q {
     animation: liftPieceQ 0.25s ease;
 }
@@ -241,41 +179,27 @@
     0% {
         transform: translateY(0) scale(1);
     }
-
     50% {
         transform: translateY(-18px) scale(1.12);
     }
-
     100% {
         transform: translateY(0) scale(1);
     }
 }
-
 /* =========================
    PIECES
 ========================= */
-
 .piece-q {
     width: 55px;
-
     height: 55px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     border-radius: 14px;
-
     font-size: 38px;
-
     font-weight: 800;
-
     user-select: none;
-
     animation: pieceAppearQ 0.18s ease;
-
     box-shadow:
         inset 0 0 10px rgb(0 0 0 / 35%),
         0 6px 12px rgb(0 0 0 / 25%);
@@ -292,20 +216,16 @@
 @keyframes pieceAppearQ {
     from {
         transform: scale(0.3);
-
         opacity: 0;
     }
-
     to {
         transform: scale(1);
-
         opacity: 1;
     }
 }
 
 .piece-q.moving-q {
     animation: pieceMoveQ 0.35s ease;
-
     z-index: 100;
 }
 
@@ -313,52 +233,39 @@
     0% {
         transform: scale(1);
     }
-
     40% {
         transform: scale(1.15) translateY(-25px);
     }
-
     100% {
         transform: scale(1);
     }
 }
-
 /* =========================
    OUTSIDE PIECE
 ========================= */
-
 .outside-piece-q {
     position: absolute;
-
     pointer-events: none;
-
     z-index: 200;
-
     animation: pushOutsideQ 0.35s ease;
 }
 
 @keyframes pushOutsideQ {
     0% {
         transform: scale(1) translate(0, 0);
-
         opacity: 1;
     }
-
     70% {
         transform: scale(1.15);
     }
-
     100% {
         transform: scale(0.9);
-
         opacity: 0;
     }
 }
-
 /* =========================
    SLIDE ANIMATIONS
 ========================= */
-
 .cell-q.slide-left-q {
     animation: slideLeftQ 0.25s ease;
 }
@@ -379,7 +286,6 @@
     from {
         transform: translateX(40px);
     }
-
     to {
         transform: translateX(0);
     }
@@ -389,7 +295,6 @@
     from {
         transform: translateX(-40px);
     }
-
     to {
         transform: translateX(0);
     }
@@ -399,7 +304,6 @@
     from {
         transform: translateY(40px);
     }
-
     to {
         transform: translateY(0);
     }
@@ -409,81 +313,56 @@
     from {
         transform: translateY(-40px);
     }
-
     to {
         transform: translateY(0);
     }
 }
-
 /* =========================
    DIRECTION BAR
 ========================= */
-
 .direction-bar-q {
     position: absolute;
-
     bottom: -55px;
-
     left: 50%;
-
     transform: translateX(-50%);
-
     display: flex;
-
     gap: 8px;
-
     padding: 8px;
-
     border-radius: 16px;
-
     backdrop-filter: blur(16px);
-
     z-index: 999;
 }
 
 .room-page-q.dark .direction-bar-q {
     background: rgb(8 20 45 / 85%);
-
     border: 1px solid rgb(255 255 255 / 12%);
 }
 
 .room-page-q.light .direction-bar-q {
     background: rgb(255 255 255 / 55%);
-
     border: 1px solid rgb(255 255 255 / 40%);
 }
-
 /* =========================
    DIRECTION BUTTONS
 ========================= */
-
 .dir-btn-q {
     position: relative;
-
     border: none;
-
     cursor: pointer;
-
     padding: 8px 14px;
-
     border-radius: 10px;
-
     font-size: 12px;
-
     text-transform: uppercase;
-
     transition: 0.2s ease;
 }
 
 .room-page-q.dark .dir-btn-q {
     background: rgb(255 255 255 / 8%);
-
     color: #cbd5e1;
 }
 
 .room-page-q.light .dir-btn-q {
     background: rgb(255 255 255 / 60%);
-
     color: #3f6a8a;
 }
 
@@ -493,136 +372,91 @@
 
 .dir-btn-q.active-q {
     background: #38bdf8;
-
     color: #0f172a;
-
     font-weight: 700;
-
     transform: scale(1.1);
-
     box-shadow: 0 0 14px rgb(56 189 248 / 60%);
 }
 
 .dir-btn-q.active-q::after {
     content: "";
-
     position: absolute;
-
     inset: -3px;
-
     border-radius: 12px;
-
     border: 1px solid rgb(56 189 248 / 60%);
-
     animation: dirPulseQ 0.8s infinite;
 }
 
 @keyframes dirPulseQ {
     0% {
         opacity: 0.3;
-
         transform: scale(1);
     }
-
     50% {
         opacity: 0.8;
-
         transform: scale(1.05);
     }
-
     100% {
         opacity: 0.3;
-
         transform: scale(1);
     }
 }
 /* =========================
    CONFIRM PUSH BUTTON
 ========================= */
-
 .confirm-btn-q {
     border: none;
-
     cursor: pointer;
-
     padding: 9px 18px;
-
     border-radius: 12px;
-
     font-size: 13px;
-
     font-weight: 800;
-
     text-transform: uppercase;
-
     letter-spacing: 0.5px;
-
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
         background 0.3s ease;
-
     animation: confirmAppearQ 0.25s ease;
 }
-
 /* DARK */
-
 .room-page-q.dark .confirm-btn-q {
     background: linear-gradient(135deg, #22c55e, #16a34a);
-
     color: #052e16;
-
     box-shadow: 0 6px 18px rgb(34 197 94 / 35%);
 }
-
 /* LIGHT */
-
 .room-page-q.light .confirm-btn-q {
     background: linear-gradient(135deg, #4ade80, #22c55e);
-
     color: #14532d;
-
     box-shadow: 0 6px 18px rgb(34 197 94 / 25%);
 }
-
 /* HOVER */
-
 .confirm-btn-q:hover {
     transform: scale(1.08) translateY(-2px);
-
     box-shadow: 0 10px 25px rgb(34 197 94 / 45%);
 }
-
 /* CLICK */
-
 .confirm-btn-q:active {
     transform: scale(0.95);
 }
-
 /* ANIMACJA POJAWIENIA */
-
 @keyframes confirmAppearQ {
     from {
         opacity: 0;
-
         transform: scale(0.7) translateY(10px);
     }
-
     to {
         opacity: 1;
-
         transform: scale(1) translateY(0);
     }
 }
 /* =========================
    WINNER
 ========================= */
-
 .winner-box-q {
     display: flex;
-
     align-items: center;
-
     gap: 15px;
 }
 
@@ -632,56 +466,38 @@
 
 .back-button-q {
     border: none;
-
     padding: 10px 18px;
-
     border-radius: 14px;
-
     cursor: pointer;
-
     background: #38bdf8;
-
     color: #0f172a;
-
     font-weight: 700;
-
     transition: 0.2s ease;
 }
 
 .back-button-q:hover {
     transform: scale(1.05);
 }
-
 /* =========================
    RESPONSIVE
 ========================= */
-
 @media (width <= 600px) {
     .cell-q {
         width: 52px;
-
         height: 52px;
     }
-
     .piece-q {
         width: 42px;
-
         height: 42px;
-
         font-size: 28px;
     }
-
     .direction-bar-q {
         bottom: -65px;
-
         flex-wrap: wrap;
     }
-
     .room-info-q {
         flex-direction: column;
-
         gap: 8px;
-
         font-size: 15px;
     }
 }

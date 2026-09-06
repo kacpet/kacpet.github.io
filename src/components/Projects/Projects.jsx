@@ -54,7 +54,7 @@ function Projects({ theme, language }) {
     };
 
     const technologies = [
-        { name: "JavaScript", logo: <Icons name="javascript" />, path: "/projects/javascript", projects: 0 },
+        { name: "JavaScript", logo: <Icons name="javascript" />, path: "/projects/javascript", projects: 1 },
         { name: "React", logo: <Icons name="react" />, path: "/projects/react", projects: 1 },
         { name: "Angular", logo: <Icons name="angular" />, path: "/projects/angular", projects: 0 },
         { name: "Vue", logo: <Icons name="vue" />, path: "/projects/vue", projects: 0 },

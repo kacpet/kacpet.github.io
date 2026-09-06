@@ -1,29 +1,21 @@
 /* =========================
    TOOLS PAGE (MATCH LANG SYSTEM)
 ========================= */
-
 .tools-page {
     position: relative;
-
     min-height: 100vh;
     width: 100%;
-
     overflow-x: hidden;
-
     display: flex;
     justify-content: center;
-
     padding: 140px 24px 100px;
-
     transition:
         background 0.45s ease,
         color 0.45s ease;
 }
-
 /* =========================
    BACKGROUND
 ========================= */
-
 .tools-background {
     position: absolute;
     inset: 0;
@@ -37,11 +29,9 @@
 .tools-page.light {
     background: radial-gradient(circle at top left, #eef8ff 0%, #d9efff 35%, #b8e0ff 68%, #8dcbff 100%);
 }
-
 /* =========================
    BLURS
 ========================= */
-
 .tools-bg-blur {
     position: absolute;
     border-radius: 50%;
@@ -85,11 +75,9 @@
     0% {
         transform: translate3d(0, 0, 0);
     }
-
     50% {
         transform: translate3d(30px, 20px, 0);
     }
-
     100% {
         transform: translate3d(0, 0, 0);
     }
@@ -99,47 +87,37 @@
     0% {
         transform: translate3d(0, 0, 0);
     }
-
     50% {
         transform: translate3d(-25px, -20px, 0);
     }
-
     100% {
         transform: translate3d(0, 0, 0);
     }
 }
-
 /* =========================
    CONTAINER
 ========================= */
-
 .tools-container {
     position: relative;
     z-index: 2;
-
     width: 100%;
     max-width: 1220px;
-
     display: flex;
     flex-direction: column;
     gap: 70px;
 }
-
 /* =========================
    HERO
 ========================= */
-
 .tools-hero {
     display: flex;
     align-items: center;
     gap: 44px;
     flex-wrap: wrap;
 }
-
 /* =========================
    LOGO (FIXED LIKE LANG)
 ========================= */
-
 .tools-logo-wrapper {
     flex-shrink: 0;
 }
@@ -147,18 +125,13 @@
 .tools-logo {
     width: 170px;
     height: 170px;
-
     padding: 28px;
-
     border-radius: 42px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     backdrop-filter: blur(22px);
     backdrop-filter: blur(22px);
-
     transition:
         transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
         background 0.35s ease,
@@ -180,22 +153,17 @@
     border: 1px solid rgb(120 180 255 / 24%);
     box-shadow: 0 10px 35px rgb(60 120 180 / 12%);
 }
-
 /* 🔥 KLUCZ: IDENTYCZNE SKALOWANIE JAK W LANG */
-
 .tools-logo svg,
 .tools-logo > * {
     width: 100%;
     height: 100%;
     display: block;
-
     transform-origin: center;
 }
-
 /* =========================
    TEXT
 ========================= */
-
 .tools-heading {
     flex: 1;
 }
@@ -218,10 +186,8 @@
 
 .tools-title {
     margin-top: 12px;
-
     font-size: clamp(3rem, 8vw, 5.4rem);
     font-weight: 800;
-
     letter-spacing: -2.5px;
     line-height: 1;
 }
@@ -237,7 +203,6 @@
 .tools-description {
     max-width: 760px;
     margin-top: 24px;
-
     font-size: 1.08rem;
     line-height: 1.9;
 }
@@ -249,11 +214,9 @@
 .tools-page.light .tools-description {
     color: #35597a;
 }
-
 /* =========================
    GRID / CARD
 ========================= */
-
 .tools-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -263,10 +226,8 @@
 .tools-card {
     padding: 34px;
     border-radius: 34px;
-
     backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
-
     transition:
         transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
         background 0.35s ease,
@@ -287,11 +248,9 @@
     background: rgb(255 255 255 / 62%);
     border: 1px solid rgb(120 180 255 / 24%);
 }
-
 /* =========================
    RESPONSIVE
 ========================= */
-
 @media (width <= 768px) {
     .tools-logo {
         width: 140px;
@@ -299,17 +258,14 @@
         padding: 22px;
         border-radius: 30px;
     }
-
     .tools-logo svg,
     .tools-logo > * {
         transform: scale(1.18);
     }
 }
-
 /* =========================
    ENTER ANIMATION (LIKE LANG)
 ========================= */
-
 .tools-logo-wrapper,
 .tools-heading,
 .tools-card {
@@ -329,29 +285,23 @@
         opacity: 0;
         transform: translate3d(0, 28px, 0) scale(0.97);
     }
-
     to {
         opacity: 1;
         transform: translate3d(0, 0, 0) scale(1);
     }
 }
-
 /* =========================
    FEATURES LIST (MISSING PIECE)
 ========================= */
-
 .tools-list {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
 }
-
 /* item chip like skill-item */
-
 .tools-item {
     padding: 13px 18px;
     border-radius: 999px;
-
     transition:
         transform 0.3s ease,
         background 0.3s ease;
@@ -365,9 +315,7 @@
     font-size: 0.95rem;
     font-weight: 500;
 }
-
 /* THEMING */
-
 .tools-page.dark .tools-item {
     background: rgb(80 170 255 / 8%);
     border: 1px solid rgb(120 190 255 / 12%);
@@ -379,38 +327,28 @@
     border: 1px solid rgb(120 180 255 / 18%);
     color: #1f4f7a;
 }
-
 /* =========================
    CARD CONTENT SPACING FIX
 ========================= */
-
 .tools-card .section-top {
     margin-bottom: 24px;
 }
-
 /* =========================
    SECTION HEADER FIX (TOOLS)
 ========================= */
-
 .tools-page .section-top h2 {
     font-size: 1.45rem;
     font-weight: 700;
 }
-
 /* DARK */
-
 .tools-page.dark .section-top h2 {
     color: #edf6ff;
 }
-
 /* LIGHT */
-
 .tools-page.light .section-top h2 {
     color: #1f4f7a;
 }
-
 /* DOT */
-
 .tools-page.dark .section-dot {
     background: #6dc0ff;
     box-shadow: 0 0 14px rgb(109 192 255 / 60%);

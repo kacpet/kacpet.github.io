@@ -58,6 +58,11 @@ import CVDarkENG11 from "./imgs/React/CV/eng/dark/11.png";
 import CVDarkENG12 from "./imgs/React/CV/eng/dark/12.png";
 import CVDarkENG13 from "./imgs/React/CV/eng/dark/13.png";
 
+import RecruitmentTask1 from "./imgs/React/RecruitmentTask/1.png";
+import RecruitmentTask2 from "./imgs/React/RecruitmentTask/2.png";
+import RecruitmentTask3 from "./imgs/React/RecruitmentTask/3.png";
+import RecruitmentTask4 from "./imgs/React/RecruitmentTask/4.png";
+
 const ReactProjectsData = {
     title: "React",
 
@@ -69,7 +74,21 @@ const ReactProjectsData = {
                 english: "Modern portfolio/CV built with React. Includes projects, skills sections and interactive UI.",
             },
 
-            imgsLightPL: [CVLightPL1, CVLightPL2, CVLightPL3, CVLightPL4, CVLightPL5, CVLightPL6, CVLightPL7, CVLightPL8, CVLightPL9, CVLightPL10, CVLightPL11, CVLightPL12, CVLightPL13],
+            imgsLightPL: [
+                CVLightPL1,
+                CVLightPL2,
+                CVLightPL3,
+                CVLightPL4,
+                CVLightPL5,
+                CVLightPL6,
+                CVLightPL7,
+                CVLightPL8,
+                CVLightPL9,
+                CVLightPL10,
+                CVLightPL11,
+                CVLightPL12,
+                CVLightPL13,
+            ],
 
             imgsDarkPL: [
                 CVDarkPL1,
@@ -122,6 +141,17 @@ const ReactProjectsData = {
             tags: ["React", "JavaScript", "Firebase"],
             pageLink: "https://kacpet.github.io",
             github: "https://github.com/kacpet/kacpet.github.io",
+        },
+        {
+            title: "web for recruiation",
+            description: {
+                polish: " Strona wykonana jako zadanie rekrutaqcyjne",
+                english: "Website made as a recruitment task",
+            },
+            universalImgs: [RecruitmentTask1, RecruitmentTask2, RecruitmentTask3, RecruitmentTask4],
+            tags: ["React", "TypeScript", "TailwindCSS"],
+            pageLink: "https://kacpet.github.io/zadanie-rekrutacyjne/",
+            github: "https://github.com/kacpet/zadanie-rekrutacyjne",
         },
     ],
 };
